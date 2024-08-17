@@ -84,9 +84,6 @@ GEM
     connection_pool (2.4.1)
     crass (1.0.6)
     date (3.3.4)
-    debug (1.9.2)
-      irb (~> 1.10)
-      reline (>= 0.3.8)
     drb (2.2.1)
     erubi (1.13.0)
     globalid (1.2.1)
@@ -268,7 +265,6 @@ PLATFORMS
 DEPENDENCIES
   bootsnap
   brakeman
-  debug
   importmap-rails
   pg (~> 1.1)
   puma (>= 5.0)
@@ -277,7 +273,6 @@ DEPENDENCIES
   sprockets-rails
   stimulus-rails
   turbo-rails
-  tzinfo-data
   web-console
 
 BUNDLED WITH
