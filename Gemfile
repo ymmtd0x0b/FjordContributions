@@ -9,6 +9,9 @@ gem "turbo-rails"
 gem "stimulus-rails"
 gem "bootsnap", require: false
 
+# not default
+gem "slim"
+
 group :development, :test do
   gem "brakeman", require: false
   gem "rubocop-rails-omakase", require: false
