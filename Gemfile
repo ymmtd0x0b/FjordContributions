@@ -20,9 +20,17 @@ group :development, :test do
 end
 
 group :development do
+  gem 'web-console'
+
+  # not default
   gem 'rubocop-capybara', require: false
   gem 'rubocop-fjord', require: false
   gem 'rubocop-rails', require: false
   gem 'slim_lint'
-  gem 'web-console'
+end
+
+group :test do
+  # not default
+  gem 'factory_bot_rails'
+  gem 'rspec-rails'
 end
