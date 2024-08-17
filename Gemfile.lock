@@ -204,9 +204,11 @@ GEM
       unicode-display_width (>= 2.4.0, < 3.0)
     rubocop-ast (1.32.0)
       parser (>= 3.3.1.0)
-    rubocop-minitest (0.35.1)
-      rubocop (>= 1.61, < 2.0)
-      rubocop-ast (>= 1.31.1, < 2.0)
+    rubocop-capybara (2.21.0)
+      rubocop (~> 1.41)
+    rubocop-fjord (0.3.0)
+      rubocop (>= 1.0)
+      rubocop-performance
     rubocop-performance (1.21.1)
       rubocop (>= 1.48.1, < 2.0)
       rubocop-ast (>= 1.31.1, < 2.0)
@@ -215,11 +217,6 @@ GEM
       rack (>= 1.1)
       rubocop (>= 1.33.0, < 2.0)
       rubocop-ast (>= 1.31.1, < 2.0)
-    rubocop-rails-omakase (1.0.0)
-      rubocop
-      rubocop-minitest
-      rubocop-performance
-      rubocop-rails
     ruby-progressbar (1.13.0)
     securerandom (0.3.1)
     slim (5.2.1)
@@ -281,7 +278,9 @@ DEPENDENCIES
   pg (~> 1.1)
   puma (>= 5.0)
   rails (~> 7.2.0)
-  rubocop-rails-omakase
+  rubocop-capybara
+  rubocop-fjord
+  rubocop-rails
   slim
   slim-rails
   slim_lint

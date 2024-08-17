@@ -15,10 +15,12 @@ gem "slim-rails"
 
 group :development, :test do
   gem "brakeman", require: false
-  gem "rubocop-rails-omakase", require: false
 end
 
 group :development do
+  gem "rubocop-capybara", require: false
+  gem "rubocop-fjord", require: false
+  gem "rubocop-rails", require: false
   gem "slim_lint"
   gem "web-console"
 end
