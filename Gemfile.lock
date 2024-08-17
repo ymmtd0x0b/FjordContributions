@@ -225,6 +225,10 @@ GEM
     slim (5.2.1)
       temple (~> 0.10.0)
       tilt (>= 2.1.0)
+    slim-rails (3.6.3)
+      actionpack (>= 3.1)
+      railties (>= 3.1)
+      slim (>= 3.0, < 6.0, != 5.0.0)
     sprockets (4.2.1)
       concurrent-ruby (~> 1.0)
       rack (>= 2.2.4, < 4)
@@ -276,6 +280,7 @@ DEPENDENCIES
   rails (~> 7.2.0)
   rubocop-rails-omakase
   slim
+  slim-rails
   sprockets-rails
   stimulus-rails
   turbo-rails
