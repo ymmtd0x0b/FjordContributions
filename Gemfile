@@ -19,5 +19,6 @@ group :development, :test do
 end
 
 group :development do
+  gem "slim_lint"
   gem "web-console"
 end
