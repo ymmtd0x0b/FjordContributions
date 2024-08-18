@@ -62,3 +62,43 @@ jobs:
 
       - name: Lint code
         run: bin/lint
+
+  rspec:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:11-alpine
+        ports:
+          - "5432:5432"
+        env:
+          POSTGRES_DB: rails_test
+          POSTGRES_USER: rails
+          POSTGRES_PASSWORD: password
+    env:
+      RAILS_ENV: test
+      DATABASE_URL: "postgres://rails:password@localhost:5432/rails_test"
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.3.0'
+
+      - name: Install gems
+        run: bundle install
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20.12.2'
+
+      - name: Install packages
+        run: yarn
+
+      - name: Set up database schema
+        run: bin/rails db:schema:load
+
+      - name: Run tests
+        run: bin/rspec
