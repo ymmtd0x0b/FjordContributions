@@ -94,6 +94,7 @@ GEM
       railties (>= 5.0.0)
     globalid (1.2.1)
       activesupport (>= 6.1)
+    high_voltage (4.0.0)
     i18n (1.14.5)
       concurrent-ruby (~> 1.0)
     importmap-rails (2.0.1)
@@ -310,6 +311,7 @@ DEPENDENCIES
   bootsnap
   brakeman
   factory_bot_rails
+  high_voltage
   importmap-rails
   pg (~> 1.1)
   puma (>= 5.0)

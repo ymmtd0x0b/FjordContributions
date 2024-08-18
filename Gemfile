@@ -3,6 +3,7 @@
 source 'https://rubygems.org'
 
 gem 'bootsnap', require: false
+gem 'high_voltage'
 gem 'importmap-rails'
 gem 'pg', '~> 1.1'
 gem 'puma', '>= 5.0'
