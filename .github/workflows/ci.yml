@@ -47,9 +47,18 @@ jobs:
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: .ruby-version
-          bundler-cache: true
+          ruby-version: '3.3.0'
 
-      - name: Lint code for consistent style
-        run: bin/rubocop -f github
+      - name: Install gems
+        run: bundle install
 
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20.12.2'
+
+      - name: Install packages
+        run: yarn
+
+      - name: Lint code
+        run: bin/lint
