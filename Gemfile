@@ -9,6 +9,7 @@ gem 'puma', '>= 5.0'
 gem 'rails', '~> 7.2.0'
 gem 'sprockets-rails'
 gem 'stimulus-rails'
+gem 'tailwindcss-rails'
 gem 'turbo-rails'
 
 # not default
