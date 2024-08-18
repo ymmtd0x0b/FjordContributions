@@ -97,8 +97,10 @@ jobs:
       - name: Install packages
         run: yarn
 
-      - name: Set up database schema
-        run: bin/rails db:schema:load
+      # 現時点では schema が存在しないのでコメントアウトする
+      # shcema を作成した際にこのコメントアウトをはずす
+      # - name: Set up database schema
+      #   run: bin/rails db:schema:load
 
       - name: Run tests
         run: bin/rspec
