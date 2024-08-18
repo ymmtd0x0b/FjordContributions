@@ -14,5 +14,6 @@ html
     = stylesheet_link_tag "application", "data-turbo-track": "reload"
     = stylesheet_link_tag 'tailwind', 'inter-font', 'data-turbo-track': 'reload', defer: true
     = javascript_importmap_tags
-  body
-    = yield
+  body.flex.bg-gray-50.overflow-y-scroll
+    main.flex-grow
+      = yield

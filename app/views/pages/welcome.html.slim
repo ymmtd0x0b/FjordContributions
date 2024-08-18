@@ -1,0 +1,43 @@
+.w-full.mx-auto.max-w-screen-lg
+  h1.text-slate-700.text-center.text-3xl.font-semibold.pt-16
+    | 登録するだけであなたの取り組みを一覧表示
+  p.text-slate-700.text-center.text-2xl.pt-10
+    | フィヨルドブートキャンプのチーム開発プラクティスで
+    br
+    | あなたが関わった Issue や PullRequest を自動で取得して一覧表示できるサービスです
+
+  .flex.justify-around.py-16
+    .flex.flex-col.justify-center.w-52.items-center.p-4.bg-gray-50.border.border-gray-300.rounded-lg.shadow
+      = image_tag 'code_merge', class: 'w-[120px] h-[120px] mx-auto'
+      .text-center.text-slate-700.font-medium
+        = '担当した'
+        br
+        = 'Issue & PullRequest'
+    .flex.flex-col.justify-center.w-52.items-center.p-4.bg-gray-50.border.border-gray-300.rounded-lg.shadow
+      = image_tag 'annotation', class: 'w-[120px] h-[120px] mx-auto'
+      .text-center.text-slate-700.font-medium
+        = 'レビューした'
+        br
+        = 'Issue & PullRequest'
+    .flex.flex-col.justify-center.w-52.items-center.p-4.bg-gray-50.border.border-gray-300.rounded-lg.shadow
+      = image_tag 'file_pen', class: 'w-[120px] h-[120px] mx-auto'
+      .text-center.text-slate-700.font-medium
+        = '作成した'
+        br
+        = 'Issue'
+    .flex.flex-col.justify-center.w-52.items-center.p-4.bg-gray-50.border.border-gray-300.rounded-lg.shadow
+      = image_tag 'file_search', class: 'w-[120px] h-[120px] mx-auto'
+      .text-center.text-slate-700.font-medium
+        = '作成した'
+        br
+        = 'Wikiページ'
+
+  .text-slate-700.text-center.pt-5.text-xl.mb-10
+    | 初めて利用する方はGitHubアカウントを連携してください
+
+  .flex.justify-center.items-stretch.mb-10.h-12
+    = button_tag class: 'text-center py-2 px-5 font-semibold text-gray-200 focus:outline-none bg-slate-600 rounded-lg border border-gray-200 hover:bg-slate-500 hover:text-gray-200 focus:z-10 focus:ring-4 focus:ring-gray-100' do
+      .flex.justify-around
+        .w-6.h-6.mr-1
+          = image_tag 'github'
+        | GitHubアカントで登録
