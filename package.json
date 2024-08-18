@@ -17,5 +17,8 @@
     "prettier": "^3.3.3",
     "prettier-config-standard": "^7.0.0"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "flowbite": "^2.5.1"
+  }
 }
