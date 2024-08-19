@@ -8,12 +8,10 @@ html
     = csrf_meta_tags
     = csp_meta_tag
     = yield :head
-    link[rel="manifest" href="/manifest.json"]
-    link[rel="icon" href="/icon.png" type="image/png"]
-    link[rel="icon" href="/icon.svg" type="image/svg+xml"]
-    link[rel="apple-touch-icon" href="/icon.png"]
+    = favicon_link_tag 'favicon.ico'
     = stylesheet_link_tag "application", "data-turbo-track": "reload"
     = stylesheet_link_tag 'tailwind', 'inter-font', 'data-turbo-track': 'reload', defer: true
     = javascript_importmap_tags
-  body
-    = yield
+  body.flex.bg-gray-50.overflow-y-scroll
+    main.flex-grow
+      = yield

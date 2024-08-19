@@ -33,6 +33,8 @@ end
 
 group :test do
   # not default
+  gem 'capybara'
   gem 'factory_bot_rails'
   gem 'rspec-rails'
+  gem 'webdrivers'
 end
