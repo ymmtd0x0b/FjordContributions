@@ -102,5 +102,8 @@ jobs:
       # - name: Set up database schema
       #   run: bin/rails db:schema:load
 
+      - name: Build Tailwind CSS
+        run: bin/rails tailwindcss:build
+
       - name: Run tests
         run: bin/rspec
