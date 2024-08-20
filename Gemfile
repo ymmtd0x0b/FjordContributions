@@ -19,6 +19,8 @@ gem 'slim-rails'
 
 group :development, :test do
   gem 'brakeman', require: false
+  gem 'factory_bot_rails'
+  gem 'rspec-rails'
 end
 
 group :development do
@@ -34,8 +36,6 @@ end
 group :test do
   # not default
   gem 'capybara'
-  gem 'factory_bot_rails'
-  gem 'rspec-rails'
   gem 'simplecov', require: false
   gem 'webdrivers'
 end
