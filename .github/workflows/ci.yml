@@ -64,6 +64,8 @@ jobs:
         run: bin/lint
 
   rspec:
+    permissions:
+      checks: write
     runs-on: ubuntu-latest
     services:
       postgres:
@@ -107,3 +109,7 @@ jobs:
 
       - name: Run tests
         run: bin/rspec
+
+      - uses: joshmfrankel/simplecov-check-action@main
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
