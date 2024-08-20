@@ -1,0 +1,9 @@
+header
+  nav.py-2.bg-slate-600
+    .flex.flex-wrap.justify-between.items-center.px-4.py-1.mx-auto.max-w-screen-lg
+      .flex.items-center.text-white
+        = link_to root_path do
+          .flex.items-center
+            = image_tag 'symbol', width: 37.5, height: 37.5
+            = image_tag 'logo_header', width: 250, height: 37.5, class: 'mb-1'
+      = button_tag 'ログイン', class: 'text-gray-800 bg-gray-50 hover:bg-gray-200 focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-4 py-2 mr-2 focus:outline-none'
