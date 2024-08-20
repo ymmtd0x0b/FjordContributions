@@ -5,6 +5,7 @@ source 'https://rubygems.org'
 gem 'bootsnap', require: false
 gem 'high_voltage'
 gem 'importmap-rails'
+gem 'octokit'
 gem 'pg', '~> 1.1'
 gem 'puma', '>= 5.0'
 gem 'rails', '~> 7.2.0'
@@ -19,6 +20,7 @@ gem 'slim-rails'
 
 group :development, :test do
   gem 'brakeman', require: false
+  gem 'dotenv-rails'
   gem 'factory_bot_rails'
   gem 'rspec-rails'
 end
