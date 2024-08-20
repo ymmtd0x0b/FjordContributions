@@ -12,7 +12,8 @@ html
     = stylesheet_link_tag "application", "data-turbo-track": "reload"
     = stylesheet_link_tag 'tailwind', 'inter-font', 'data-turbo-track': 'reload', defer: true
     = javascript_importmap_tags
-  body.flex.flex-col.bg-gray-50.overflow-y-scroll
+  body.flex.flex-col.min-h-screen.bg-gray-50.overflow-y-scroll
     = render 'shared/header'
     main.flex-grow
       = yield
+    = render 'shared/footer'
