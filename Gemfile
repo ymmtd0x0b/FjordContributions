@@ -15,6 +15,8 @@ gem 'tailwindcss-rails'
 gem 'turbo-rails'
 
 # not default
+gem 'faraday-multipart', require: false
+gem 'faraday-retry'
 gem 'slim'
 gem 'slim-rails'
 
