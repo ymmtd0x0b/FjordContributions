@@ -20,6 +20,7 @@ gem 'slim-rails'
 
 group :development, :test do
   gem 'brakeman', require: false
+  gem 'byebug'
   gem 'dotenv-rails'
   gem 'factory_bot_rails'
   gem 'rspec-rails'
@@ -39,5 +40,7 @@ group :test do
   # not default
   gem 'capybara'
   gem 'simplecov', require: false
+  gem 'vcr'
   gem 'webdrivers'
+  gem 'webmock'
 end
