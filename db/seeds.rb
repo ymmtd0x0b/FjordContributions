@@ -12,7 +12,11 @@
 
 # 既存のデータを削除
 Repository.destroy_all
+Label.destroy_all
 
 # 初期データの投入
 repo = GitHub::Repository.find_by(name: 'fjordllc/bootcamp')
-Repository.create!(repo.to_h)
+repository = Repository.create!(repo.to_h)
+
+labels = GitHub::Label.registered_by(repository)
+labels.map { |label| Label.create!(label.to_h) }
