@@ -31,4 +31,36 @@ RSpec.describe GitHub::APIClient, type: :model do
       end
     end
   end
+
+  describe '#labels' do
+    context 'リポジトリに登録されているラベルが１つ以上ある場合' do
+      it 'Sawyer::Resourceオブジェクトを要素に持つ Array を返すこと', vcr: { cassette_name: 'github/api_client/labels' } do
+        actual = @client.labels('test/repository')
+        expect(actual).not_to be_empty
+        expect(actual).to all(be_instance_of(Sawyer::Resource))
+      end
+    end
+
+    context 'リポジトリに登録されているラベルが無い場合' do
+      it '空の Array を返すこと', vcr: { cassette_name: 'github/api_client/labels_nothing' } do
+        actual = @client.labels('test/repository')
+        expect(actual).to be_empty
+      end
+    end
+
+    context 'エラーが発生した場合' do
+      it '空の Array を返すこと', vcr: { cassette_name: 'github/api_client/labels_error' } do
+        actual = @client.labels('test/non_exist_repository')
+        expect(actual).to be_empty
+      end
+
+      it 'ログへ出力すること', vcr: { cassette_name: 'github/api_client/labels_error' } do
+        @client.labels('test/non_exist_repository')
+        expect(Rails.logger).to have_received(:error).with(<<~LOG.chomp
+          [GitHub API] GET https://api.github.com/repos/test/non_exist_repository/labels?page=1&per_page=100: 404 - Not Found // See: https://docs.github.com/rest/issues/labels#list-labels-for-a-repository
+        LOG
+                                                          )
+      end
+    end
+  end
 end
