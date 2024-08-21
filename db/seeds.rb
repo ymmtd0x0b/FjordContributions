@@ -9,3 +9,10 @@
 #   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
+
+# 既存のデータを削除
+Repository.destroy_all
+
+# 初期データの投入
+repo = GitHub::Repository.find_by(name: 'fjordllc/bootcamp')
+Repository.create!(repo.to_h)
