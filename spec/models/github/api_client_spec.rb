@@ -63,4 +63,28 @@ RSpec.describe GitHub::APIClient, type: :model do
       end
     end
   end
+
+  describe '#user' do
+    context 'ユーザーが見つかった場合' do
+      it 'Sawyer::Resourceオブジェクトを返すこと', vcr: { cassette_name: 'github/api_client/user' } do
+        actual = @client.user('kimura')
+        expect(actual).to be_instance_of(Sawyer::Resource)
+      end
+    end
+
+    context 'エラーが発生した場合(ユーザーが見つからない場合もエラーに含む)' do
+      it 'nilを返すこと', vcr: { cassette_name: 'github/api_client/user_with_not_found' } do
+        actual = @client.user('not_found_user')
+        expect(actual).to eq nil
+      end
+
+      it 'ログへ出力すること', vcr: { cassette_name: 'github/api_client/user_with_not_found' } do
+        @client.user('not_found_user')
+        expect(Rails.logger).to have_received(:error).with(<<~LOG.chomp
+          [GitHub API] GET https://api.github.com/users/not_found_user: 404 - Not Found // See: https://docs.github.com/rest
+        LOG
+                                                          )
+      end
+    end
+  end
 end
