@@ -14,7 +14,7 @@ RSpec.describe Label, type: :model do
     let(:repository) { create(:repository, name: 'test/repository') }
 
     context 'リポジトリに登録されたラベルがある場合' do
-      it 'Sawyer::Resourceオブジェクトを要素に持つ Array を返すこと', vcr: { cassette_name: 'github/label/registred_by' } do
+      it 'GitHub::Label オブジェクトを要素に持つ Array を返すこと', vcr: { cassette_name: 'github/label/registred_by' } do
         labels = GitHub::Label.registered_by(repository)
         expect(labels).not_to be_empty
         expect(labels).to all(be_instance_of(GitHub::Label))
