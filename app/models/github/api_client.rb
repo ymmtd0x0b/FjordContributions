@@ -28,6 +28,13 @@ module GitHub
       []
     end
 
+    def user(id_or_login)
+      @client.user id_or_login
+    rescue Octokit::Error => e
+      log_error(e)
+      nil
+    end
+
     private
 
     def log_error(exception)
