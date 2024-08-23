@@ -87,4 +87,40 @@ RSpec.describe GitHub::APIClient, type: :model do
       end
     end
   end
+
+  describe '#search_issues' do
+    context '該当する issue を見つけた場合' do
+      it 'Swayer::Resourceオブジェクトで構成された Array を返すこと', vcr: { cassette_name: 'github/api_client/search_issues' } do
+        actual = @client.search_issues('repo:test/repository is:issue author:kimura')
+        expect(actual).to all(be_instance_of(Sawyer::Resource))
+      end
+    end
+
+    context '該当する issue が見つからない場合' do
+      it '空の Array を返すこと', vcr: { cassette_name: 'github/api_client/search_issues_with_not_found' } do
+        actual = @client.search_issues('repo:test/repository is:issue author:not_found')
+        expect(actual).to be_empty
+      end
+    end
+
+    context 'エラーが発生した場合' do
+      it '空の Array を返すこと', vcr: { cassette_name: 'github/api_client/search_issues_with_error' } do
+        actual = @client.search_issues('repo:test/repository is:issue author:error')
+        expect(actual).to be_empty
+      end
+
+      it 'ログへ出力すること', vcr: { cassette_name: 'github/api_client/search_issues_with_error' } do
+        @client.search_issues('repo:test/repository is:issue author:error')
+        expect(Rails.logger).to have_received(:error).with(<<~LOG.chomp
+          [GitHub API] GET https://api.github.com/search/issues?page=1&per_page=100&q=repo%3Atest%2Frepository+is%3Aissue+author%3Aerror: 422 - Validation Failed
+          Error summary:
+            message: The listed users cannot be searched either because the users do not exist or you do not have permission to view the users.
+            resource: Search
+            field: q
+            code: invalid // See: https://docs.github.com/v3/search/
+        LOG
+                                                          )
+      end
+    end
+  end
 end
