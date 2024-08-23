@@ -35,6 +35,21 @@ module GitHub
       nil
     end
 
+    def search_issues(query, option = { page: 1, per_page: 100 })
+      issues = []
+      loop do
+        issues_per_page = @client.search_issues(query, option)
+        issues.concat issues_per_page.items
+        option[:page] += 1
+        break unless issues_per_page.items.count == option[:per_page]
+      end
+
+      issues
+    rescue Octokit::Error => e
+      log_error(e)
+      []
+    end
+
     private
 
     def log_error(exception)
