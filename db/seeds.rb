@@ -14,13 +14,17 @@
 Repository.destroy_all
 Label.destroy_all
 User.destroy_all
+Issue.destroy_all
 
 # 初期データの投入
-repo = GitHub::Repository.find_by(name: 'fjordllc/bootcamp')
-repository = Repository.create!(repo.to_h)
+repo_by_api = GitHub::Repository.find_by(name: 'fjordllc/bootcamp')
+repository = Repository.create!(repo_by_api.to_h)
 
-labels = GitHub::Label.registered_by(repository)
-labels.map { |label| Label.create!(label.to_h) }
+labels_by_api = GitHub::Label.registered_by(repository)
+labels_by_api.map { |label| Label.create!(label.to_h) }
 
-user = GitHub::User.find_by(login: ENV['USER_LOGIN'])
-User.create!(user.to_h)
+user_by_api = GitHub::User.find_by(login: ENV['USER_LOGIN'])
+user = User.create!(user_by_api.to_h)
+
+issues = GitHub::Issue.created_by(repository, user)
+issues.map { |issue| Issue.create!(issue.to_h) }
