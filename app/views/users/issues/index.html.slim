@@ -20,7 +20,7 @@
       li.me-2
         = link_to '作成した Issue', users_issues_path(@user.login), class: 'inline-block p-4 text-blue-600 border-b-2 border-blue-600 rounded-t-lg active', aria: { current: 'page' }
       li.me-2
-        = link_to '担当した Issue', '#', class: 'inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300'
+        = link_to '担当した Issue', users_issues_path(@user.login, association: 'assigned'), class: 'inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300'
       li.me-2
         = link_to 'レビューした Issue', '#', class: 'inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300'
       li.me-2
@@ -28,7 +28,7 @@
       li.me-2
         = link_to '全て表示', '#', class: 'inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300'
 
-- if @user.issues.count.zero?
+- if @issues.count.zero?
   .max-w-screen-lg.mx-auto.w-full.text-center.mt-28.text-slate-700
     .font-medium.text-2xl
       | 表示可能なアイテムはありませんでした
@@ -38,8 +38,8 @@
       .relative.my-10.mx-10.overflow-x-auto.shadow-md.sm:rounded-lg
         .w-full.text-sm.text-left.rtl:text-right.text-gray-500
           .px-6.py-3.text-gray-50.font-semibold.bg-slate-700.border-b
-            = "Total #{@user.issues.count}"
-          - @user.issues.each do |issue|
+            = "Total #{@issues.count}"
+          - @issues.each do |issue|
             .bg-white.border-b.hover:bg-gray-100.px-6.py-3.font-bold.text-slate-700
               .w-fit.hover:text-blue-600
                 = issue.title
