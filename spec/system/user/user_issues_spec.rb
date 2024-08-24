@@ -10,7 +10,7 @@ RSpec.describe 'User::Issues', type: :system do
       create(:issue, :with_author, :with_repository, repository_id: 123, title: 'Issue B', author: kimura)
     end
 
-    visit user_issues_path('kimura')
+    visit users_issues_path('kimura')
 
     expect(page).to have_content 'Total 2'
     expect(page).to have_content 'Issue A'
