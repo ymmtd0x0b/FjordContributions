@@ -36,6 +36,12 @@ module GitHub
         issues.map { |issue| new(repository_id: repository.id, issue: convert_to_hash(issue)) }
       end
 
+      def assigned_by(repository, user)
+        client = GitHub::APIClient.new
+        issues = client.search_issues("repo:#{repository.name} is:issue assignee:#{user.login}")
+        issues.map { |issue| new(repository_id: repository.id, issue: convert_to_hash(issue)) }
+      end
+
       private
 
       def convert_to_hash(issue)

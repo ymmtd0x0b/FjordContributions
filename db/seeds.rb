@@ -15,6 +15,7 @@ Repository.destroy_all
 Label.destroy_all
 User.destroy_all
 Issue.destroy_all
+Assign.destroy_all
 
 # 初期データの投入
 repo_by_api = GitHub::Repository.find_by(name: 'fjordllc/bootcamp')
@@ -26,5 +27,11 @@ labels_by_api.map { |label| Label.create!(label.to_h) }
 user_by_api = GitHub::User.find_by(login: ENV['USER_LOGIN'])
 user = User.create!(user_by_api.to_h)
 
-issues = GitHub::Issue.created_by(repository, user)
-issues.map { |issue| Issue.create!(issue.to_h) }
+created_issues = GitHub::Issue.created_by(repository, user)
+created_issues.map { |issue| Issue.create!(issue.to_h) }
+
+assigned_issues = GitHub::Issue.assigned_by(repository, user)
+assigned_issues.map do |issue|
+  Issue.create!(issue.to_h) unless Issue.find_by(id: issue.id)
+  Assign.create!(assignable_type: 'Issue', assignable_id: issue.id, user:)
+end
