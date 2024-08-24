@@ -10,9 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_08_22_180024) do
+ActiveRecord::Schema[7.2].define(version: 2024_08_23_200443) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "assigns", force: :cascade do |t|
+    t.string "assignable_type", null: false
+    t.bigint "assignable_id", null: false
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["assignable_type", "assignable_id"], name: "index_assigns_on_assignable"
+    t.index ["user_id"], name: "index_assigns_on_user_id"
+  end
 
   create_table "issues", force: :cascade do |t|
     t.string "title", null: false
@@ -51,6 +61,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_08_22_180024) do
     t.index ["login"], name: "index_users_on_login", unique: true
   end
 
+  add_foreign_key "assigns", "users"
   add_foreign_key "issues", "repositories"
   add_foreign_key "labels", "repositories"
 end
