@@ -16,4 +16,18 @@ RSpec.describe 'User::Issues', type: :system do
     expect(page).to have_content 'Issue A'
     expect(page).to have_content 'Issue B'
   end
+
+  scenario 'ユーザーが担当した Issue を一覧表示する' do
+    create(:repository, id: 123, name: 'test/repository')
+    create(:user, login: 'kimura') do |kimura|
+      create(:issue, :with_author, :with_repository, repository_id: 123, title: 'Issue C') { |issue| issue.assignees << kimura }
+      create(:issue, :with_author, :with_repository, repository_id: 123, title: 'Issue D') { |issue| issue.assignees << kimura }
+    end
+
+    visit users_issues_path('kimura', association: 'assigned')
+
+    expect(page).to have_content 'Total 2'
+    expect(page).to have_content 'Issue C'
+    expect(page).to have_content 'Issue D'
+  end
 end
