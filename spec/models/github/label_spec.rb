@@ -22,7 +22,7 @@ RSpec.describe Label, type: :model do
     end
 
     context 'リポジトリに登録されたラベルがない場合' do
-      it '空の Array を返すこと', vcr: { cassette_name: 'github/label/registred_by_not_found' } do
+      it '空の Array を返すこと', vcr: { cassette_name: 'github/label/registred_by_with_not_found' } do
         labels = GitHub::Label.registered_by(repository)
         expect(labels).to be_empty
       end
