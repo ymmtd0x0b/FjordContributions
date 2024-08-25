@@ -58,7 +58,7 @@ RSpec.describe GitHub::Issue, type: :model do
     end
 
     context '該当する Issue がない場合' do
-      it '空の Array を返すこと', vcr: { cassette_name: 'github/issue/assigned_by_not_found' } do
+      it '空の Array を返すこと', vcr: { cassette_name: 'github/issue/assigned_by_with_not_found' } do
         repository = FactoryBot.create(:repository, name: 'test/repository')
         user = FactoryBot.create(:user, login: 'not_found')
 
