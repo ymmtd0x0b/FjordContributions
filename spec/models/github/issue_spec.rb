@@ -67,4 +67,27 @@ RSpec.describe GitHub::Issue, type: :model do
       end
     end
   end
+
+  describe '.reviewed_by' do
+    context '該当する Issue がある場合' do
+      it ' GitHub::Issue オブジェクトを要素に持つ Array を返すこと', vcr: { cassette_name: 'github/issue/reviewed_by' } do
+        repository = create(:repository, name: 'test/repository')
+        user = create(:user, login: 'kimura')
+
+        issues = GitHub::Issue.reviewed_by(repository, user)
+        expect(issues).not_to be_empty
+        expect(issues).to all(be_instance_of(GitHub::Issue))
+      end
+    end
+
+    context '該当する Issue がない場合' do
+      it '空の Array を返すこと', vcr: { cassette_name: 'github/issue/reviewed_by_with_not_found' } do
+        repository = create(:repository, name: 'test/repository')
+        user = create(:user, login: 'not_found')
+
+        issues = GitHub::Issue.reviewed_by(repository, user)
+        expect(issues).to be_empty
+      end
+    end
+  end
 end
