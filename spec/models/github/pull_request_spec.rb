@@ -34,4 +34,27 @@ RSpec.describe GitHub::PullRequest, type: :model do
       end
     end
   end
+
+  describe '.reviewed_by' do
+    context '該当する PullRequest がある場合' do
+      it 'GitHub::PullRequest オブジェクトを要素に持つ Array を返すこと', vcr: { cassette_name: 'github/pull_request/reviewed_by' } do
+        repository = create(:repository, name: 'test/repository')
+        user = create(:user, login: 'kimura')
+
+        pull_requests = GitHub::PullRequest.reviewed_by(repository, user)
+        expect(pull_requests).not_to be_empty
+        expect(pull_requests).to all(be_instance_of(GitHub::PullRequest))
+      end
+    end
+
+    context '該当する PullRequest がない場合' do
+      it '空の Array を返すこと', vcr: { cassette_name: 'github/pull_request/reviewed_by_with_not_found' } do
+        repository = create(:repository, name: 'test/repository')
+        user = create(:user, login: 'not_found')
+
+        pull_requests = GitHub::PullRequest.reviewed_by(repository, user)
+        expect(pull_requests).to be_empty
+      end
+    end
+  end
 end
