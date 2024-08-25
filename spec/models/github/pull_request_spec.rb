@@ -15,8 +15,8 @@ RSpec.describe GitHub::PullRequest, type: :model do
   describe '.assigned_by' do
     context '該当する PullRequest がある場合' do
       it 'GitHub::PullRequest オブジェクトを要素に持つ Array を返すこと', vcr: { cassette_name: 'github/pull_request/assigned_by' } do
-        repository = FactoryBot.create(:repository, name: 'test/repository')
-        user = FactoryBot.create(:user, login: 'kimura')
+        repository = create(:repository, name: 'test/repository')
+        user = create(:user, login: 'kimura')
 
         pull_requests = GitHub::PullRequest.assigned_by(repository, user)
         expect(pull_requests).not_to be_empty
@@ -26,8 +26,8 @@ RSpec.describe GitHub::PullRequest, type: :model do
 
     context '該当する PullRequest がない場合' do
       it '空の Array を返すこと', vcr: { cassette_name: 'github/pull_request/assigned_by_with_not_found' } do
-        repository = FactoryBot.create(:repository, name: 'test/repository')
-        user = FactoryBot.create(:user, login: 'not_found')
+        repository = create(:repository, name: 'test/repository')
+        user = create(:user, login: 'not_found')
 
         pull_requests = GitHub::PullRequest.assigned_by(repository, user)
         expect(pull_requests).to be_empty
