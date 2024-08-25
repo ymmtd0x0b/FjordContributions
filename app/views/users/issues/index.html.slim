@@ -22,7 +22,7 @@
       li.me-2
         = link_to '担当した Issue', users_issues_path(@user.login, association: 'assigned'), class: 'inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300'
       li.me-2
-        = link_to 'レビューした Issue', '#', class: 'inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300'
+        = link_to 'レビューした Issue', users_issues_path(@user.login, association: 'reviewed'), class: 'inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300'
       li.me-2
         = link_to '作成した Wiki', '#', class: 'inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300'
       li.me-2

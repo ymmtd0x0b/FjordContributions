@@ -6,8 +6,11 @@ class Users::IssuesController < ApplicationController
     @user = User.find_by(login: params[:user_login])
 
     @issues =
-      if params[:association] == 'assigned'
+      case params[:association]
+      when 'assigned'
         @user.assigned_issues
+      when 'reviewed'
+        @user.reviewed_issues
       else
         @user.issues
       end
