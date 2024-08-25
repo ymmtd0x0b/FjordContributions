@@ -9,4 +9,5 @@ class User < ApplicationRecord
 
   has_many :reviews, dependent: :destroy
   has_many :reviewed_pull_requests, through: :reviews, source: :pull_request
+  has_many :reviewed_issues, through: :reviewed_pull_requests, source: :issues
 end
