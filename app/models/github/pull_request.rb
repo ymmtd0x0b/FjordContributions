@@ -28,6 +28,12 @@ module GitHub
         pull_requests.map { |pull_request| new(repository_id: repository.id, pull_request: convert_to_hash(pull_request)) }
       end
 
+      def reviewed_by(repository, user)
+        client = GitHub::APIClient.new
+        pull_requests = client.search_issues("repo:#{repository.name} is:pr reviewed-by:#{user.login} review:approved -assignee:#{user.login}")
+        pull_requests.map { |pull_request| GitHub::PullRequest.new(repository_id: repository.id, pull_request: convert_to_hash(pull_request)) }
+      end
+
       private
 
       def convert_to_hash(pull_request)
