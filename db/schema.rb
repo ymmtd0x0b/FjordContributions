@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_08_23_200443) do
+ActiveRecord::Schema[7.2].define(version: 2024_08_25_114106) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -45,6 +45,15 @@ ActiveRecord::Schema[7.2].define(version: 2024_08_23_200443) do
     t.index ["repository_id"], name: "index_labels_on_repository_id"
   end
 
+  create_table "pull_requests", force: :cascade do |t|
+    t.integer "number", null: false
+    t.bigint "repository_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["repository_id", "number"], name: "index_pull_requests_on_repository_id_and_number", unique: true
+    t.index ["repository_id"], name: "index_pull_requests_on_repository_id"
+  end
+
   create_table "repositories", force: :cascade do |t|
     t.string "name", null: false
     t.string "avatar_url"
@@ -64,4 +73,5 @@ ActiveRecord::Schema[7.2].define(version: 2024_08_23_200443) do
   add_foreign_key "assigns", "users"
   add_foreign_key "issues", "repositories"
   add_foreign_key "labels", "repositories"
+  add_foreign_key "pull_requests", "repositories"
 end
