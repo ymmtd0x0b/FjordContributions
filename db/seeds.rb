@@ -16,22 +16,29 @@ Label.destroy_all
 User.destroy_all
 Issue.destroy_all
 Assign.destroy_all
+PullRequest.destroy_all
 
 # 初期データの投入
 repo_by_api = GitHub::Repository.find_by(name: 'fjordllc/bootcamp')
 repository = Repository.create!(repo_by_api.to_h)
 
 labels_by_api = GitHub::Label.registered_by(repository)
-labels_by_api.map { |label| Label.create!(label.to_h) }
+labels_by_api.each { |label| Label.create!(label.to_h) }
 
 user_by_api = GitHub::User.find_by(login: ENV['USER_LOGIN'])
 user = User.create!(user_by_api.to_h)
 
 created_issues = GitHub::Issue.created_by(repository, user)
-created_issues.map { |issue| Issue.create!(issue.to_h) }
+created_issues.each { |issue| Issue.create!(issue.to_h) }
 
 assigned_issues = GitHub::Issue.assigned_by(repository, user)
-assigned_issues.map do |issue|
+assigned_issues.each do |issue|
   Issue.create!(issue.to_h) unless Issue.find_by(id: issue.id)
   Assign.create!(assignable_type: 'Issue', assignable_id: issue.id, user:)
+end
+
+assigned_pull_requests = GitHub::PullRequest.assigned_by(repository, user)
+assigned_pull_requests.each do |pull_request|
+  PullRequest.create!(pull_request.to_h)
+  Assign.create!(assignable_type: 'PullRequest', assignable_id: pull_request.id, user:)
 end
