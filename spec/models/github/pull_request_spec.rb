@@ -12,6 +12,19 @@ RSpec.describe GitHub::PullRequest, type: :model do
     end
   end
 
+  describe '#relosuitons' do
+    it 'issues_number に合致した Issue ID と自身(GitHub::PullRequest)の ID とのハッシュを返すこと' do
+      create(:repository, id: 123)
+      create(:issue, :with_repository, :with_author, repository_id: 123, id: 103, number: 333)
+      create(:issue, :with_repository, :with_author, repository_id: 123, id: 104, number: 444)
+
+      pull_request_data = { id: 111, number: 222, issues_number: [333, 444], created_at: '2000/01/01 09:00:00', updated_at: '2000/01/01 10:00:00' }
+      pull_request = GitHub::PullRequest.new(repository_id: 123, pull_request: pull_request_data)
+
+      expect(pull_request.resolutions).to eq([{ pull_request_id: 111, issue_id: 103 }, { pull_request_id: 111, issue_id: 104 }])
+    end
+  end
+
   describe '.assigned_by' do
     context '該当する PullRequest がある場合' do
       it 'GitHub::PullRequest オブジェクトを要素に持つ Array を返すこと', vcr: { cassette_name: 'github/pull_request/assigned_by' } do
