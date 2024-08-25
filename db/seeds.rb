@@ -17,6 +17,7 @@ User.destroy_all
 Issue.destroy_all
 Assign.destroy_all
 PullRequest.destroy_all
+Review.destroy_all
 
 # 初期データの投入
 repo_by_api = GitHub::Repository.find_by(name: 'fjordllc/bootcamp')
@@ -41,4 +42,10 @@ assigned_pull_requests = GitHub::PullRequest.assigned_by(repository, user)
 assigned_pull_requests.each do |pull_request|
   PullRequest.create!(pull_request.to_h)
   Assign.create!(assignable_type: 'PullRequest', assignable_id: pull_request.id, user:)
+end
+
+reviews_pull_requests = GitHub::PullRequest.reviewed_by(repository, user)
+reviews_pull_requests.each do |pull_request|
+  PullRequest.create!(pull_request.to_h)
+  Review.create!(pull_request_id: pull_request.id, user:)
 end
