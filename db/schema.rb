@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_08_25_213859) do
+ActiveRecord::Schema[7.2].define(version: 2024_08_25_230328) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -90,6 +90,18 @@ ActiveRecord::Schema[7.2].define(version: 2024_08_25_213859) do
     t.index ["login"], name: "index_users_on_login", unique: true
   end
 
+  create_table "wikis", force: :cascade do |t|
+    t.bigint "repository_id", null: false
+    t.bigint "author_id", null: false
+    t.string "title", null: false
+    t.string "first_commit_hash", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["author_id"], name: "index_wikis_on_author_id"
+    t.index ["repository_id", "first_commit_hash"], name: "index_wikis_on_repository_id_and_first_commit_hash", unique: true
+    t.index ["repository_id"], name: "index_wikis_on_repository_id"
+  end
+
   add_foreign_key "assigns", "users"
   add_foreign_key "issues", "repositories"
   add_foreign_key "labels", "repositories"
@@ -98,4 +110,6 @@ ActiveRecord::Schema[7.2].define(version: 2024_08_25_213859) do
   add_foreign_key "resolutions", "pull_requests"
   add_foreign_key "reviews", "pull_requests"
   add_foreign_key "reviews", "users"
+  add_foreign_key "wikis", "repositories"
+  add_foreign_key "wikis", "users", column: "author_id"
 end
