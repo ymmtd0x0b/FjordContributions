@@ -44,6 +44,11 @@ assigned_pull_requests.each do |pull_request|
   Assign.create!(assignable_type: 'PullRequest', assignable_id: pull_request.id, user:)
 end
 
+reviewed_issues = GitHub::Issue.reviewed_by(repository, user)
+reviewed_issues.each do |issue|
+  Issue.create!(issue.to_h) unless Issue.find_by(id: issue.id)
+end
+
 reviews_pull_requests = GitHub::PullRequest.reviewed_by(repository, user)
 reviews_pull_requests.each do |pull_request|
   PullRequest.create!(pull_request.to_h)
