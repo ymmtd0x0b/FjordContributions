@@ -76,6 +76,6 @@ http_interactions:
       - C818:3E0B8B:3B3F250:3C70413:6653F3D4
     body:
       encoding: ASCII-8BIT
-      string: '{"total_count":0,"items":[{"id":1,"number":100,"body":"## Issue\r\n\r\n- https://github.com/test/repository/issues/1\r\n\r\n## 概要","created_by":"2000/01/01 09:00:00","updated_by":"2000/01/01 10:00:00"},{"id":2,"number":200,"body":"## Issue\r\n\r\n- https://github.com/test/repository/issues/2\r\n\r\n## 概要","created_by":"2000/01/01 09:00:00","updated_by":"2000/01/01 10:00:00"}]}'
+      string: '{"total_count":2,"items":[{"id":1,"number":100,"body":"## Issue\r\n\r\n- https://github.com/test/repository/issues/1\r\n\r\n## 概要","created_by":"2000/01/01 09:00:00","updated_by":"2000/01/01 10:00:00"},{"id":2,"number":200,"body":"## Issue\r\n\r\n- https://github.com/test/repository/issues/2\r\n\r\n## 概要","created_by":"2000/01/01 09:00:00","updated_by":"2000/01/01 10:00:00"}]}'
   recorded_at: Mon, 27 May 2024 02:45:40 GMT
 recorded_with: VCR 6.2.0
