@@ -21,6 +21,10 @@ module GitHub
         updated_at: @updated_at }
     end
 
+    def resolutions
+      ::Issue.where(number: @issues_number).pluck(:id).map { |issue_id| { issue_id:, pull_request_id: @id } }
+    end
+
     class << self
       def assigned_by(repository, user)
         client = GitHub::APIClient.new
