@@ -28,7 +28,7 @@
       li.me-2
         = link_to '全て表示', '#', class: 'inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300'
 
-- if @issues.count.zero?
+- if @user.wikis.count.zero?
   .max-w-screen-lg.mx-auto.w-full.text-center.mt-28.text-slate-700
     .font-medium.text-2xl
       | 表示可能なアイテムはありませんでした
@@ -38,8 +38,8 @@
       .relative.my-10.mx-10.overflow-x-auto.shadow-md.sm:rounded-lg
         .w-full.text-sm.text-left.rtl:text-right.text-gray-500
           .px-6.py-3.text-gray-50.font-semibold.bg-slate-700.border-b
-            = "Total #{@issues.count}"
-          - @issues.each do |issue|
+            = "Total #{@user.wikis.count}"
+          - @user.wikis.each do |wiki|
             .bg-white.border-b.hover:bg-gray-100.px-6.py-3.font-bold.text-slate-700
               .w-fit.hover:text-blue-600
-                = issue.title
+                = wiki.title
