@@ -15,6 +15,7 @@ gem 'turbo-rails'
 gem 'faraday-multipart', require: false
 gem 'faraday-retry'
 gem 'font-awesome-sass'
+gem 'git'
 gem 'high_voltage'
 gem 'octokit'
 gem 'slim'
