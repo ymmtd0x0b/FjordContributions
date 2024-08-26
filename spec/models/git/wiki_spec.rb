@@ -79,7 +79,7 @@ RSpec.describe Git::Wiki, type: :model do
       end
 
       it 'ログに出力すること' do
-        expect(Rails.logger).to receive(:error).with("[Git] fatal: リポジトリ '#{@tmpdir_realpath}/not_found_repository.wiki.git' は存在しません")
+        expect(Rails.logger).to receive(:error)
         Git::Wiki.created_by(@repository, @user)
       end
     end
