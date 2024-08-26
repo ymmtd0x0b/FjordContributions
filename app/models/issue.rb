@@ -4,6 +4,9 @@ class Issue < ApplicationRecord
   belongs_to :author, class_name: 'User', optional: true
   belongs_to :repository
 
+  has_many :labelings, dependent: :destroy
+  has_many :labels, through: :labelings, source: :label
+
   has_many :assigns, as: :assignable, dependent: :destroy
   has_many :assignees, through: :assigns, source: :user
 
