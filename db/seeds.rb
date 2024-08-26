@@ -20,6 +20,7 @@ PullRequest.destroy_all
 Review.destroy_all
 Resolution.destroy_all
 Wiki.destroy_all
+Labeling.destroy_all
 
 # 初期データの投入
 repo_by_api = GitHub::Repository.find_by(name: 'fjordllc/bootcamp')
@@ -32,11 +33,17 @@ user_by_api = GitHub::User.find_by(login: ENV['USER_LOGIN'])
 user = User.create!(user_by_api.to_h)
 
 created_issues = GitHub::Issue.created_by(repository, user)
-created_issues.each { |issue| Issue.create!(issue.to_h) }
+created_issues.each do |issue|
+  Issue.create!(issue.to_h)
+  issue.create_labelings.each { |labeling| Labeling.create!(labeling) }
+end
 
 assigned_issues = GitHub::Issue.assigned_by(repository, user)
 assigned_issues.each do |issue|
-  Issue.create!(issue.to_h) unless Issue.find_by(id: issue.id)
+  unless Issue.find_by(id: issue.id)
+    Issue.create!(issue.to_h)
+    issue.create_labelings.each { |labeling| Labeling.create!(labeling) }
+  end
   Assign.create!(assignable_type: 'Issue', assignable_id: issue.id, user:)
 end
 
@@ -51,7 +58,10 @@ end
 
 reviewed_issues = GitHub::Issue.reviewed_by(repository, user)
 reviewed_issues.each do |issue|
-  Issue.create!(issue.to_h) unless Issue.find_by(id: issue.id)
+  unless Issue.find_by(id: issue.id)
+    Issue.create!(issue.to_h)
+    issue.create_labelings.each { |labeling| Labeling.create!(labeling) }
+  end
 end
 
 reviews_pull_requests = GitHub::PullRequest.reviewed_by(repository, user)
