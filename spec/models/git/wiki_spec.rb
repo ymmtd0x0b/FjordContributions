@@ -33,6 +33,7 @@ RSpec.describe Git::Wiki, type: :model do
       Dir.chdir(tmpdir_realpath) do
         git = Git.init('test/repository.wiki.git')
         git.config('user.name', 'kimura')
+        git.config('user.email', 'kimura@email.com')
 
         File.write('test/repository.wiki.git/test.txt', 'test')
         git.add('test.txt')
