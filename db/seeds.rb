@@ -19,6 +19,7 @@ Assign.destroy_all
 PullRequest.destroy_all
 Review.destroy_all
 Resolution.destroy_all
+Wiki.destroy_all
 
 # 初期データの投入
 repo_by_api = GitHub::Repository.find_by(name: 'fjordllc/bootcamp')
@@ -60,4 +61,9 @@ reviews_pull_requests.each do |pull_request|
   pull_request.resolutions.each do |resolution|
     Resolution.create!(resolution) unless Resolution.find_by(resolution)
   end
+end
+
+created_wikis = Git::Wiki.created_by(repository, user)
+created_wikis.each do |wiki|
+  Wiki.create!(wiki.to_h)
 end
