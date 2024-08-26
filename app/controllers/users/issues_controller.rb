@@ -8,11 +8,11 @@ class Users::IssuesController < ApplicationController
     @issues =
       case params[:association]
       when 'assigned'
-        @user.assigned_issues
+        @user.assigned_issues.order(:created_at)
       when 'reviewed'
-        @user.reviewed_issues
+        @user.reviewed_issues.order(:created_at)
       else
-        @user.issues
+        @user.issues.order(:created_at)
       end
   end
 end

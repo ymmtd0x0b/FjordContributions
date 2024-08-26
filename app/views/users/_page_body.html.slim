@@ -1,0 +1,15 @@
+- if items.presence
+  .bg-gray-50
+    .max-w-screen-lg.mx-auto
+      .relative.my-10.mx-10.overflow-x-auto.shadow-md.sm:rounded-lg
+        .w-full.text-sm.text-left.rtl:text-right.text-gray-500
+          .px-6.py-3.text-gray-50.font-semibold.bg-slate-700.border-b
+            = "Total #{items.count}"
+          - items.each do |item|
+            .bg-white.border-b.hover:bg-gray-100.px-6.py-3.font-bold.text-slate-700
+              .w-fit.hover:text-blue-600
+                = item.title
+- else
+  .max-w-screen-lg.mx-auto.w-full.text-center.mt-28.text-slate-700
+    .font-medium.text-2xl
+      | 表示可能なアイテムはありませんでした
