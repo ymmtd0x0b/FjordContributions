@@ -99,10 +99,8 @@ jobs:
       - name: Install packages
         run: yarn
 
-      # 現時点では schema が存在しないのでコメントアウトする
-      # shcema を作成した際にこのコメントアウトをはずす
-      # - name: Set up database schema
-      #   run: bin/rails db:schema:load
+      - name: Set up database schema
+        run: bin/rails db:schema:load
 
       - name: Build Tailwind CSS
         run: bin/rails tailwindcss:build
