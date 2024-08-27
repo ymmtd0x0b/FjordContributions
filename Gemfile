@@ -12,6 +12,8 @@ gem 'stimulus-rails'
 gem 'turbo-rails'
 
 # not default
+gem 'active_decorator'
+gem 'chroma'
 gem 'faraday-multipart', require: false
 gem 'faraday-retry'
 gem 'font-awesome-sass'

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_08_25_230328) do
+ActiveRecord::Schema[7.2].define(version: 2024_08_26_214346) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -33,6 +33,16 @@ ActiveRecord::Schema[7.2].define(version: 2024_08_25_230328) do
     t.datetime "updated_at", null: false
     t.index ["author_id"], name: "index_issues_on_author_id"
     t.index ["repository_id"], name: "index_issues_on_repository_id"
+  end
+
+  create_table "labelings", force: :cascade do |t|
+    t.bigint "issue_id", null: false
+    t.bigint "label_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["issue_id", "label_id"], name: "index_labelings_on_issue_id_and_label_id", unique: true
+    t.index ["issue_id"], name: "index_labelings_on_issue_id"
+    t.index ["label_id"], name: "index_labelings_on_label_id"
   end
 
   create_table "labels", force: :cascade do |t|
@@ -104,6 +114,8 @@ ActiveRecord::Schema[7.2].define(version: 2024_08_25_230328) do
 
   add_foreign_key "assigns", "users"
   add_foreign_key "issues", "repositories"
+  add_foreign_key "labelings", "issues"
+  add_foreign_key "labelings", "labels"
   add_foreign_key "labels", "repositories"
   add_foreign_key "pull_requests", "repositories"
   add_foreign_key "resolutions", "issues"

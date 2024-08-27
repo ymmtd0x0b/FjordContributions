@@ -8,7 +8,7 @@ module GitHub
       @repository_id = repository_id
       @id = label[:id]
       @name = label[:name]
-      @color = label[:color]
+      @color = "##{label[:color]}"
     end
 
     def to_h

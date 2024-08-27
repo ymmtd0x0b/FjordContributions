@@ -6,9 +6,16 @@
           .px-6.py-3.text-gray-50.font-semibold.bg-slate-700.border-b
             = "Total #{items.count}"
           - items.each do |item|
-            .bg-white.border-b.hover:bg-gray-100.px-6.py-3.font-bold.text-slate-700
-              .w-fit.hover:text-blue-600
+            .bg-white.border-b.hover:bg-gray-100.px-6.py-2.font-bold.text-slate-700
+              .w-fit.text-base.hover:text-blue-600
                 = item.title
+              - if item.instance_of?(Issue)
+                .flex.items-center.pt-1.space-x-2
+                  .px-2.text-xs.font-medium.text-slate-500.
+                    = "##{item.number}"
+                  - item.labels.each do |label|
+                    .flex.px-2.text-xs.font-bold.rounded-full(class="py-0.5" style="background-color: #{label.color}; color: #{label.font_color}; border: 2px solid #{label.border_color}")
+                      = label.name
 - else
   .max-w-screen-lg.mx-auto.w-full.text-center.mt-28.text-slate-700
     .font-medium.text-2xl
