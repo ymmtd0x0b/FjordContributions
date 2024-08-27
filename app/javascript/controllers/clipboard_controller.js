@@ -8,7 +8,7 @@ export default class extends Controller {
     'markdownButtonMessage',
     'markdownButtonSuccessMessage',
     'urlButtonMessage',
-    'urlButtonSuccessMessage',
+    'urlButtonSuccessMessage'
   ]
 
   markdownCopy() {
