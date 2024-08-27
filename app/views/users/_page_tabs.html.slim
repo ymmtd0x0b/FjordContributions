@@ -10,4 +10,4 @@
       li.me-2
         = link_to '作成した Wiki', users_wikis_path(user.login), class: 'inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300'
       li.me-2
-        = link_to '全て表示', '#', class: 'inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300'
+        = link_to '全て表示', users_contributions_path(user.login), class: 'inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300'
