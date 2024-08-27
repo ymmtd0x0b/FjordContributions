@@ -1,0 +1,30 @@
+= render 'users/page_header', repository: @repository, user: @user
+= render 'users/page_tabs', user: @user
+
+div
+  .px-10.pt-5.pb-10.flex-grow.max-w-screen-lg.mx-auto
+    .flex.justify-end
+      button.mr-4.w-fit.px-4.text-white.text-sm.bg-zinc-500.hover:bg-zinc-700.focus:ring-4.focus:outline-none.focus:ring-zinc-700.font-medium.rounded-lg.py-2.5(data-tooltip-target="tooltip-markdown-copy")
+        span.inline-flex.items-center
+          i.fa-regular.fa-copy.mr-2
+          | Markdown をコピー
+      #tooltip-markdown-copy.absolute.z-50.invisible.inline-block.px-3.py-2.text-gray-50.text-xs.font-medium.bg-zinc-700.border.border-black.rounded-lg.shadow-sm.opacity-0.tooltip(role="tooltip")
+        | 以下の一覧を Markdown 記法でクリップボードへコピーします
+        .tooltip-arrow.bg-zinc-700(data-popper-arrow)
+      button.w-fit.px-4.text-white.text-sm.bg-zinc-500.hover:bg-zinc-700.focus:ring-4.focus:outline-none.focus:ring-zinc-700.font-medium.rounded-lg.py-2.5(data-tooltip-target="tooltip-url-copy")
+        span.inline-flex.items-center
+          i.fa-regular.fa-copy.mr-2
+          | URL をコピー
+      #tooltip-url-copy.absolute.z-50.invisible.inline-block.px-3.py-2.text-gray-50.text-xs.font-medium.bg-zinc-700.rounded-lg.shadow-sm.opacity-0.tooltip(role="tooltip")
+        | この画面の URL をクリップボードへコピーします
+        .tooltip-arrow.bg-zinc-700(data-popper-arrow)
+
+    div(data-clipboard-target='allIssuesTable')
+      = render 'table', table_header: 'Pull Request', issues: @assigned_issues, user: @user
+      = render 'table', table_header: 'Review',       issues: @reviewed_issues, user: @user
+
+      - if @issues.any? || @wikis.any?
+        h2.text-2xl.text-slate-600.font-bold.border-b.border-gray-400.pb-2.mb-3
+          | その他
+        = render 'list', list_header: 'Issue', content: 'バグ発見の報告や改善提案を目的として作成したIssueです。', items: @issues if @issues.any?
+        = render 'list', list_header: 'Wiki', content: '議事録や作業効率化を目的として作成したWikiページです。', items: @wikis if @wikis.any?

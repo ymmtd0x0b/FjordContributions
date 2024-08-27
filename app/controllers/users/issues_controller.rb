@@ -1,10 +1,11 @@
 # frozen_string_literal: true
 
 class Users::IssuesController < ApplicationController
-  def index
-    @repository = Repository.find_by(name: ENV['REPOSITORY_NAME'])
-    @user = User.find_by(login: params[:user_login])
+  include Settable
+  before_action :set_repository, only: %i[index]
+  before_action :set_user, only: %i[index]
 
+  def index
     @issues =
       case params[:association]
       when 'assigned'

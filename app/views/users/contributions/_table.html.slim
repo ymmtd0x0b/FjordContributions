@@ -1,0 +1,42 @@
+.mb-10
+  h2.text-2xl.text-slate-600.font-bold.border-b.border-gray-400.pb-2.mb-3
+    = table_header
+
+  .relative.mt-4.mx-3.overflow-x-auto.shadow-md.sm:rounded-lg
+    table.w-full.text-sm.text-left.rtl:text-right.text-gray-500
+      thead.text-gray-50.bg-slate-600.border-b.border-gray-400
+        tr
+          th.px-6.py-3(col='col')
+            | Point
+          th.px-6.py-3(col='col')
+            | Issue
+          th.px-6.py-3(col='col')
+            | PR
+      tbody
+        - if issues.any?
+          - issues.each do |issue|
+            tr.font-semibold.odd:bg-gray-200.text-slate-800.even:bg-gray-100.border-b.border-gray-400
+              td.px-6.py-3
+                = issue.point || '-'
+              td.px-6.py-3
+                = issue.title
+              td.px-6.py-3
+                - issue.pull_requests.each do |pull_request|
+                  - if (table_header == 'Pull Request' && pull_request.assignee?(user)) || (table_header == 'Review' && pull_request.reviewer?(user))
+                    = "##{pull_request.number}"
+                    br
+        - else
+            tr.font-semibold.bg-gray-200.text-slate-800.border-b.border-gray-400
+              td.px-6.py-3
+                | -
+              td.px-6.py-3
+                | -
+              td.px-6.py-3
+                | -
+      tfoot
+        tr.bg-slate-600.font-semibold.text-gray-50
+          th.px-6.py-3
+            = issues.sum(&:point)
+          td.px-6.py-3
+            | Total
+          td.px-6.py-3
