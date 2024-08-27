@@ -6,7 +6,7 @@ RSpec.describe Label, type: :model do
   describe '#to_h' do
     it '自身をハッシュ(連想配列)へ変換して返すこと' do
       label = GitHub::Label.new(repository_id: 123, label: { id: 222, name: 'bug', color: 'ffffff' })
-      expect(label.to_h).to eq({ repository_id: 123, id: 222, name: 'bug', color: 'ffffff' })
+      expect(label.to_h).to eq({ repository_id: 123, id: 222, name: 'bug', color: '#ffffff' })
     end
   end
 
