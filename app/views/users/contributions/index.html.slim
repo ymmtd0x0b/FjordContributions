@@ -14,9 +14,12 @@ div(data-controller='clipboard')
       #tooltip-markdown-copy.absolute.z-50.invisible.inline-block.px-3.py-2.text-gray-50.text-xs.font-medium.bg-zinc-700.border.border-black.rounded-lg.shadow-sm.opacity-0.tooltip(role="tooltip")
         | 以下の一覧を Markdown 記法でクリップボードへコピーします
         .tooltip-arrow.bg-zinc-700(data-popper-arrow)
-      button.w-36.px-4.text-white.text-sm.bg-zinc-700.hover:bg-zinc-600.focus:ring-4.focus:outline-none.focus:ring-zinc-600.font-medium.rounded-lg.py-2.5(data-tooltip-target="tooltip-url-copy")
-        span.inline-flex.items-center
+      button.w-36.px-4.text-white.text-sm.bg-zinc-700.hover:bg-zinc-600.focus:ring-4.focus:outline-none.focus:ring-zinc-600.font-medium.rounded-lg.py-2.5(data-action='clipboard#urlCopy' data-tooltip-target="tooltip-url-copy")
+        span.inline-flex.items-center(data-clipboard-target='urlButtonMessage')
           i.fa-regular.fa-copy.mr-2
+          | URL をコピー
+        span.hidden.inline-flex.items-center(data-clipboard-target='urlButtonSuccessMessage')
+          i.fa-solid.fa-check.w-3.me-1.5.mr-2
           | URL をコピー
       #tooltip-url-copy.absolute.z-50.invisible.inline-block.px-3.py-2.text-gray-50.text-xs.font-medium.bg-zinc-700.rounded-lg.shadow-sm.opacity-0.tooltip(role="tooltip")
         | この画面の URL をクリップボードへコピーします
