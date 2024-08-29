@@ -5,7 +5,6 @@ require 'rails_helper'
 RSpec.describe 'User::Contributions', type: :system do
   before do
     create(:repository, id: 123, name: 'test/repository')
-    @kimura = create(:user, login: 'kimura')
 
     create(:issue, :with_author, repository_id: 123, title: 'キムラが担当した Issue') do |issue|
       issue.assignees << kimura
@@ -20,9 +19,11 @@ RSpec.describe 'User::Contributions', type: :system do
     create(:wiki, repository_id: 123, title: 'キムラが作成した Wiki', author: kimura)
   end
 
+  let(:kimura) { create(:user, login: 'kimura') }
+
   context 'ゲストの場合' do
     scenario 'ユーザーの 作成/担当/レビューした Issue とそれと紐付いた PullRequest 、Wiki を一覧表示する' do
-      visit users_contributions_path(@kimura.login)
+      visit users_contributions_path(kimura.login)
 
       expect(page).to have_button('Markdown をコピー')
       expect(page).to have_button('URL をコピー')
@@ -37,7 +38,7 @@ RSpec.describe 'User::Contributions', type: :system do
 
   context 'ユーザーの場合' do
     scenario 'ユーザーの 作成/担当/レビューした Issue とそれと紐付いた PullRequest 、Wiki を一覧表示する' do
-      login_as @kimura, to: users_contributions_path(@kimura.login)
+      login_as kimura, to: users_contributions_path(kimura.login)
 
       expect(page).to have_button('Markdown をコピー')
       expect(page).to have_button('URL をコピー')
