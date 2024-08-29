@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class UserSessionsController < ApplicationController
+  skip_before_action :authenticate_user!
+
   def create
     user = User.find_or_initialize_by_github_auth(request.env['omniauth.auth'])
     user.save if user.new_record?

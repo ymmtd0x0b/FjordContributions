@@ -2,6 +2,7 @@
 
 class Users::ContributionsController < ApplicationController
   include Settable
+  skip_before_action :authenticate_user!
   before_action :set_repository, only: %i[index]
   before_action :set_user, only: %i[index]
 

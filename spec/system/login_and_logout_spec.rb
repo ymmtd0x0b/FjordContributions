@@ -19,7 +19,7 @@ RSpec.describe 'LoginAndLogout', type: :system do
     expect(page).to have_button 'kimura'
   end
 
-  context 'ユーザーとして、アカウント登録ボタンをクリックした場合' do
+  context 'ユーザーがアカウント登録ボタンをクリックした場合' do
     scenario 'ログインに成功すること' do
       create(:user, id: 456, login: 'kimura')
 
@@ -32,15 +32,14 @@ RSpec.describe 'LoginAndLogout', type: :system do
   end
 
   scenario 'ログアウトに成功すること' do
-    create(:user, id: 456, login: 'kimura')
+    kimura = create(:user, id: 456, login: 'kimura')
 
-    visit root_path
-    click_button 'ログイン'
+    login_as kimura, to: root_path
 
     click_button 'kimura'
     click_link 'ログアウト'
 
-    expect(page).to have_current_path '/'
+    expect(page).to have_current_path root_path
     expect(page).to have_button 'ログイン'
   end
 end

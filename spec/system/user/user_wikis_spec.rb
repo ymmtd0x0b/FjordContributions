@@ -3,18 +3,27 @@
 require 'rails_helper'
 
 RSpec.describe 'User::Wikis', type: :system do
-  scenario 'ユーザーが作成した Wiki を一覧表示する' do
-    create(:repository, id: 123, name: 'test/repository')
+  context 'ゲストの場合' do
+    scenario 'トップページへリダイレクトする' do
+      visit users_wikis_path('kimura')
+      expect(page).to have_current_path root_path
+    end
+  end
 
-    kimura = create(:user, login: 'kimura')
-    create(:wiki, repository_id: 123, title: '議事録01', author: kimura)
-    create(:wiki, repository_id: 123, title: '議事録02', author: kimura)
-    create(:wiki, repository_id: 123, title: '議事録03', author: kimura)
+  context 'ユーザーの場合' do
+    scenario 'ユーザーが作成した Wiki を一覧表示する' do
+      create(:repository, id: 123, name: 'test/repository')
 
-    visit users_wikis_path(kimura.login)
+      kimura = create(:user, login: 'kimura')
+      create(:wiki, repository_id: 123, title: '議事録01', author: kimura)
+      create(:wiki, repository_id: 123, title: '議事録02', author: kimura)
+      create(:wiki, repository_id: 123, title: '議事録03', author: kimura)
 
-    expect(page).to have_content '議事録01'
-    expect(page).to have_content '議事録02'
-    expect(page).to have_content '議事録03'
+      login_as kimura, to: users_wikis_path(kimura.login)
+
+      expect(page).to have_content '議事録01'
+      expect(page).to have_content '議事録02'
+      expect(page).to have_content '議事録03'
+    end
   end
 end
