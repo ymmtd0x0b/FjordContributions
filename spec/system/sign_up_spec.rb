@@ -18,7 +18,7 @@ RSpec.describe 'Sign up', type: :system do
     end.to change { User.count }.from(0).to(1)
   end
 
-  context 'ゲストとして、ログインボタンをクリックした場合' do
+  context 'ゲストがログインボタンをクリックした場合' do
     scenario 'ユーザー登録する' do
       visit root_path
       expect do
