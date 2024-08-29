@@ -7,17 +7,17 @@ RSpec.describe 'User::Contributions', type: :system do
     create(:repository, id: 123, name: 'test/repository')
     kimura = create(:user, login: 'kimura')
 
-    create(:issue, :with_author, :with_repository, repository_id: 123, title: 'キムラが担当した Issue') do |issue|
+    create(:issue, :with_author, repository_id: 123, title: 'キムラが担当した Issue') do |issue|
       issue.assignees << kimura
-      issue.pull_requests << create(:pull_request, :with_repository, repository_id: 123, number: 111) { |pr| pr.assignees << kimura }
+      issue.pull_requests << create(:pull_request, repository_id: 123, number: 111) { |pr| pr.assignees << kimura }
     end
 
-    create(:issue, :with_author, :with_repository, repository_id: 123, title: 'キムラがレビューした Issue') do |issue|
-      issue.pull_requests << create(:pull_request, :with_repository, repository_id: 123, number: 222) { |pr| pr.reviewers << kimura }
+    create(:issue, :with_author, repository_id: 123, title: 'キムラがレビューした Issue') do |issue|
+      issue.pull_requests << create(:pull_request, repository_id: 123, number: 222) { |pr| pr.reviewers << kimura }
     end
 
-    create(:issue, :with_author, :with_repository, repository_id: 123, title: 'キムラが作成した Issue', author: kimura)
-    create(:wiki, :with_repository, repository_id: 123, title: 'キムラが作成した Wiki', author: kimura)
+    create(:issue, repository_id: 123, title: 'キムラが作成した Issue', author: kimura)
+    create(:wiki, repository_id: 123, title: 'キムラが作成した Wiki', author: kimura)
 
     visit users_contributions_path(kimura.login)
 

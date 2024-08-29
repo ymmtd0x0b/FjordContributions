@@ -20,27 +20,27 @@ RSpec.describe Git::Wiki, type: :model do
     end
   end
 
-  describe '.created_by' do
-    before do
-      @tmpdir_realpath = create_dummy_repository_wiki
-      allow(Git::Wiki).to receive(:github_url).and_return(@tmpdir_realpath)
+  def create_dummy_repository_wiki(repository_name, author_name:)
+    tmpdir = Dir.mktmpdir
+    tmpdir_realpath = File.realpath tmpdir
+
+    Dir.chdir(tmpdir_realpath) do
+      git = Git.init("#{repository_name}.wiki.git")
+      git.config('user.name', author_name)
+      git.config('user.email', 'test@example.com')
+
+      File.write("#{repository_name}.wiki.git/test.txt", 'test')
+      git.add('test.txt')
+      git.commit('first commit')
     end
 
-    def create_dummy_repository_wiki
-      tmpdir = Dir.mktmpdir
-      tmpdir_realpath = File.realpath tmpdir
+    tmpdir_realpath
+  end
 
-      Dir.chdir(tmpdir_realpath) do
-        git = Git.init('test/repository.wiki.git')
-        git.config('user.name', 'kimura')
-        git.config('user.email', 'kimura@email.com')
-
-        File.write('test/repository.wiki.git/test.txt', 'test')
-        git.add('test.txt')
-        git.commit('first commit')
-      end
-
-      tmpdir_realpath
+  describe '.created_by' do
+    before do
+      @tmpdir_realpath = create_dummy_repository_wiki('test/repository', author_name: 'kimura')
+      allow(Git::Wiki).to receive(:github_url).and_return(@tmpdir_realpath)
     end
 
     after do
@@ -50,9 +50,9 @@ RSpec.describe Git::Wiki, type: :model do
     context '該当する Wiki がある場合' do
       it 'Git::Wiki オブジェクトを要素に持つ Array を返すこと' do
         repository = create(:repository, name: 'test/repository')
-        user = create(:user, login: 'kimura')
+        kimura = create(:user, login: 'kimura')
 
-        wikis = Git::Wiki.created_by(repository, user)
+        wikis = Git::Wiki.created_by(repository, kimura)
         expect(wikis).not_to be_empty
         expect(wikis).to all(be_instance_of(Git::Wiki))
       end
@@ -61,27 +61,34 @@ RSpec.describe Git::Wiki, type: :model do
     context '該当する Wiki がない場合' do
       it '空の Array を返すこと' do
         repository = create(:repository, name: 'test/repository')
-        user = create(:user, login: 'hajime')
+        hajime = create(:user, login: 'hajime')
 
-        wikis = Git::Wiki.created_by(repository, user)
+        wikis = Git::Wiki.created_by(repository, hajime)
         expect(wikis).to be_empty
       end
     end
 
     context 'エラーが発生した場合' do
       before do
-        @repository = create(:repository, name: 'not_found_repository')
-        @user = create(:user, login: 'kimura')
+        allow(Rails.logger).to receive(:error)
+        allow(Git).to receive(:clone) do
+          result = Git::CommandLineResult.new(%w[git status], `exit 1`, '', 'error!!')
+          error = Git::CommandLineError.new(result)
+          raise(error)
+        end
       end
 
+      let(:repository) { create(:repository) }
+      let(:user) { create(:user) }
+
       it '空の Array を返すこと' do
-        wikis = Git::Wiki.created_by(@repository, @user)
+        wikis = Git::Wiki.created_by(repository, user)
         expect(wikis).to be_empty
       end
 
       it 'ログに出力すること' do
-        expect(Rails.logger).to receive(:error)
-        Git::Wiki.created_by(@repository, @user)
+        Git::Wiki.created_by(repository, user)
+        expect(Rails.logger).to have_received(:error).with('[Git] error!!')
       end
     end
   end
