@@ -9,3 +9,8 @@ AllCops:
 Rails/LexicallyScopedActionFilter:
   Exclude:
     - app/controllers/high_voltage/pages_controller.rb
+
+Rails/SkipsModelValidations:
+  Exclude:
+    - app/models/issue.rb
+    - app/models/labeling.rb

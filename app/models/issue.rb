@@ -12,4 +12,13 @@ class Issue < ApplicationRecord
 
   has_many :resolutions, dependent: :destroy
   has_many :pull_requests, through: :resolutions, source: :pull_request
+
+  class << self
+    def synchronize(issues_by_github_api)
+      hash_list = issues_by_github_api.map(&:to_h)
+      upsert_all(hash_list) if hash_list.any?
+
+      Labeling.synchronize(issues_by_github_api)
+    end
+  end
 end

@@ -8,5 +8,6 @@ class CreateIssues < ActiveRecord::Migration[7.2]
 
       t.timestamps
     end
+    add_index :issues, %i[repository_id number], unique: true
   end
 end

@@ -32,6 +32,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_08_26_214346) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["author_id"], name: "index_issues_on_author_id"
+    t.index ["repository_id", "number"], name: "index_issues_on_repository_id_and_number", unique: true
     t.index ["repository_id"], name: "index_issues_on_repository_id"
   end
 
