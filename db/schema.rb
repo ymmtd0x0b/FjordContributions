@@ -20,6 +20,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_08_26_214346) do
     t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["assignable_type", "assignable_id", "user_id"], name: "index_assigns_on_assignable_type_and_assignable_id_and_user_id", unique: true
     t.index ["assignable_type", "assignable_id"], name: "index_assigns_on_assignable"
     t.index ["user_id"], name: "index_assigns_on_user_id"
   end
