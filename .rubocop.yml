@@ -14,3 +14,4 @@ Rails/SkipsModelValidations:
   Exclude:
     - app/models/issue.rb
     - app/models/labeling.rb
+    - app/models/assign.rb
