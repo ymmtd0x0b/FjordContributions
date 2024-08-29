@@ -26,9 +26,10 @@ RSpec.describe GitHub::PullRequest, type: :model do
   end
 
   describe '.assigned_by' do
+    let(:repository) { create(:repository, name: 'test/repository') }
+
     context '該当する PullRequest がある場合' do
       it 'GitHub::PullRequest オブジェクトを要素に持つ Array を返すこと', vcr: { cassette_name: 'github/pull_request/assigned_by' } do
-        repository = create(:repository, name: 'test/repository')
         user = create(:user, login: 'kimura')
 
         pull_requests = GitHub::PullRequest.assigned_by(repository, user)
@@ -39,7 +40,6 @@ RSpec.describe GitHub::PullRequest, type: :model do
 
     context '該当する PullRequest がない場合' do
       it '空の Array を返すこと', vcr: { cassette_name: 'github/pull_request/assigned_by_with_not_found' } do
-        repository = create(:repository, name: 'test/repository')
         user = create(:user, login: 'not_found')
 
         pull_requests = GitHub::PullRequest.assigned_by(repository, user)
@@ -49,9 +49,10 @@ RSpec.describe GitHub::PullRequest, type: :model do
   end
 
   describe '.reviewed_by' do
+    let(:repository) { create(:repository, name: 'test/repository') }
+
     context '該当する PullRequest がある場合' do
       it 'GitHub::PullRequest オブジェクトを要素に持つ Array を返すこと', vcr: { cassette_name: 'github/pull_request/reviewed_by' } do
-        repository = create(:repository, name: 'test/repository')
         user = create(:user, login: 'kimura')
 
         pull_requests = GitHub::PullRequest.reviewed_by(repository, user)
@@ -62,7 +63,6 @@ RSpec.describe GitHub::PullRequest, type: :model do
 
     context '該当する PullRequest がない場合' do
       it '空の Array を返すこと', vcr: { cassette_name: 'github/pull_request/reviewed_by_with_not_found' } do
-        repository = create(:repository, name: 'test/repository')
         user = create(:user, login: 'not_found')
 
         pull_requests = GitHub::PullRequest.reviewed_by(repository, user)
