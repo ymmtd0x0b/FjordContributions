@@ -4,7 +4,7 @@ require 'rails_helper'
 
 RSpec.describe 'Sign up', type: :system do
   before do
-    FactoryBot.create(:repository, id: 123, name: 'test/repository')
+    create(:repository, id: 123, name: 'test/repository')
     OmniAuth.config.mock_auth[:github] =
       OmniAuth::AuthHash.new({ provider: 'github', uid: 501, info: { nickname: 'kimura', name: '', image: 'https://example.com/avatar.png' } })
   end
