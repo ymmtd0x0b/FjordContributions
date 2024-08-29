@@ -9,9 +9,10 @@ RSpec.describe LabelDecorator, type: :model do
         label = create(:label, :with_repository, color: '#ffffff')
         decorator_label = ActiveDecorator::Decorator.instance.decorate(label)
 
-        expect(decorator_label.color.paint.light?).to be_truthy
-        expect(decorator_label.color.paint.brightness).to eq 255.0
-        expect(decorator_label.border_color.paint.brightness).to eq 179.0
+        expect(label.color.paint.light?).to be_truthy
+
+        color = label.color
+        expect { color = decorator_label.border_color }.to change { color.paint.brightness }.from(255.0).to(179.0)
       end
     end
 
@@ -20,9 +21,10 @@ RSpec.describe LabelDecorator, type: :model do
         label = create(:label, :with_repository, color: '#555555')
         decorator_label = ActiveDecorator::Decorator.instance.decorate(label)
 
-        expect(decorator_label.color.paint.dark?).to be_truthy
-        expect(decorator_label.color.paint.brightness).to eq 85.0
-        expect(decorator_label.border_color.paint.brightness).to eq 72.0
+        expect(label.color.paint.dark?).to be_truthy
+
+        color = label.color
+        expect { color = decorator_label.border_color }.to change { color.paint.brightness }.from(85.0).to(72.0)
       end
     end
   end
