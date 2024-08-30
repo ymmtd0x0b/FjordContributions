@@ -35,7 +35,7 @@ RSpec.describe 'Sign up', type: :system do
     end
   end
 
-  scenario 'ユーザー登録する際、作成/担当した Issue を取得すること', vcr: { cassette_name: 'system/sign_up' } do
+  scenario 'ユーザー登録する際、ユーザーの取り組みを取得すること', vcr: { cassette_name: 'system/sign_up' } do
     visit root_path
     click_button 'GitHubアカントで登録'
 
@@ -49,6 +49,14 @@ RSpec.describe 'Sign up', type: :system do
       expect(page).to have_content '新機能の追加'
       expect(page).to have_content '#402'
     end
+
+    # レビューした PullRequest を登録する機能を実装したらコメントアウトを削除する
+    # within('#reviewed_issues') do
+    #   expect(page).to have_content '2'
+    #   expect(page).to have_content 'ロゴの変更'
+    #   expect(page).to have_content '3'
+    #   expect(page).to have_content '既存機能の改修'
+    # end
 
     within('#created_issues') do
       expect(page).to have_content 'バグの報告１'
