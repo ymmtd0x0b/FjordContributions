@@ -44,8 +44,10 @@ RSpec.describe 'Sign up', type: :system do
     within('#assigned_issues') do
       expect(page).to have_content '1'
       expect(page).to have_content 'バグの修正'
+      expect(page).to have_content '#401'
       expect(page).to have_content '2'
       expect(page).to have_content '新機能の追加'
+      expect(page).to have_content '#402'
     end
 
     within('#created_issues') do
