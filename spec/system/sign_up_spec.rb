@@ -36,15 +36,24 @@ RSpec.describe 'Sign up', type: :system do
   end
 
   context 'ユーザー登録する際', vcr: { cassette_name: 'system/sign_up' } do
-    scenario 'ユーザーが作成した Issue を GitHub から取得＆登録する' do
+    before do
       visit root_path
       click_button 'GitHubアカントで登録'
+    end
 
+    scenario 'ユーザーが作成した Issue を GitHub から取得＆登録する' do
       visit users_issues_path('kimura')
       expect(page).to have_content 'Total 3'
       expect(page).to have_content 'バグの修正'
       expect(page).to have_content '新機能の追加'
       expect(page).to have_content '機能の提案'
+    end
+
+    scenario 'ユーザーが担当した Issue を GitHub から取得＆登録する' do
+      visit users_issues_path('kimura', association: 'assigned')
+      expect(page).to have_content 'Total 2'
+      expect(page).to have_content 'バグの修正'
+      expect(page).to have_content '新機能の追加'
     end
   end
 end
