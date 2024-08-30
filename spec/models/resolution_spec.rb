@@ -14,12 +14,11 @@ RSpec.describe Resolution, type: :model do
         create(:issue, :with_author, repository_id: 123, id: 100, number: 10) { |issue| issue.pull_requests << pull_request }
         create(:issue, :with_author, repository_id: 123, id: 200, number: 20)
 
-        expect do
-          pull_requests_collected_by_the_github_api = [
-            GitHub::PullRequest.new(repository_id: 123, pull_request: { id: 300, number: 30, issues_number: [10, 20] })
-          ]
-          Resolution.synchronize(pull_requests_collected_by_the_github_api)
-        end.to change { pull_request.issues.ids }.from([100]).to([100, 200])
+        pull_requests_collected_by_the_github_api = [
+          GitHub::PullRequest.new(repository_id: 123, pull_request: { id: 300, number: 30, issues_number: [10, 20] })
+        ]
+
+        expect { Resolution.synchronize(pull_requests_collected_by_the_github_api) }.to change { pull_request.issues.ids }.from([100]).to([100, 200])
       end
     end
 
@@ -29,12 +28,11 @@ RSpec.describe Resolution, type: :model do
         create(:issue, :with_author, repository_id: 123, id: 100, number: 10) { |issue| issue.pull_requests << pull_request }
         create(:issue, :with_author, repository_id: 123, id: 200, number: 20) { |issue| issue.pull_requests << pull_request }
 
-        expect do
-          pull_requests_collected_by_the_github_api = [
-            GitHub::PullRequest.new(repository_id: 123, pull_request: { id: 300, number: 30, issues_number: [10] })
-          ]
-          Resolution.synchronize(pull_requests_collected_by_the_github_api)
-        end.to change { pull_request.issues.ids }.from([100, 200]).to([100])
+        pull_requests_collected_by_the_github_api = [
+          GitHub::PullRequest.new(repository_id: 123, pull_request: { id: 300, number: 30, issues_number: [10] })
+        ]
+
+        expect { Resolution.synchronize(pull_requests_collected_by_the_github_api) }.to change { pull_request.issues.ids }.from([100, 200]).to([100])
       end
     end
   end

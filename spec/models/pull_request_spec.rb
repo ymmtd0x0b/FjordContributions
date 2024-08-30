@@ -48,4 +48,54 @@ RSpec.describe PullRequest, type: :model do
       expect(Resolution).to have_received(:synchronize)
     end
   end
+
+  describe '#assignee?' do
+    before do
+      create(:repository, id: 123)
+    end
+
+    context 'ユーザーがアサインされている場合' do
+      it 'true を返すこと' do
+        kimura = create(:user, login: 'kimura')
+        pull_request = create(:pull_request, repository_id: 123) { |pr| pr.assignees << kimura }
+
+        expect(pull_request.assignee?(kimura)).to eq true
+      end
+    end
+
+    context 'ユーザーがアサインされていない場合' do
+      it 'false を返すこと' do
+        kimura = create(:user, login: 'kimura')
+        hajime = create(:user, login: 'hajime')
+        pull_request = create(:pull_request, repository_id: 123) { |pr| pr.assignees << hajime }
+
+        expect(pull_request.assignee?(kimura)).to eq false
+      end
+    end
+  end
+
+  describe '#reviewer?' do
+    before do
+      create(:repository, id: 123)
+    end
+
+    context 'ユーザーがレビューしている場合' do
+      it 'true を返すこと' do
+        kimura = create(:user, login: 'kimura')
+        pull_request = create(:pull_request, repository_id: 123) { |pr| pr.reviewers << kimura }
+
+        expect(pull_request.reviewer?(kimura)).to eq true
+      end
+    end
+
+    context 'ユーザーがレビューしていない場合' do
+      it 'false を返すこと' do
+        kimura = create(:user, login: 'kimura')
+        hajime = create(:user, login: 'hajime')
+        pull_request = create(:pull_request, repository_id: 123) { |pr| pr.reviewers << hajime }
+
+        expect(pull_request.reviewer?(kimura)).to eq false
+      end
+    end
+  end
 end
