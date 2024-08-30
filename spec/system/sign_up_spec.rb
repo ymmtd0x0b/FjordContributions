@@ -48,15 +48,16 @@ RSpec.describe 'Sign up', type: :system do
       expect(page).to have_content '2'
       expect(page).to have_content '新機能の追加'
       expect(page).to have_content '#402'
+      expect(page).to have_content '3'
     end
 
-    # レビューした PullRequest を登録する機能を実装したらコメントアウトを削除する
-    # within('#reviewed_issues') do
-    #   expect(page).to have_content '2'
-    #   expect(page).to have_content 'ロゴの変更'
-    #   expect(page).to have_content '3'
-    #   expect(page).to have_content '既存機能の改修'
-    # end
+    within('#reviewed_issues') do
+      expect(page).to have_content '2'
+      expect(page).to have_content 'ロゴの変更'
+      expect(page).to have_content '3'
+      expect(page).to have_content '既存機能の改修'
+      expect(page).to have_content '5'
+    end
 
     within('#created_issues') do
       expect(page).to have_content 'バグの報告１'
