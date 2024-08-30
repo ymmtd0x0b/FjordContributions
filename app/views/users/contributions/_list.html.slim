@@ -5,7 +5,7 @@
     p.font-medium.text-slate-700
       = content
 
-  ul.ml-2.space-y-2.font-semibold.text-slate-700.list-disc.list-inside
+  ul.ml-2.space-y-2.font-semibold.text-slate-700.list-disc.list-inside(id="#{list_id}")
     - items.each do |item|
       li
         = item.title

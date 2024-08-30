@@ -75,7 +75,7 @@ http_interactions:
       - E272:3F406E:8A3D34:90F7E8:668698C2
     body:
       encoding: ASCII-8BIT
-      string: '{"total_count":3,"items":[{"id":301,"number":301,"title":"バグの修正","user":{"id":"501"},"labels":[{"id":201},{"id":204}],"created_at":"2024-01-13T07:41:50Z","updated_at":"2024-05-20T13:45:40Z"},{"id":302,"number":302,"title":"新機能の追加","user":{"id":"501"},"labels":[{"id":202},{"id":205}],"created_at":"2024-02-19T10:30:02Z","updated_at":"2024-05-20T13:45:14Z"},{"id":305,"number":305,"title":"機能の提案","user":{"id":"501"},"labels":[{"id":203}],"created_at":"2024-02-23T11:32:30Z","updated_at":"2024-05-20T10:45:03Z"}]}'
+      string: '{"total_count":3,"items":[{"id":303,"number":303,"title":"バグの報告１","user":{"id":"501"},"labels":[{"id":201},{"id":204}],"created_at":"2024-01-13T07:41:50Z","updated_at":"2024-05-20T13:45:40Z"},{"id":304,"number":304,"title":"バグの報告２","user":{"id":"501"},"labels":[{"id":202},{"id":205}],"created_at":"2024-02-19T10:30:02Z","updated_at":"2024-05-20T13:45:14Z"},{"id":305,"number":305,"title":"新機能の提案","user":{"id":"501"},"labels":[{"id":203}],"created_at":"2024-02-23T11:32:30Z","updated_at":"2024-05-20T10:45:03Z"}]}'
   recorded_at: Thu, 04 Jul 2024 12:42:42 GMT
 - request:
     method: get
@@ -154,4 +154,81 @@ http_interactions:
       encoding: ASCII-8BIT
       string: '{"total_count":2,"items":[{"id":301,"number":301,"title":"バグの修正","labels":[{"id":201},{"id":204}],"user":{"id":"501"},"created_at":"2024-01-13T07:41:50Z","updated_at":"2024-05-20T10:45:40Z"},{"id":302,"number":302,"title":"新機能の追加","labels":[{"id":202},{"id":205}],"user":{"id":"501"},"created_at":"2024-02-19T10:30:02Z","updated_at":"2024-05-20T10:45:14Z"}]}'
   recorded_at: Thu, 04 Jul 2024 12:42:38 GMT
+- request:
+    method: get
+    uri: https://api.github.com/search/issues?page=1&per_page=100&q=repo:test/repository%20is:pr%20assignee:kimura%20-label:release
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/vnd.github.v3+json
+      User-Agent:
+      - Octokit Ruby Gem 9.1.0
+      Content-Type:
+      - application/json
+      Authorization:
+      - token <GITHUB_ACCESS_TOKEN>
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Thu, 04 Jul 2024 12:42:39 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Cache-Control:
+      - no-cache
+      Vary:
+      - Accept, Authorization, Cookie, X-GitHub-OTP,Accept-Encoding, Accept, X-Requested-With
+      Github-Authentication-Token-Expiration:
+      - '2024-07-11 17:13:17 +0900'
+      X-Github-Media-Type:
+      - github.v3; format=json
+      X-Accepted-Github-Permissions:
+      - allows_permissionless_access=true
+      X-Github-Api-Version-Selected:
+      - '2022-11-28'
+      X-Ratelimit-Limit:
+      - '30'
+      X-Ratelimit-Remaining:
+      - '28'
+      X-Ratelimit-Reset:
+      - '1720097018'
+      X-Ratelimit-Used:
+      - '2'
+      X-Ratelimit-Resource:
+      - search
+      Access-Control-Expose-Headers:
+      - ETag, Link, Location, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining,
+        X-RateLimit-Used, X-RateLimit-Resource, X-RateLimit-Reset, X-OAuth-Scopes,
+        X-Accepted-OAuth-Scopes, X-Poll-Interval, X-GitHub-Media-Type, X-GitHub-SSO,
+        X-GitHub-Request-Id, Deprecation, Sunset
+      Access-Control-Allow-Origin:
+      - "*"
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubdomains; preload
+      X-Frame-Options:
+      - deny
+      X-Content-Type-Options:
+      - nosniff
+      X-Xss-Protection:
+      - '0'
+      Referrer-Policy:
+      - origin-when-cross-origin, strict-origin-when-cross-origin
+      Content-Security-Policy:
+      - default-src 'none'
+      Transfer-Encoding:
+      - chunked
+      Server:
+      - github.com
+      X-Github-Request-Id:
+      - E24C:37AC3B:1366676:1449B4A:668698BF
+    body:
+      encoding: ASCII-8BIT
+      string: '{"total_count":2,"items":[{"id":401,"number":401,"body":"# Issue\n- #301\n\n# 概要","created_at":"2024-02-23T11:32:30Z","updated_at":"2024-05-20T10:45:03Z"},{"id":402,"number":402,"body":"# Issue\n- #302\n\n# 概要","created_at":"2024-02-23T11:32:30Z","updated_at":"2024-05-20T10:45:03Z"}]}'
+  recorded_at: Thu, 04 Jul 2024 12:42:39 GMT
 recorded_with: VCR 6.3.1
