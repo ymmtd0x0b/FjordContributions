@@ -16,10 +16,9 @@ RSpec.describe Labeling, type: :model do
         issue = create(:issue, :with_author, repository_id: 123, id: 100)
         issue.labelings.create!(label_id: 10)
 
-        expect do
-          issues_collected_by_the_github_api = [GitHub::Issue.new(repository_id: 123, issue: { id: 100, labels_id: [10, 20] })]
-          Labeling.synchronize(issues_collected_by_the_github_api)
-        end.to change { issue.labels.ids }.from([10]).to([10, 20])
+        issues_collected_by_the_github_api = [GitHub::Issue.new(repository_id: 123, issue: { id: 100, labels_id: [10, 20] })]
+
+        expect { Labeling.synchronize(issues_collected_by_the_github_api) }.to change { issue.labels.ids }.from([10]).to([10, 20])
       end
     end
 
@@ -29,10 +28,9 @@ RSpec.describe Labeling, type: :model do
         issue.labelings.create!(label_id: 10)
         issue.labelings.create!(label_id: 20)
 
-        expect do
-          issues_collected_by_the_github_api = [GitHub::Issue.new(repository_id: 123, issue: { id: 100, labels_id: [10] })]
-          Labeling.synchronize(issues_collected_by_the_github_api)
-        end.to change { issue.labels.ids }.from([10, 20]).to([10])
+        issues_collected_by_the_github_api = [GitHub::Issue.new(repository_id: 123, issue: { id: 100, labels_id: [10] })]
+
+        expect { Labeling.synchronize(issues_collected_by_the_github_api) }.to change { issue.labels.ids }.from([10, 20]).to([10])
       end
     end
   end
