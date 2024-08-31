@@ -18,3 +18,4 @@ Rails/SkipsModelValidations:
     - app/models/pull_request.rb
     - app/models/resolution.rb
     - app/models/review.rb
+    - app/models/wiki.rb
