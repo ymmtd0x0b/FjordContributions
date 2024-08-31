@@ -36,33 +36,42 @@ RSpec.describe 'Sign up', type: :system do
   end
 
   scenario 'ユーザー登録する際、ユーザーの取り組みを取得すること', vcr: { cassette_name: 'system/sign_up' } do
-    visit root_path
-    click_button 'GitHubアカントで登録'
+    DummyRepositoryWiki.init('test/repository', files: %w[議事録１ 議事録２], author: 'kimura') do |tmpdir_realpath|
+      allow(Git::Wiki).to receive(:github_url).and_return(tmpdir_realpath)
 
-    visit users_contributions_path('kimura')
+      visit root_path
+      click_button 'GitHubアカントで登録'
 
-    within('#assigned_issues') do
-      expect(page).to have_content '1'
-      expect(page).to have_content 'バグの修正'
-      expect(page).to have_content '#401'
-      expect(page).to have_content '2'
-      expect(page).to have_content '新機能の追加'
-      expect(page).to have_content '#402'
-      expect(page).to have_content '3'
-    end
+      visit users_contributions_path('kimura')
 
-    within('#reviewed_issues') do
-      expect(page).to have_content '2'
-      expect(page).to have_content 'ロゴの変更'
-      expect(page).to have_content '3'
-      expect(page).to have_content '既存機能の改修'
-      expect(page).to have_content '5'
-    end
+      within('#assigned_issues') do
+        expect(page).to have_content '1'
+        expect(page).to have_content 'バグの修正'
+        expect(page).to have_content '#401'
+        expect(page).to have_content '2'
+        expect(page).to have_content '新機能の追加'
+        expect(page).to have_content '#402'
+        expect(page).to have_content '3'
+      end
 
-    within('#created_issues') do
-      expect(page).to have_content 'バグの報告１'
-      expect(page).to have_content 'バグの報告２'
-      expect(page).to have_content '新機能の提案'
+      within('#reviewed_issues') do
+        expect(page).to have_content '2'
+        expect(page).to have_content 'ロゴの変更'
+        expect(page).to have_content '3'
+        expect(page).to have_content '既存機能の改修'
+        expect(page).to have_content '5'
+      end
+
+      within('#created_issues') do
+        expect(page).to have_content 'バグの報告１'
+        expect(page).to have_content 'バグの報告２'
+        expect(page).to have_content '新機能の提案'
+      end
+
+      within('#created_wikis') do
+        expect(page).to have_content '議事録１'
+        expect(page).to have_content '議事録２'
+      end
     end
   end
 end
