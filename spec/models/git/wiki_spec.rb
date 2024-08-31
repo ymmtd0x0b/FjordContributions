@@ -20,51 +20,33 @@ RSpec.describe Git::Wiki, type: :model do
     end
   end
 
-  def create_dummy_repository_wiki(repository_name, author_name:)
-    tmpdir = Dir.mktmpdir
-    tmpdir_realpath = File.realpath tmpdir
-
-    Dir.chdir(tmpdir_realpath) do
-      git = Git.init("#{repository_name}.wiki.git")
-      git.config('user.name', author_name)
-      git.config('user.email', 'test@example.com')
-
-      File.write("#{repository_name}.wiki.git/test.txt", 'test')
-      git.add('test.txt')
-      git.commit('first commit')
-    end
-
-    tmpdir_realpath
-  end
-
   describe '.created_by' do
-    before do
-      @tmpdir_realpath = create_dummy_repository_wiki('test/repository', author_name: 'kimura')
-      allow(Git::Wiki).to receive(:github_url).and_return(@tmpdir_realpath)
-    end
-
-    after do
-      FileUtils.remove_entry_secure @tmpdir_realpath
-    end
-
     context '該当する Wiki がある場合' do
       it 'Git::Wiki オブジェクトを要素に持つ Array を返すこと' do
-        repository = create(:repository, name: 'test/repository')
-        kimura = create(:user, login: 'kimura')
+        DummyRepositoryWiki.init('test/repository', author: 'kimura') do |tmpdir_realpath|
+          allow(Git::Wiki).to receive(:github_url).and_return(tmpdir_realpath)
 
-        wikis = Git::Wiki.created_by(repository, kimura)
-        expect(wikis).not_to be_empty
-        expect(wikis).to all(be_instance_of(Git::Wiki))
+          repository = create(:repository, name: 'test/repository')
+          kimura = create(:user, login: 'kimura')
+
+          wikis = Git::Wiki.created_by(repository, kimura)
+          expect(wikis).not_to be_empty
+          expect(wikis).to all(be_instance_of(Git::Wiki))
+        end
       end
     end
 
     context '該当する Wiki がない場合' do
       it '空の Array を返すこと' do
-        repository = create(:repository, name: 'test/repository')
-        hajime = create(:user, login: 'hajime')
+        DummyRepositoryWiki.init('test/repository', author: 'kimura') do |tmpdir_realpath|
+          allow(Git::Wiki).to receive(:github_url).and_return(tmpdir_realpath)
 
-        wikis = Git::Wiki.created_by(repository, hajime)
-        expect(wikis).to be_empty
+          repository = create(:repository, name: 'test/repository')
+          hajime = create(:user, login: 'hajime')
+
+          wikis = Git::Wiki.created_by(repository, hajime)
+          expect(wikis).to be_empty
+        end
       end
     end
 
