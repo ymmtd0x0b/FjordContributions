@@ -23,11 +23,11 @@ Wiki.destroy_all
 Labeling.destroy_all
 
 # 初期データの投入
-repo_by_api = GitHub::Repository.find_by(name: 'fjordllc/bootcamp')
-repository = Repository.create!(repo_by_api.to_h)
+repo_by_api = GitHub::Repository.find_by(name: ENV['REPOSITORY_NAME'])
+Repository.create!(repo_by_api.to_h)
 
-labels_by_api = GitHub::Label.registered_by(repository)
-labels_by_api.each { |label| Label.create!(label.to_h) }
+# labels_by_api = GitHub::Label.registered_by(repository)
+# labels_by_api.each { |label| Label.create!(label.to_h) }
 
 # user_by_api = GitHub::User.find_by(login: ENV['USER_LOGIN'])
 # User.create!(user_by_api.to_h)
