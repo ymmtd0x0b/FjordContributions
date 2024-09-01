@@ -19,3 +19,4 @@ Rails/SkipsModelValidations:
     - app/models/resolution.rb
     - app/models/review.rb
     - app/models/wiki.rb
+    - app/models/label.rb
