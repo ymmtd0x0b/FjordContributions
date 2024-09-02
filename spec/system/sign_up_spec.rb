@@ -19,6 +19,7 @@ RSpec.describe 'Sign up', type: :system do
     visit root_path
     expect do
       click_button 'GitHubアカントで登録'
+      expect(page).to have_content 'アカウント登録に成功しました'
       expect(page).to have_current_path '/kimura/issues?association=assigned'
       expect(page).to have_content 'kimura'
     end.to change { User.count }.from(0).to(1)
@@ -29,6 +30,7 @@ RSpec.describe 'Sign up', type: :system do
       visit root_path
       expect do
         click_button 'ログイン'
+        expect(page).to have_content 'アカウント登録に成功しました'
         expect(page).to have_current_path '/kimura/issues?association=assigned'
         expect(page).to have_content 'kimura'
       end.to change { User.count }.from(0).to(1)

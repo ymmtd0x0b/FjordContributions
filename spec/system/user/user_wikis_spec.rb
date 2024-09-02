@@ -6,6 +6,7 @@ RSpec.describe 'User::Wikis', type: :system do
   context 'ゲストの場合' do
     scenario 'トップページへリダイレクトする' do
       visit users_wikis_path('kimura')
+      expect(page).to have_content 'ログインしてください'
       expect(page).to have_current_path root_path
     end
   end
