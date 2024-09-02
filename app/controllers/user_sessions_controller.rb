@@ -10,6 +10,9 @@ class UserSessionsController < ApplicationController
     if user.new_record?
       user.save
       Newspaper.publish(:create_user, { repository: @repository, user: })
+      flash[:notice] = 'アカウント登録に成功しました'
+    else
+      flash[:notice] = 'ログインしました'
     end
     session[:user_id] = user.id
     redirect_to users_issues_path(current_user.login, association: 'assigned')
@@ -17,6 +20,6 @@ class UserSessionsController < ApplicationController
 
   def destroy
     reset_session
-    redirect_to root_path
+    redirect_to root_path, notice: 'ログアウトしました'
   end
 end
