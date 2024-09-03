@@ -6,4 +6,5 @@ Rails.application.routes.draw do
     resources :wikis, only: %i[index]
     resources :contributions, only: %i[index]
   end
+  resources :users, only: %i[update]
 end
