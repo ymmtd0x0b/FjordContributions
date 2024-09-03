@@ -10,7 +10,7 @@ class User < ApplicationRecord
 
   has_many :reviews, dependent: :destroy
   has_many :reviewed_pull_requests, through: :reviews, source: :pull_request
-  has_many :reviewed_issues, through: :reviewed_pull_requests, source: :issues
+  has_many :reviewed_issues, through: :reviewed_pull_requests, source: :issues, extend: IssuesAssociationExtension
 
   def self.find_or_initialize_by_github_auth(auth_hash)
     uid = auth_hash[:uid]
