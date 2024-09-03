@@ -19,20 +19,35 @@ RSpec.describe 'User::Contributions', type: :system do
     create(:wiki, repository_id: 123, title: 'キムラが作成した Wiki', author: kimura)
   end
 
-  let(:kimura) { create(:user, login: 'kimura') }
+  let(:kimura) { create(:user, login: 'kimura', avatar_url: 'https://example.com/avatar_url.png') }
 
   context 'ゲストの場合' do
     scenario 'ユーザーの 作成/担当/レビューした Issue とそれと紐付いた PullRequest 、Wiki を一覧表示する' do
       visit users_contributions_path(kimura.login)
 
-      expect(page).to have_button('Markdown をコピー')
-      expect(page).to have_button('URL をコピー')
-      expect(page).to have_content('キムラが担当した Issue')
-      expect(page).to have_content('#111')
-      expect(page).to have_content('キムラがレビューした Issue')
-      expect(page).to have_content('#222')
-      expect(page).to have_content('キムラが作成した Issue')
-      expect(page).to have_content('キムラが作成した Wiki')
+      expect(page).to have_element(:h1, text: 'kimura')
+      expect(page).to have_element(:img, src: 'https://example.com/avatar_url.png')
+
+      expect(page).not_to have_button('Markdown をコピー')
+      expect(page).not_to have_button('URL をコピー')
+
+      within('#assigned_issues') do
+        expect(page).to have_content('キムラが担当した Issue')
+        expect(page).to have_content('#111')
+      end
+
+      within('#reviewed_issues') do
+        expect(page).to have_content('キムラがレビューした Issue')
+        expect(page).to have_content('#222')
+      end
+
+      within('#created_issues') do
+        expect(page).to have_content('キムラが作成した Issue')
+      end
+
+      within('#created_wikis') do
+        expect(page).to have_content('キムラが作成した Wiki')
+      end
     end
   end
 
@@ -42,12 +57,24 @@ RSpec.describe 'User::Contributions', type: :system do
 
       expect(page).to have_button('Markdown をコピー')
       expect(page).to have_button('URL をコピー')
-      expect(page).to have_content('キムラが担当した Issue')
-      expect(page).to have_content('#111')
-      expect(page).to have_content('キムラがレビューした Issue')
-      expect(page).to have_content('#222')
-      expect(page).to have_content('キムラが作成した Issue')
-      expect(page).to have_content('キムラが作成した Wiki')
+
+      within('#assigned_issues') do
+        expect(page).to have_content('キムラが担当した Issue')
+        expect(page).to have_content('#111')
+      end
+
+      within('#reviewed_issues') do
+        expect(page).to have_content('キムラがレビューした Issue')
+        expect(page).to have_content('#222')
+      end
+
+      within('#created_issues') do
+        expect(page).to have_content('キムラが作成した Issue')
+      end
+
+      within('#created_wikis') do
+        expect(page).to have_content('キムラが作成した Wiki')
+      end
     end
   end
 end
