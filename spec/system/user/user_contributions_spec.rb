@@ -28,6 +28,9 @@ RSpec.describe 'User::Contributions', type: :system do
       expect(page).to have_element(:h1, text: 'kimura')
       expect(page).to have_element(:img, src: 'https://example.com/avatar_url.png')
 
+      expect(page).not_to have_button('Markdown をコピー')
+      expect(page).not_to have_button('URL をコピー')
+
       within('#assigned_issues') do
         expect(page).to have_content('キムラが担当した Issue')
         expect(page).to have_content('#111')
