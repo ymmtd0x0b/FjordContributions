@@ -1,5 +1,6 @@
-= render 'users/page_header', repository: @repository, user: @user
-= render 'users/page_tabs', user: @user
+- if logged_in?
+  = render 'users/page_header', repository: @repository, user: current_user
+  = render 'users/page_tabs', user: current_user
 
 div(data-controller='clipboard')
   .px-10.pt-5.pb-10.flex-grow.max-w-screen-lg.mx-auto

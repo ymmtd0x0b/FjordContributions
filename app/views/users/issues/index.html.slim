@@ -1,3 +1,3 @@
-= render 'users/page_header', repository: @repository, user: @user
-= render 'users/page_tabs', user: @user
+= render 'users/page_header', repository: @repository, user: @current_user
+= render 'users/page_tabs', user: @current_user
 = render 'users/page_body', items: @issues
