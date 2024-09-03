@@ -26,6 +26,16 @@ RSpec.describe User::IssuesAssociationExtension do
         actual = taro.issues.not_referenced_by_other_users.ids
         expect(actual).to eq [100]
       end
+
+      it '他のユーザーがアサインしていない Issue を返すこと (Issue に関連する PullRequest にアサイン)' do
+        create(:issue, repository:, id: 100, author: taro)
+        create(:issue, repository:, id: 200, author: taro) do |issue|
+          issue.pull_requests << create(:pull_request, repository:) { |pr| pr.assignees << jiro }
+        end
+
+        actual = taro.issues.not_referenced_by_other_users.ids
+        expect(actual).to eq [100]
+      end
     end
   end
 end
