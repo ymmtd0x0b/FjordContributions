@@ -8,7 +8,8 @@ module User::IssuesAssociationExtension
       #{not_assigned_by_other_users_through_pull_requests} AND
       #{not_reviewed_by_other_users}
     SQL
-    where(sql, owner_id: proxy_association.owner.id)
+    sanitized_sql = Issue.sanitize_sql_array([sql, { owner_id: proxy_association.owner.id }])
+    where(sanitized_sql)
   end
 
   private
