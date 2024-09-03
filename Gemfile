@@ -50,8 +50,8 @@ end
 group :test do
   # not default
   gem 'capybara'
+  gem 'selenium-webdriver'
   gem 'simplecov', require: false
   gem 'vcr'
-  gem 'webdrivers'
   gem 'webmock'
 end
