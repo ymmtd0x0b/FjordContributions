@@ -5,7 +5,8 @@ module User::IssuesAssociationExtension
     sql = <<~"SQL"
       #{not_created_by_other_users}  AND
       #{not_assigned_by_other_users} AND
-      #{not_assigned_by_other_users_through_pull_requests}
+      #{not_assigned_by_other_users_through_pull_requests} AND
+      #{not_reviewed_by_other_users}
     SQL
     where(sql, owner_id: proxy_association.owner.id)
   end
@@ -40,6 +41,18 @@ module User::IssuesAssociationExtension
         INNER JOIN pull_requests ON resolutions.pull_request_id = pull_requests.id
         INNER JOIN assigns ON assignable_type = 'PullRequest' AND assigns.assignable_id = pull_requests.id
         WHERE resolutions.issue_id = issues.id AND assignable_type = 'PullRequest' AND assigns.user_id != :owner_id
+      )
+    SQL
+  end
+
+  def not_reviewed_by_other_users
+    <<~SQL
+      NOT EXISTS (
+        SELECT 1
+        FROM resolutions
+        INNER JOIN pull_requests ON resolutions.pull_request_id = pull_requests.id
+        INNER JOIN reviews ON reviews.pull_request_id = pull_requests.id
+        WHERE resolutions.issue_id = issues.id AND reviews.user_id != :owner_id
       )
     SQL
   end
