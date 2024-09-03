@@ -5,7 +5,7 @@ class User < ApplicationRecord
   has_many :wikis, foreign_key: :author_id, inverse_of: :author, dependent: :destroy
 
   has_many :assigns, dependent: :destroy
-  has_many :assigned_issues, through: :assigns, source: :assignable, source_type: 'Issue'
+  has_many :assigned_issues, through: :assigns, source: :assignable, source_type: 'Issue', extend: IssuesAssociationExtension
   has_many :assigned_pull_requests, through: :assigns, source: :assignable, source_type: 'PullRequest'
 
   has_many :reviews, dependent: :destroy
