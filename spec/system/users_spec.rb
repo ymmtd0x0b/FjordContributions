@@ -48,11 +48,13 @@ RSpec.describe 'Users', type: :system do
     click_button 'toast-close'
 
     expect do
-      accept_confirm do
-        click_button 'kimura'
-        click_link 'アカウント削除'
-      end
+      click_button 'kimura'
+      click_button 'アカウント削除'
+      click_link 'OK'
+
       expect(page).to have_content 'アカウントを削除しました'
     end.to change(User, :count).by(-1)
+
+    expect(Newspaper).to have_received(:publish).with(:user_destroy, kind_of(User))
   end
 end
