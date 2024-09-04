@@ -16,4 +16,10 @@ Rails.configuration.after_initialize do
   Newspaper.subscribe(:update_user, Synchronizer::AssignedPullRequest.new)
   Newspaper.subscribe(:update_user, Synchronizer::ReviewedPullRequest.new)
   Newspaper.subscribe(:update_user, Synchronizer::CreatedWiki.new)
+
+  Newspaper.subscribe(:update_user, Destroyer::CreatedIssue.new)
+  Newspaper.subscribe(:update_user, Destroyer::AssignedIssue.new)
+  Newspaper.subscribe(:update_user, Destroyer::ReviewedIssue.new)
+  Newspaper.subscribe(:update_user, Destroyer::AssignedPullRequest.new)
+  Newspaper.subscribe(:update_user, Destroyer::ReviewedPullRequest.new)
 end

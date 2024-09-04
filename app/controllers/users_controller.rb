@@ -12,4 +12,11 @@ class UsersController < ApplicationController
 
     redirect_to request.headers[:HTTP_REFERER]
   end
+
+  def destroy
+    Newspaper.publish(:user_destroy, current_user)
+    current_user.destroy!
+    reset_session
+    redirect_to root_path, notice: 'アカウントを削除しました', status: :see_other
+  end
 end
