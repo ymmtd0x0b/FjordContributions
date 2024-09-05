@@ -5,6 +5,7 @@ require 'rails_helper'
 RSpec.describe 'Users', type: :system do
   before do
     allow(Newspaper).to receive(:publish).with(:update_user, kind_of(Hash))
+    allow(Newspaper).to receive(:publish).with(:user_destroy, kind_of(User))
   end
 
   scenario 'ユーザー情報を更新する', vcr: { cassette_name: 'system/user_update' } do
@@ -37,5 +38,23 @@ RSpec.describe 'Users', type: :system do
       expect(page).to have_content '更新に失敗しました'
       expect(page).to have_current_path users_wikis_path(kimura.login)
     end
+  end
+
+  scenario 'ユーザーを削除する' do
+    create(:repository, id: 123, name: 'test/repository')
+    kimura = create(:user, login: 'kimura')
+
+    login_as kimura
+    click_button 'toast-close'
+
+    expect do
+      click_button 'kimura'
+      click_button 'アカウント削除'
+      click_link 'OK'
+
+      expect(page).to have_content 'アカウントを削除しました'
+    end.to change(User, :count).by(-1)
+
+    expect(Newspaper).to have_received(:publish).with(:user_destroy, kind_of(User))
   end
 end

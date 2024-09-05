@@ -24,11 +24,18 @@ header
                     path(stroke='currentColor' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m1 1 4 4 4-4')
           #dropdownAvatarName.z-10.hidden.bg-gray-500.text-gray-50.font-semibold.divide-y.divide-gray-100.rounded-lg.shadow.w-52
             .py-2
+              .text-sm.hover:bg-red-500
+                = button_tag data: { modal_target: 'retirement-modal', modal_toggle: 'retirement-modal' } do
+                  .w-full.px-4.py-2
+                    i.fa-solid.fa-trash-can.pr-2
+                    | アカウント削除
+            .py-2
               .text-sm.hover:bg-gray-400
                 = link_to logout_path, data: { turbo_method: :delete } do
                   .w-full.px-4.py-2
                     i.fa-solid.fa-arrow-right-from-bracket.pr-2
                     | ログアウト
+          = render 'shared/modal', path: user_path(current_user), method: :delete, message: '本当に実行しますか？', modal_id: 'retirement-modal'
         - else
           = button_to 'ログイン', '/auth/github', method: :post,
                       data: { turbo: false },
