@@ -16,5 +16,6 @@ html
     = render 'shared/header'
     = render 'shared/flash'
     main.flex-grow
-      = yield
+      = turbo_frame_tag :main do
+        = yield
     = render 'shared/footer'
