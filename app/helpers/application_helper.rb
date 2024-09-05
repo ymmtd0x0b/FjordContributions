@@ -1,17 +1,11 @@
 # frozen_string_literal: true
 
 module ApplicationHelper
-  def flash_bg_classes_for(flash_type)
-    case flash_type.to_s
-    when 'notice' then 'bg-green-500'
-    when 'alert'  then 'bg-red-500'
-    end
-  end
-
-  def flash_icon_classes_for(flash_type)
-    case flash_type.to_s
-    when 'notice' then 'text-green-500'
-    when 'alert'  then 'text-red-500'
+  def tab_to(name, path)
+    if path == request.fullpath
+      link_to name, path, class: 'inline-block p-4 text-blue-600 border-b-2 border-blue-600 rounded-t-lg active', aria: { current: 'page' }
+    else
+      link_to name, path, class: 'inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300'
     end
   end
 end
