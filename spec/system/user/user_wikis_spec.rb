@@ -22,9 +22,9 @@ RSpec.describe 'User::Wikis', type: :system do
 
       login_as kimura, to: users_wikis_path(kimura.login)
 
-      expect(page).to have_content '議事録01'
-      expect(page).to have_content '議事録02'
-      expect(page).to have_content '議事録03'
+      expect(page).to have_link '議事録01'
+      expect(page).to have_link '議事録02'
+      expect(page).to have_link '議事録03'
     end
   end
 end
