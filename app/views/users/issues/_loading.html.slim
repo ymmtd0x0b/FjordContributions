@@ -1,0 +1,44 @@
+.flex.gap-x-3.py-6.px-4.mt-px.w-full.mx-auto.max-w-screen-lg.animate-pulse(role='status')
+  .flex.items-center.divide-base-600
+    .w-8.h-8.rounded-full.bg-gray-400
+    .mr-2.flex.flex-col.align-bottom
+      .mx-3.mt-2.h-5.bg-gray-400.rounded-full.w-48
+      .ml-1.mt-2.border-0.border-b-2.border-blue-400.w-52
+    button.h-9.flex.items-center.text-gray-800.bg-white.border.border-gray-300.hover:bg-gray-200.focus:ring-4.focus:ring-gray-300.font-medium.rounded-lg.text-sm.px-4.focus:outline-none
+      i.fa-solid.fa-arrow-rotate-right.fa-rotate-270.mr-1
+      | 最新情報へ更新
+
+.px-4.text-sm.font-semibold.text-center.text-gray-500.border-b.border-gray-300.w-full.mx-auto.max-w-screen-lg.animate-pulse(role='status')
+  ul.flex.flex-wrap.-mb-px
+    li.me-2
+      .inline-block.p-4.border-b-2.border-transparent.rounded-t-lg
+        | 担当した Issue
+    li.me-2
+      .inline-block.p-4.border-b-2.border-transparent.rounded-t-lg
+        | レビューした Issue
+    li.me-2
+      .inline-block.p-4.border-b-2.border-transparent.rounded-t-lg
+        | 作成した Issue
+    li.me-2
+      .inline-block.p-4.border-b-2.border-transparent.rounded-t-lg
+        | 作成した Wiki
+    li.me-2
+      .inline-block.p-4.border-b-2.border-transparent.rounded-t-lg
+        | 全て表示
+
+.bg-gray-50.flex-grow.animate-pulse(role='status')
+  .max-w-screen-lg.mx-auto
+    .relative.my-10.mx-10.overflow-x-auto.shadow-md.sm:rounded-lg
+      .w-full.text-sm.text-left.rtl:text-right.text-gray-500
+        .px-6.py-3.text-gray-50.font-semibold.bg-slate-700.border-b
+          .mt-1.mb-0.5.h-4.bg-gray-400.rounded-full.w-12
+        - 8.times.each do
+          .bg-white.border-b
+            .px-6.py-3
+              .h-4.bg-gray-400.rounded-full.w-48
+              .flex(class="pt-2.5")
+                .mr-1.text-center.text-sm.font-medium.text-slate-500.my-auto
+                  .px-2.mt-px
+                    .h-4.bg-gray-400.rounded-full.w-6
+                .flex.items-center
+                  .h-4.bg-gray-400.rounded-full.w-10
