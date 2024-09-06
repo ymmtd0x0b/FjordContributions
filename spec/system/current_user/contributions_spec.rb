@@ -16,41 +16,19 @@ RSpec.describe 'User::Contributions', type: :system do
     create(:wiki, repository_id: 123, title: 'キムラが作成した Wiki', author: kimura)
   end
 
-  let(:kimura) { create(:user, login: 'kimura', avatar_url: 'https://example.com/avatar_url.png') }
+  let!(:kimura) { create(:user, login: 'kimura', avatar_url: 'https://example.com/avatar_url.png') }
 
   context 'ゲストの場合' do
-    scenario 'ユーザーの 作成/担当/レビューした Issue とそれと紐付いた PullRequest 、Wiki を一覧表示する' do
-      visit users_contributions_path(kimura.login)
-
-      expect(page).to have_element(:h1, text: 'kimura')
-      expect(page).to have_element(:img, src: 'https://example.com/avatar_url.png')
-
-      expect(page).not_to have_button('Markdown をコピー')
-      expect(page).not_to have_button('URL をコピー')
-
-      within('#assigned_issues') do
-        expect(page).to have_link('キムラが担当した Issue')
-        expect(page).to have_link('#111')
-      end
-
-      within('#reviewed_issues') do
-        expect(page).to have_link('キムラがレビューした Issue')
-        expect(page).to have_link('#222')
-      end
-
-      within('#created_issues') do
-        expect(page).to have_link('キムラが作成した Issue')
-      end
-
-      within('#created_wikis') do
-        expect(page).to have_link('キムラが作成した Wiki')
-      end
+    scenario 'トップページへリダイレクトする' do
+      visit current_user_contributions_path
+      expect(page).to have_content 'ログインしてください'
+      expect(page).to have_current_path root_path
     end
   end
 
   context 'ユーザーの場合' do
     scenario 'ユーザーの 作成/担当/レビューした Issue とそれと紐付いた PullRequest 、Wiki を一覧表示する' do
-      login_as kimura, to: users_contributions_path(kimura.login)
+      login_as kimura, to: current_user_contributions_path
 
       expect(page).to have_button('Markdown をコピー')
       expect(page).to have_button('URL をコピー')

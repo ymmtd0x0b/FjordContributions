@@ -5,7 +5,7 @@ require 'rails_helper'
 RSpec.describe 'User::Wikis', type: :system do
   context 'ゲストの場合' do
     scenario 'トップページへリダイレクトする' do
-      visit users_wikis_path('kimura')
+      visit current_user_wikis_path
       expect(page).to have_content 'ログインしてください'
       expect(page).to have_current_path root_path
     end
@@ -20,7 +20,7 @@ RSpec.describe 'User::Wikis', type: :system do
       create(:wiki, repository_id: 123, title: '議事録02', author: kimura)
       create(:wiki, repository_id: 123, title: '議事録03', author: kimura)
 
-      login_as kimura, to: users_wikis_path(kimura.login)
+      login_as kimura, to: current_user_wikis_path
 
       expect(page).to have_link '議事録01'
       expect(page).to have_link '議事録02'
