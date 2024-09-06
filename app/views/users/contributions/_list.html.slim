@@ -8,4 +8,4 @@
   ul.ml-2.space-y-2.font-semibold.text-slate-700.list-disc.list-inside(id="#{list_id}")
     - items.each do |item|
       li
-        = item.title
+        = link_to item.title, item.url, { target: '_blank', rel: 'noopener noreferrer' }
