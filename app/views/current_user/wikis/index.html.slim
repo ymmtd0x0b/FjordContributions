@@ -1,0 +1,4 @@
+= render 'current_user/page_header', repository: @repository, user: current_user
+= turbo_frame_tag :contributions, action: :advance do
+  = render 'current_user/page_tabs', user: current_user
+  = render 'current_user/page_body', items: @wikis

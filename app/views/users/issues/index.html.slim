@@ -1,4 +1,0 @@
-= render 'users/page_header', repository: @repository, user: @current_user
-= turbo_frame_tag :contributions, action: :advance do
-  = render 'users/page_tabs', user: @current_user
-  = render 'users/page_body', items: @issues

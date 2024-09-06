@@ -1,36 +1,25 @@
-= render 'users/page_header', repository: @repository, user: @user
-= turbo_frame_tag :contributions, action: :advance do
-  = render 'users/page_tabs', user: @user
-  div(data-controller='clipboard')
-    .px-10.pt-5.pb-10.flex-grow.max-w-screen-lg.mx-auto
-      .flex.justify-end
-        button.mr-4.w-48.px-4.text-white.text-sm.bg-zinc-700.hover:bg-zinc-600.focus:ring-4.focus:outline-none.focus:ring-zinc-600.font-medium.rounded-lg.py-2.5(data-action='clipboard#markdownCopy' data-tooltip-target="tooltip-markdown-copy")
-          span.inline-flex.items-center(data-clipboard-target='markdownButtonMessage')
-            i.fa-regular.fa-copy.mr-2
-            | Markdown をコピー
-          span.hidden.inline-flex.items-center(data-clipboard-target='markdownButtonSuccessMessage')
-            i.fa-solid.fa-check.w-3.me-1.5.mr-2
-            | Markdown をコピー
-        #tooltip-markdown-copy.absolute.z-50.invisible.inline-block.px-3.py-2.text-gray-50.text-xs.font-medium.bg-zinc-700.border.border-black.rounded-lg.shadow-sm.opacity-0.tooltip(role="tooltip")
-          | 以下の一覧を Markdown 記法でクリップボードへコピーします
-          .tooltip-arrow.bg-zinc-700(data-popper-arrow)
-        button.w-36.px-4.text-white.text-sm.bg-zinc-700.hover:bg-zinc-600.focus:ring-4.focus:outline-none.focus:ring-zinc-600.font-medium.rounded-lg.py-2.5(data-action='clipboard#urlCopy' data-tooltip-target="tooltip-url-copy")
-          span.inline-flex.items-center(data-clipboard-target='urlButtonMessage')
-            i.fa-regular.fa-copy.mr-2
-            | URL をコピー
-          span.hidden.inline-flex.items-center(data-clipboard-target='urlButtonSuccessMessage')
-            i.fa-solid.fa-check.w-3.me-1.5.mr-2
-            | URL をコピー
-        #tooltip-url-copy.absolute.z-50.invisible.inline-block.px-3.py-2.text-gray-50.text-xs.font-medium.bg-zinc-700.rounded-lg.shadow-sm.opacity-0.tooltip(role="tooltip")
-          | この画面の URL をクリップボードへコピーします
-          .tooltip-arrow.bg-zinc-700(data-popper-arrow)
+.px-10.pt-5.pb-10.flex-grow.max-w-screen-lg.mx-auto
+  h1.text-2xl.text-slate-600.font-bold.pb-2.my-10.text-center
+    .flex.justify-center.items-center
+      span チーム開発プラクティスでの
+      .mx-2
+        .flex.justify-center.items-center
+          = image_tag @user.avatar_url, class: 'rounded-full w-10 h-10 me-2'
+          .font-bold.text-blue-600
+            - if @user.name?
+                .text-xl.border-b-2.border-blue-600
+                  = @user.name
+                .text-sm.text-left.font-normal
+                  = @user.login
+            - else
+              .text-2xl.border-b-2.border-blue-600
+                = @user.login
+      span さんの取り組み
+  = render 'table', table_header: 'Pull Request', issues: @assigned_issues, user: @user, table_id: 'assigned_issues'
+  = render 'table', table_header: 'Review',       issues: @reviewed_issues, user: @user, table_id: 'reviewed_issues'
 
-      div(data-clipboard-target='allIssuesTable')
-        = render 'table', table_header: 'Pull Request', issues: @assigned_issues, user: @user, table_id: 'assigned_issues'
-        = render 'table', table_header: 'Review',       issues: @reviewed_issues, user: @user, table_id: 'reviewed_issues'
-
-        - if @issues.any? || @wikis.any?
-          h2.text-2xl.text-slate-600.font-bold.border-b.border-gray-400.pb-2.mb-3
-            | その他
-          = render 'list', list_header: 'Issue', content: 'バグ発見の報告や改善提案を目的として作成したIssueです。', items: @issues, list_id: 'created_issues' if @issues.any?
-          = render 'list', list_header: 'Wiki', content: '議事録や作業効率化を目的として作成したWikiページです。', items: @wikis , list_id: 'created_wikis' if @wikis.any?
+  - if @issues.any? || @wikis.any?
+    h2.text-2xl.text-slate-600.font-bold.border-b.border-gray-400.pb-2.mb-3
+      | その他
+    = render 'list', list_header: 'Issue', content: 'バグ発見の報告や改善提案を目的として作成したIssueです。', items: @issues, list_id: 'created_issues' if @issues.any?
+    = render 'list', list_header: 'Wiki', content: '議事録や作業効率化を目的として作成したWikiページです。', items: @wikis , list_id: 'created_wikis' if @wikis.any?

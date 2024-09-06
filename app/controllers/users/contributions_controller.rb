@@ -12,10 +12,6 @@ class Users::ContributionsController < ApplicationController
     @reviewed_issues = @user.reviewed_issues.order(:created_at)
     @wikis = @user.wikis.order(:created_at)
 
-    if @user == current_user
-      render :index
-    else
-      render :unauthorized_index
-    end
+    render :index
   end
 end
