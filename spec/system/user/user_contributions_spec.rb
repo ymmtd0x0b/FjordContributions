@@ -5,16 +5,13 @@ require 'rails_helper'
 RSpec.describe 'User::Contributions', type: :system do
   before do
     create(:repository, id: 123, name: 'test/repository')
-
     create(:issue, :with_author, repository_id: 123, title: 'キムラが担当した Issue') do |issue|
       issue.assignees << kimura
       issue.pull_requests << create(:pull_request, repository_id: 123, number: 111) { |pr| pr.assignees << kimura }
     end
-
     create(:issue, :with_author, repository_id: 123, title: 'キムラがレビューした Issue') do |issue|
       issue.pull_requests << create(:pull_request, repository_id: 123, number: 222) { |pr| pr.reviewers << kimura }
     end
-
     create(:issue, repository_id: 123, title: 'キムラが作成した Issue', author: kimura)
     create(:wiki, repository_id: 123, title: 'キムラが作成した Wiki', author: kimura)
   end
@@ -32,21 +29,21 @@ RSpec.describe 'User::Contributions', type: :system do
       expect(page).not_to have_button('URL をコピー')
 
       within('#assigned_issues') do
-        expect(page).to have_content('キムラが担当した Issue')
-        expect(page).to have_content('#111')
+        expect(page).to have_link('キムラが担当した Issue')
+        expect(page).to have_link('#111')
       end
 
       within('#reviewed_issues') do
-        expect(page).to have_content('キムラがレビューした Issue')
-        expect(page).to have_content('#222')
+        expect(page).to have_link('キムラがレビューした Issue')
+        expect(page).to have_link('#222')
       end
 
       within('#created_issues') do
-        expect(page).to have_content('キムラが作成した Issue')
+        expect(page).to have_link('キムラが作成した Issue')
       end
 
       within('#created_wikis') do
-        expect(page).to have_content('キムラが作成した Wiki')
+        expect(page).to have_link('キムラが作成した Wiki')
       end
     end
   end
@@ -59,21 +56,21 @@ RSpec.describe 'User::Contributions', type: :system do
       expect(page).to have_button('URL をコピー')
 
       within('#assigned_issues') do
-        expect(page).to have_content('キムラが担当した Issue')
-        expect(page).to have_content('#111')
+        expect(page).to have_link('キムラが担当した Issue')
+        expect(page).to have_link('#111')
       end
 
       within('#reviewed_issues') do
-        expect(page).to have_content('キムラがレビューした Issue')
-        expect(page).to have_content('#222')
+        expect(page).to have_link('キムラがレビューした Issue')
+        expect(page).to have_link('#222')
       end
 
       within('#created_issues') do
-        expect(page).to have_content('キムラが作成した Issue')
+        expect(page).to have_link('キムラが作成した Issue')
       end
 
       within('#created_wikis') do
-        expect(page).to have_content('キムラが作成した Wiki')
+        expect(page).to have_link('キムラが作成した Wiki')
       end
     end
   end

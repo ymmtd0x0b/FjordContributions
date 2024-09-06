@@ -48,31 +48,31 @@ RSpec.describe 'Sign up', type: :system do
 
       within('#assigned_issues') do
         expect(page).to have_content '1'
-        expect(page).to have_content 'バグの修正'
-        expect(page).to have_content '#401'
+        expect(page).to have_link 'バグの修正'
+        expect(page).to have_link '#401'
         expect(page).to have_content '2'
-        expect(page).to have_content '新機能の追加'
-        expect(page).to have_content '#402'
+        expect(page).to have_link '新機能の追加'
+        expect(page).to have_link '#402'
         expect(page).to have_content '3'
       end
 
       within('#reviewed_issues') do
         expect(page).to have_content '2'
-        expect(page).to have_content 'ロゴの変更'
+        expect(page).to have_link 'ロゴの変更'
         expect(page).to have_content '3'
-        expect(page).to have_content '既存機能の改修'
+        expect(page).to have_link '既存機能の改修'
         expect(page).to have_content '5'
       end
 
       within('#created_issues') do
-        expect(page).to have_content 'バグの報告１'
-        expect(page).to have_content 'バグの報告２'
-        expect(page).to have_content '新機能の提案'
+        expect(page).to have_link 'バグの報告１'
+        expect(page).to have_link 'バグの報告２'
+        expect(page).to have_link '新機能の提案'
       end
 
       within('#created_wikis') do
-        expect(page).to have_content '議事録１'
-        expect(page).to have_content '議事録２'
+        expect(page).to have_link '議事録１'
+        expect(page).to have_link '議事録２'
       end
     end
   end

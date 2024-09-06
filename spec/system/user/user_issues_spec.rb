@@ -22,8 +22,8 @@ RSpec.describe 'User::Issues', type: :system do
       login_as kimura, to: users_issues_path('kimura')
 
       expect(page).to have_content 'Total 2'
-      expect(page).to have_content 'Issue A'
-      expect(page).to have_content 'Issue B'
+      expect(page).to have_link 'Issue A'
+      expect(page).to have_link 'Issue B'
     end
 
     scenario '本人が担当した Issue を一覧表示する' do
@@ -35,25 +35,22 @@ RSpec.describe 'User::Issues', type: :system do
       login_as kimura, to: users_issues_path('kimura', association: 'assigned')
 
       expect(page).to have_content 'Total 2'
-      expect(page).to have_content 'Issue C'
-      expect(page).to have_content 'Issue D'
+      expect(page).to have_link 'Issue C'
+      expect(page).to have_link 'Issue D'
     end
 
     scenario '本人がレビューした Issue を一覧表示する' do
       create(:repository, id: 123, name: 'test/repository')
       kimura = create(:user, login: 'kimura')
-      create(:issue, :with_author, repository_id: 123, title: 'Issue E') do |issue|
-        issue.pull_requests << create(:pull_request, repository_id: 123) { |pr| pr.reviewers << kimura }
-      end
-      create(:issue, :with_author, repository_id: 123, title: 'Issue F') do |issue|
-        issue.pull_requests << create(:pull_request, repository_id: 123) { |pr| pr.reviewers << kimura }
-      end
+      kimura_reviewed_pr = create(:pull_request, repository_id: 123) { |pr| pr.reviewers << kimura }
+      create(:issue, :with_author, repository_id: 123, title: 'Issue E') { |issue| issue.pull_requests << kimura_reviewed_pr }
+      create(:issue, :with_author, repository_id: 123, title: 'Issue F') { |issue| issue.pull_requests << kimura_reviewed_pr }
 
       login_as kimura, to: users_issues_path('kimura', association: 'reviewed')
 
       expect(page).to have_content 'Total 2'
-      expect(page).to have_content 'Issue E'
-      expect(page).to have_content 'Issue F'
+      expect(page).to have_link 'Issue E'
+      expect(page).to have_link 'Issue F'
     end
   end
 end
