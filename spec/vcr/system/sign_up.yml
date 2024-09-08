@@ -2,6 +2,85 @@
 http_interactions:
 - request:
     method: get
+    uri: https://api.github.com/user/501
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/vnd.github.v3+json
+      User-Agent:
+      - Octokit Ruby Gem 9.1.0
+      Content-Type:
+      - application/json
+      Authorization:
+      - token <GITHUB_ACCESS_TOKEN>
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Thu, 22 Aug 2024 15:29:38 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Cache-Control:
+      - private, max-age=60, s-maxage=60
+      Vary:
+      - Accept, Authorization, Cookie, X-GitHub-OTP,Accept-Encoding, Accept, X-Requested-With
+      Etag:
+      - W/"6a48c26dd395d0ed0bfa39d6db6d1b18280f5d7dc0a75a9ffc8cea29f05e8e0f"
+      Last-Modified:
+      - Fri, 16 Aug 2024 14:11:22 GMT
+      Github-Authentication-Token-Expiration:
+      - '2024-08-28 02:34:05 +0900'
+      X-Github-Media-Type:
+      - github.v3; format=json
+      X-Github-Api-Version-Selected:
+      - '2022-11-28'
+      X-Ratelimit-Limit:
+      - '5000'
+      X-Ratelimit-Remaining:
+      - '4999'
+      X-Ratelimit-Reset:
+      - '1724344178'
+      X-Ratelimit-Used:
+      - '1'
+      X-Ratelimit-Resource:
+      - core
+      Access-Control-Expose-Headers:
+      - ETag, Link, Location, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining,
+        X-RateLimit-Used, X-RateLimit-Resource, X-RateLimit-Reset, X-OAuth-Scopes,
+        X-Accepted-OAuth-Scopes, X-Poll-Interval, X-GitHub-Media-Type, X-GitHub-SSO,
+        X-GitHub-Request-Id, Deprecation, Sunset
+      Access-Control-Allow-Origin:
+      - "*"
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubdomains; preload
+      X-Frame-Options:
+      - deny
+      X-Content-Type-Options:
+      - nosniff
+      X-Xss-Protection:
+      - '0'
+      Referrer-Policy:
+      - origin-when-cross-origin, strict-origin-when-cross-origin
+      Content-Security-Policy:
+      - default-src 'none'
+      Transfer-Encoding:
+      - chunked
+      Server:
+      - github.com
+      X-Github-Request-Id:
+      - 98A2:1F4F7F:9021B0:97F3D0:66C75961
+    body:
+      encoding: ASCII-8BIT
+      string: '{"id":501,"login":"kimura","name":"","avatar_url":"https://example.com/avatar.png"}'
+  recorded_at: Thu, 22 Aug 2024 15:29:38 GMT
+- request:
+    method: get
     uri: https://api.github.com/repositories/123
     body:
       encoding: US-ASCII
