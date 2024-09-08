@@ -35,7 +35,7 @@ header
                   .w-full.px-4.py-2
                     i.fa-solid.fa-arrow-right-from-bracket.pr-2
                     | ログアウト
-          = render 'shared/modal', path: user_path(current_user), method: :delete, message: '本当に実行しますか？', modal_id: 'retirement-modal'
+          = render 'shared/modal', path: current_user_path, method: :delete, message: '本当に実行しますか？', modal_id: 'retirement-modal'
         - else
           = button_to 'ログイン', '/auth/github', method: :post,
                       data: { turbo: false },
