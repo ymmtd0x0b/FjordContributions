@@ -16,7 +16,7 @@ RSpec.describe 'LoginAndLogout', type: :system do
     click_button 'ログイン'
 
     expect(page).to have_content 'ログインしました'
-    expect(page).to have_current_path '/kimura/issues?association=assigned'
+    expect(page).to have_current_path current_user_issues_path(association: 'assigned')
     expect(page).to have_button 'kimura'
   end
 
@@ -28,7 +28,7 @@ RSpec.describe 'LoginAndLogout', type: :system do
       click_button 'GitHubアカントで登録'
 
       expect(page).to have_content 'ログインしました'
-      expect(page).to have_current_path '/kimura/issues?association=assigned'
+      expect(page).to have_current_path current_user_issues_path(association: 'assigned')
       expect(page).to have_button 'kimura'
     end
   end
