@@ -17,9 +17,9 @@ RSpec.describe 'Users', type: :system do
     expect(page).to have_selector 'img[src$="https://example.com/before_avatar.png"]'
 
     click_button '最新情報へ更新'
-    click_button 'OK'
+    click_button 'はい'
 
-    expect(page).to have_content '更新しました'
+    expect(page).to have_content '更新に成功しました'
     expect(page).to have_button 'キムラ'
     expect(page).to have_selector 'img[src$="https://example.com/after_avatar.png"]'
   end
@@ -29,14 +29,14 @@ RSpec.describe 'Users', type: :system do
       create(:repository, id: 123, name: 'test/repository')
       kimura = create(:user, id: 456, login: 'kimura')
 
-      login_as kimura, to: users_wikis_path(kimura.login)
-      expect(page).to have_current_path users_wikis_path(kimura.login)
+      login_as kimura, to: current_user_wikis_path
+      expect(page).to have_current_path current_user_wikis_path
 
       click_button '最新情報へ更新'
-      click_button 'OK'
+      click_button 'はい'
 
       expect(page).to have_content '更新に失敗しました'
-      expect(page).to have_current_path users_wikis_path(kimura.login)
+      expect(page).to have_current_path current_user_wikis_path
     end
   end
 
@@ -50,7 +50,7 @@ RSpec.describe 'Users', type: :system do
     expect do
       click_button 'kimura'
       click_button 'アカウント削除'
-      click_button 'OK'
+      click_button 'はい'
 
       expect(page).to have_content 'アカウントを削除しました'
     end.to change(User, :count).by(-1)

@@ -17,7 +17,7 @@ RSpec.describe 'Welcome', type: :system do
       kimura = create(:user, login: 'kimura')
 
       login_as kimura, to: root_path
-      expect(page).to have_current_path '/kimura/issues?association=assigned'
+      expect(page).to have_current_path current_user_issues_path(association: 'assigned')
     end
   end
 end

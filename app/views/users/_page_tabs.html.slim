@@ -1,8 +1,0 @@
-.max-w-screen-lg.mx-auto.w-full
-  .mx-4.text-sm.font-semibold.text-center.text-gray-500.border-b.border-gray-300
-    ul.flex.flex-wrap.pl-4
-      = tab_to('担当した Issue', users_issues_path(user.login, association: 'assigned'))
-      = tab_to('レビューした Issue', users_issues_path(user.login, association: 'reviewed'))
-      = tab_to('作成した Issue', users_issues_path(user.login))
-      = tab_to('作成した Wiki', users_wikis_path(user.login))
-      = tab_to('全て表示', users_contributions_path(user.login))
