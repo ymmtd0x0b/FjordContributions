@@ -15,7 +15,7 @@ class UserSessionsController < ApplicationController
       flash[:notice] = 'ログインしました'
     end
     session[:user_id] = user.id
-    redirect_to users_issues_path(current_user.login, association: 'assigned')
+    redirect_to current_user_issues_path(association: 'assigned')
   end
 
   def destroy
