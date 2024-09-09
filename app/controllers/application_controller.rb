@@ -17,6 +17,10 @@ class ApplicationController < ActionController::Base
     @current_user ||= User.find_by(id: session[:user_id])
   end
 
+  def set_repository
+    @repository = Repository.find_by(name: ENV['REPOSITORY_NAME'])
+  end
+
   protected
 
   def authenticate_user!

@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 class CurrentUserController < ApplicationController
-  include Settable
   before_action :set_repository, only: %i[update]
 
   def update
