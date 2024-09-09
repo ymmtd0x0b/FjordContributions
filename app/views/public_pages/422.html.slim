@@ -1,0 +1,11 @@
+- content_for(:title, 'ページが表示できません')
+
+.flex.flex-col.justify-center.items-center
+  .pt-14.pb-10
+    = image_tag 'symbol.png', width: 100, alt: 'ロゴ'
+  .text-zinc-700.text-center
+    h1.pb-8.text-4xl.font-bold
+      | 422: Unprocessable Entity
+    p.pb-10.text-xl.font-semibold
+      | 正常に処理できませんでした。トップへ戻り、もう一度お試しください。
+    = link_to 'トップページに戻る', root_path, class: 'font-medium text-blue-600 dark:text-blue-500 hover:underline'

@@ -139,6 +139,8 @@ GEM
       rchardet (~> 1.8)
     globalid (1.2.1)
       activesupport (>= 6.1)
+    hanmoto (0.7.0)
+      rails (>= 6.1.0)
     hashdiff (1.1.1)
     hashie (5.0.0)
     high_voltage (4.0.0)
@@ -436,6 +438,7 @@ DEPENDENCIES
   faraday-retry
   font-awesome-sass
   git
+  hanmoto
   high_voltage
   importmap-rails
   newspaper

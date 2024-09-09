@@ -18,6 +18,7 @@ gem 'faraday-multipart', require: false
 gem 'faraday-retry'
 gem 'font-awesome-sass'
 gem 'git'
+gem 'hanmoto'
 gem 'high_voltage'
 gem 'newspaper'
 gem 'octokit'

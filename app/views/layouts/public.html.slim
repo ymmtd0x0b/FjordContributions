@@ -1,0 +1,11 @@
+doctype html
+html
+  head
+    title
+      = content_for(:title) || 'FjordContributions'
+    meta[name="charset" content="utf-8"]
+    meta[name="viewport" content="width=device-width,initial-scale=1"]
+    = favicon_link_tag '/favicon.ico'
+    = stylesheet_link_tag 'tailwind', 'inter-font'
+  body.bg-gray-50
+    = yield
