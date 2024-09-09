@@ -2,8 +2,11 @@
 
 module GitHub
   class APIClient
+    include ActiveSupport::Configurable
+    config_accessor :github_access_token, instance_reader: true, instance_writer: false
+
     def initialize
-      @client = Octokit::Client.new(access_token: ENV['GITHUB_ACCESS_TOKEN'])
+      @client = Octokit::Client.new(access_token: github_access_token)
     end
 
     def repository(id: nil, name: nil)

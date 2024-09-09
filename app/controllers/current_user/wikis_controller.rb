@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 class CurrentUser::WikisController < ApplicationController
-  include Settable
   before_action :set_repository, only: %i[index]
 
   def index

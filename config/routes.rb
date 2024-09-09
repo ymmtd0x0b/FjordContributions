@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   get 'auth/github/callback', to: 'user_sessions#create'
+  get 'auth/failure', to: 'user_sessions#failure'
   delete 'logout', to: 'user_sessions#destroy'
   resource :current_user, only: %i[update destroy], controller: 'current_user'
   namespace :current_user do

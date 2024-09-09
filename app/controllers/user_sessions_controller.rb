@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 class UserSessionsController < ApplicationController
-  include Settable
   skip_before_action :authenticate_user!
   before_action :set_repository, only: %i[create]
 
@@ -20,5 +19,9 @@ class UserSessionsController < ApplicationController
   def destroy
     reset_session
     redirect_to root_path, notice: 'ログアウトしました'
+  end
+
+  def failure
+    redirect_to root_path, alert: '認証に失敗しました'
   end
 end
