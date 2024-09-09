@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class User < ApplicationRecord
+  validates :login, presence: true
+
   has_many :issues, foreign_key: :author_id, inverse_of: :author, extend: IssuesAssociationExtension # rubocop:disable Rails/HasManyOrHasOneDependent
   has_many :wikis, foreign_key: :author_id, inverse_of: :author, dependent: :destroy
 
