@@ -1,0 +1,11 @@
+- content_for(:title, 'ページが表示できません')
+
+.flex.flex-col.justify-center.items-center
+  .pt-14.pb-10
+    = image_tag 'symbol.png', width: 100, alt: 'ロゴ'
+  .text-zinc-700.text-center
+    h1.pb-8.text-4xl.font-bold
+      | 500: Internal Server Error
+    p.pb-10.text-xl.font-semibold
+      | アプリケーションに不具合が発生しております。
+    = link_to 'トップページに戻る', root_path, class: 'font-medium text-blue-600 dark:text-blue-500 hover:underline'
