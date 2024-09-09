@@ -4,7 +4,7 @@ require 'rails_helper'
 
 RSpec.describe 'Users', type: :system do
   before do
-    allow(Newspaper).to receive(:publish).with(:update_user, kind_of(Hash))
+    allow(Newspaper).to receive(:publish).with(:user_update, kind_of(Hash))
     allow(Newspaper).to receive(:publish).with(:user_destroy, kind_of(User))
   end
 
