@@ -20,4 +20,8 @@ class UserSessionsController < ApplicationController
     reset_session
     redirect_to root_path, notice: 'ログアウトしました'
   end
+
+  def failure
+    redirect_to root_path, alert: '認証に失敗しました'
+  end
 end
