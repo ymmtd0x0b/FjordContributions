@@ -13,7 +13,7 @@ RSpec.describe 'Welcome', type: :system do
 
   context 'ユーザーの場合' do
     scenario '本人がアサインした Issue の一覧ページへリダイレクトする' do
-      create(:repository, name: 'test/repository')
+      create(:repository, id: 123)
       kimura = create(:user, login: 'kimura')
 
       login_as kimura, to: root_path

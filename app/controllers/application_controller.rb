@@ -18,7 +18,7 @@ class ApplicationController < ActionController::Base
   end
 
   def set_repository
-    @repository = Repository.find_by(name: ENV['REPOSITORY_NAME'])
+    @repository = Repository.find(ENV['BOOTCAMP_REPOSITORY_ID'])
   end
 
   protected
