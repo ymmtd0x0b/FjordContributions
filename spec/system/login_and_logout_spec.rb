@@ -47,6 +47,7 @@ RSpec.describe 'LoginAndLogout', type: :system do
   end
 
   scenario 'ユーザーはログアウトできること' do
+    create(:repository, id: 123)
     kimura = create(:user, id: 456, login: 'kimura')
 
     login_as kimura, to: root_path

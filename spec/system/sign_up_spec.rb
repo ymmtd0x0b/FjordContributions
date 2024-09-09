@@ -18,7 +18,7 @@ RSpec.describe 'Sign up', type: :system do
   scenario 'ユーザー登録する' do
     visit root_path
     expect do
-      click_button 'GitHubアカントで登録'
+      click_button 'GitHubアカウントで登録'
       expect(page).to have_content 'アカウント登録が完了しました'
       expect(page).to have_current_path current_user_issues_path(association: 'assigned')
       expect(page).to have_content 'kimura'
@@ -40,7 +40,7 @@ RSpec.describe 'Sign up', type: :system do
   context 'ユーザー登録した際' do
     scenario 'モーダル(歓迎メッセージ)を表示すること' do
       visit root_path
-      click_button 'GitHubアカントで登録'
+      click_button 'GitHubアカウントで登録'
 
       expect(page).to have_content 'ようこそ！'
       expect(page).to have_button '今すぐあなたの取り組みを取得する'
@@ -52,7 +52,7 @@ RSpec.describe 'Sign up', type: :system do
         allow(Git::Wiki).to receive(:github_url).and_return(tmpdir_realpath)
 
         visit root_path
-        click_button 'GitHubアカントで登録'
+        click_button 'GitHubアカウントで登録'
 
         within('form[action="/current_user"]') do
           click_button '今すぐあなたの取り組みを取得する'
