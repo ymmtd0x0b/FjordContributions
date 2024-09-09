@@ -23,7 +23,7 @@ Wiki.destroy_all
 Labeling.destroy_all
 
 # 初期データの投入
-repo_by_api = GitHub::Repository.find_by(name: ENV['REPOSITORY_NAME'])
+repo_by_api = GitHub::Repository.find_by(id: ENV['BOOTCAMP_REPOSITORY_ID'])
 Repository.create!(repo_by_api.to_h)
 
 # labels_by_api = GitHub::Label.registered_by(repository)
