@@ -1,5 +1,5 @@
 import { Controller } from '@hotwired/stimulus'
-import switchingShowHidden from '../switching_show_hidden'
+import switchingShowHidden from 'swichting-show-hidden'
 
 // Connects to data-controller="url-copy"
 export default class extends Controller {
