@@ -15,6 +15,5 @@ html
     = render 'header'
     = render 'flash'
     main.flex-grow
-      = turbo_frame_tag :main do
-        = yield
+      = yield
     = render 'footer'
