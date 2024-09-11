@@ -30,8 +30,8 @@ RSpec.describe 'CurrentUser::Contributions', type: :system do
     scenario 'ユーザーの 作成/担当/レビューした Issue とそれと紐付いた PullRequest 、Wiki を一覧表示する' do
       login_as kimura, to: current_user_contributions_path
 
-      expect(page).to have_button('Markdown をコピー')
-      expect(page).to have_button('URL をコピー')
+      expect(page).to have_content('Markdown をコピー')
+      expect(page).to have_content('URL をコピー')
 
       within('#assigned_issues') do
         expect(page).to have_link('キムラが担当した Issue')
