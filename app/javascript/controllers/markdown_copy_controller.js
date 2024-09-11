@@ -1,5 +1,6 @@
 import { Controller } from "@hotwired/stimulus"
 import { NodeHtmlMarkdown } from 'node-html-markdown'
+import switchingShowHidden from '../switching_show_hidden'
 
 // Connects to data-controller="url-copy"
 export default class extends Controller {
@@ -17,23 +18,7 @@ export default class extends Controller {
     )
     navigator.clipboard.writeText(markdownText)
 
-    const showSuccess = ($defaultEl, $successEl, cssClasses) => {
-      $defaultEl.classList.add('hidden')
-      $successEl.classList.remove(...cssClasses)
-    }
-
-    const resetToDefault = ($defaultEl, $successEl, cssClasses) => {
-      $defaultEl.classList.remove(...cssClasses)
-      $successEl.classList.add('hidden')
-    }
-
-    showSuccess(this.defaultIconTarget, this.successIconTarget, ['hidden','inline-flex','items-center'])
-    showSuccess(this.defaultTooltipMessageTarget, this.successTooltipMessageTarget, ['hidden'])
-
-    // reset to default state
-    setTimeout(() => {
-      resetToDefault(this.defaultIconTarget, this.successIconTarget, ['hidden','inline-flex','items-center'])
-      resetToDefault(this.defaultTooltipMessageTarget, this.successTooltipMessageTarget, ['hidden'])
-    }, 2000);
+    switchingShowHidden(this.defaultIconTarget, this.successIconTarget)
+    switchingShowHidden(this.defaultTooltipMessageTarget, this.successTooltipMessageTarget)
   }
 }
