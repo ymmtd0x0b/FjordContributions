@@ -24,8 +24,8 @@ RSpec.describe 'User::Contributions', type: :system do
 
       expect(page).to have_content('チーム開発プラクティスでの kimura さんの取り組み', normalize_ws: true)
 
-      expect(page).not_to have_button('Markdown をコピー')
-      expect(page).not_to have_button('URL をコピー')
+      expect(page).not_to have_content('Markdown をコピー')
+      expect(page).not_to have_content('URL をコピー')
 
       within('#assigned_issues') do
         expect(page).to have_link('キムラが担当した Issue')
