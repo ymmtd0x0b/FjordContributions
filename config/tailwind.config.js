@@ -51,7 +51,8 @@ module.exports = {
       },
       animation: {
         "fade-in-top": "fade-in-top 0.7s cubic-bezier(0.680, -0.550, 0.265, 1.550)    both",
-        "fade-out-bottom": "fade-out-bottom 0.7s cubic-bezier(0.680, -0.550, 0.265, 1.550)   reverse both"
+        "fade-out-bottom": "fade-out-bottom 0.7s cubic-bezier(0.680, -0.550, 0.265, 1.550)   reverse both",
+        "slide-in-top": "slide-in-top 1.5s cubic-bezier(0.175, 0.885, 0.320, 1.275)    both"
       },
       keyframes: {
         "fade-in-top": {
@@ -67,6 +68,16 @@ module.exports = {
         "fade-out-bottom": {
           "0%": {
             transform: "translateY(-50px)",
+            opacity: "0"
+          },
+          to: {
+            transform: "translateY(0)",
+            opacity: "1"
+          }
+        },
+        "slide-in-top": {
+          "0%": {
+            transform: "translateY(-150px)",
             opacity: "0"
           },
           to: {

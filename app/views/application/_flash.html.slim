@@ -33,7 +33,7 @@
 - if flash[:account_registration]
   div(data-controller="accept-confirm" data-modal-target="account_registration")
     .overflow-y-auto.overflow-x-hidden.fixed.top-0.right-0.left-0.z-50.justify-center.items-center.w-full.max-h-full.flex(id="account_registration" data-accept-confirm-target="modal" tabindex="-1" class="md:inset-0 h-[calc(100%-1rem)]" aria-modal="true")
-      .relative.p-4.w-fit.max-w-3xl.max-h-full.min-h-64
+      .animate-slide-in-top.relative.p-4.w-fit.max-w-3xl.max-h-full.min-h-64
         .relative.flex.justify-center.items-center.min-w-96.min-h-64.p-4.bg-white.rounded-lg.shadow
           .px-10.py-4(data-accept-confirm-target="dialog")
             button.absolute.top-3.text-gray-400.bg-transparent.hover:bg-gray-200.hover:text-gray-900.rounded-lg.text-sm.w-8.h-8.ms-auto.inline-flex.justify-center.items-center(type="button" class="end-2.5" data-modal-hide="account_registration")
