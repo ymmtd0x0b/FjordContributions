@@ -1,4 +1,4 @@
-import { Controller } from "@hotwired/stimulus"
+import { Controller } from '@hotwired/stimulus'
 import { NodeHtmlMarkdown } from 'node-html-markdown'
 import switchingShowHidden from '../switching_show_hidden'
 
@@ -19,6 +19,9 @@ export default class extends Controller {
     navigator.clipboard.writeText(markdownText)
 
     switchingShowHidden(this.defaultIconTarget, this.successIconTarget)
-    switchingShowHidden(this.defaultTooltipMessageTarget, this.successTooltipMessageTarget)
+    switchingShowHidden(
+      this.defaultTooltipMessageTarget,
+      this.successTooltipMessageTarget
+    )
   }
 }

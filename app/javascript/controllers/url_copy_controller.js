@@ -1,4 +1,4 @@
-import { Controller } from "@hotwired/stimulus"
+import { Controller } from '@hotwired/stimulus'
 import switchingShowHidden from '../switching_show_hidden'
 
 // Connects to data-controller="url-copy"
@@ -14,6 +14,9 @@ export default class extends Controller {
     navigator.clipboard.writeText(document.location.href)
 
     switchingShowHidden(this.defaultIconTarget, this.successIconTarget)
-    switchingShowHidden(this.defaultTooltipMessageTarget, this.successTooltipMessageTarget)
+    switchingShowHidden(
+      this.defaultTooltipMessageTarget,
+      this.successTooltipMessageTarget
+    )
   }
 }
