@@ -8,6 +8,8 @@ pin_all_from "app/javascript/controllers", under: "controllers"
 
 # not default
 pin "flowbite", to: "https://cdn.jsdelivr.net/npm/flowbite@2.5.1/dist/flowbite.turbo.min.js"
+pin "flowbite/plugin", to: "https://cdn.jsdelivr.net/npm/flowbite@2.5.1/plugin.js"
+
 # node-html-markdown
 pin "node-html-markdown", to: "https://ga.jspm.io/npm:node-html-markdown@1.3.0/dist/index.js"
 pin "boolbase", to: "https://ga.jspm.io/npm:boolbase@1.0.0/index.js"
