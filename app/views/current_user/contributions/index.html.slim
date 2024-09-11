@@ -1,51 +1,48 @@
 = render 'current_user/page_header', repository: @repository, user: current_user
 = turbo_frame_tag :contributions, data: { turbo_action: :advance } do
   = render 'current_user/page_tabs', user: current_user
-  div()
-    .px-10.pt-5.pb-10.flex-grow.max-w-screen-lg.mx-auto
-      .flex.justify-end
-        div(class="flex items-center gap-x-6 mr-10" data-controller="clipboard")
-          .flex.items-center
-            label(class="flex-shrink-0 z-10 inline-flex items-center py-2.5 px-4 text-sm font-medium text-center text-gray-900 bg-gray-100 border border-gray-300 rounded-s-lg")
-              | Markdown をコピー
-            input(id="markdown" class="hidden" value="" readonly disabled)
-            button(data-copy-to-clipboard-target="markdown" data-tooltip-target="tooltip-markdown" class="flex-shrink-0 z-20 inline-flex items-center py-3 px-4 text-sm font-medium text-center text-white bg-blue-500 rounded-e-lg hover:bg-blue-600 focus:ring-2 focus:outline-none focus:ring-blue-600 border border-blue-500 hover:border-blue-600" type="button")
-              span(id="default-icon-markdown")
-                svg(class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 20")
-                  path(d="M16 1h-3.278A1.992 1.992 0 0 0 11 0H7a1.993 1.993 0 0 0-1.722 1H2a2 2 0 0 0-2 2v15a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2Zm-3 14H5a1 1 0 0 1 0-2h8a1 1 0 0 1 0 2Zm0-4H5a1 1 0 0 1 0-2h8a1 1 0 1 1 0 2Zm0-5H5a1 1 0 0 1 0-2h2V2h4v2h2a1 1 0 1 1 0 2Z")
-              span(id="success-icon-markdown" class="hidden inline-flex items-center")
-                svg(class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12")
-                  path(stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5.917 5.724 10.5 15 1.5")
-            div(id="tooltip-markdown" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-gray-50 transition-opacity duration-300 bg-blue-600 rounded-lg shadow-sm opacity-0 tooltip" data-popper-placement="top")
-              span(id="default-tooltip-message-markdown")
-                | Copy link
-              span(id="success-tooltip-message-markdown" class="hidden")
-                | Copied!
-              div(class="tooltip-arrow" data-popper-arrow)
-          .flex.items-center
-            label(class="flex-shrink-0 z-10 inline-flex items-center py-2.5 px-4 text-sm font-medium text-center text-gray-900 bg-gray-100 border border-gray-300 rounded-s-lg")
-              | URL をコピー
-            input(id="url" class="hidden" value="" readonly disabled)
-            button(data-copy-to-clipboard-target="url" data-tooltip-target="tooltip-url" class="flex-shrink-0 z-20 inline-flex items-center py-3 px-4 text-sm font-medium text-center text-white bg-gray-500 rounded-e-lg hover:bg-gray-600 focus:ring-2 focus:outline-none focus:ring-gray-600 border border-gray-500 hover:border-gray-600" type="button")
-              span(id="default-icon-url")
-                svg(class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 20")
-                  path(d="M16 1h-3.278A1.992 1.992 0 0 0 11 0H7a1.993 1.993 0 0 0-1.722 1H2a2 2 0 0 0-2 2v15a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2Zm-3 14H5a1 1 0 0 1 0-2h8a1 1 0 0 1 0 2Zm0-4H5a1 1 0 0 1 0-2h8a1 1 0 1 1 0 2Zm0-5H5a1 1 0 0 1 0-2h2V2h4v2h2a1 1 0 1 1 0 2Z")
-              span(id="success-icon-url" class="hidden inline-flex items-center")
-                svg(class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12")
-                  path(stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5.917 5.724 10.5 15 1.5")
-            div(id="tooltip-url" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-gray-50 transition-opacity duration-300 bg-gray-600 rounded-lg shadow-sm opacity-0 tooltip" data-popper-placement="top")
-              span(id="default-tooltip-message-url")
-                | Copy link
-              span(id="success-tooltip-message-url" class="hidden")
-                | Copied!
-              div(class="tooltip-arrow" data-popper-arrow)
+  .px-10.pt-5.pb-10.flex-grow.max-w-screen-lg.mx-auto
+    .flex.justify-end
+      div(class="flex items-center gap-x-6 mr-10")
+        .flex.items-center(data-controller="url-copy")
+          span(class="flex-shrink-0 z-10 inline-flex items-center py-2.5 px-4 text-sm font-medium text-center text-gray-900 bg-gray-100 border border-gray-300 rounded-s-lg")
+            | URL をコピー
+          button(data-action="click->url-copy#run" data-tooltip-target="tooltip-url" class="flex-shrink-0 z-20 inline-flex items-center py-3 px-4 text-sm font-medium text-center text-white bg-gray-500 rounded-e-lg hover:bg-gray-600 focus:ring-2 focus:outline-none focus:ring-gray-600 border border-gray-500 hover:border-gray-600" type="button")
+            span(data-url-copy-target="defaultIcon")
+              svg(class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 20")
+                path(d="M16 1h-3.278A1.992 1.992 0 0 0 11 0H7a1.993 1.993 0 0 0-1.722 1H2a2 2 0 0 0-2 2v15a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2Zm-3 14H5a1 1 0 0 1 0-2h8a1 1 0 0 1 0 2Zm0-4H5a1 1 0 0 1 0-2h8a1 1 0 1 1 0 2Zm0-5H5a1 1 0 0 1 0-2h2V2h4v2h2a1 1 0 1 1 0 2Z")
+            span(data-url-copy-target="successIcon" class="hidden inline-flex items-center")
+              svg(class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12")
+                path(stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5.917 5.724 10.5 15 1.5")
+          div(id="tooltip-url" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-gray-50 transition-opacity duration-300 bg-gray-600 rounded-lg shadow-sm opacity-0 tooltip" data-popper-placement="top")
+            span(data-url-copy-target="defaultTooltipMessage")
+              | Copy link
+            span(data-url-copy-target="successTooltipMessage" class="hidden")
+              | Copied!
+            div(class="tooltip-arrow" data-popper-arrow)
+        .flex.items-center(data-controller="markdown-copy")
+          span(class="flex-shrink-0 z-10 inline-flex items-center py-2.5 px-4 text-sm font-medium text-center text-gray-900 bg-gray-100 border border-gray-300 rounded-s-lg")
+            | Markdown をコピー
+          button(data-action="click->markdown-copy#run" data-tooltip-target="tooltip-markdown" class="flex-shrink-0 z-20 inline-flex items-center py-3 px-4 text-sm font-medium text-center text-white bg-blue-500 rounded-e-lg hover:bg-blue-600 focus:ring-2 focus:outline-none focus:ring-blue-600 border border-blue-500 hover:border-blue-600" type="button")
+            span(data-markdown-copy-target="defaultIcon")
+              svg(class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 20")
+                path(d="M16 1h-3.278A1.992 1.992 0 0 0 11 0H7a1.993 1.993 0 0 0-1.722 1H2a2 2 0 0 0-2 2v15a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2Zm-3 14H5a1 1 0 0 1 0-2h8a1 1 0 0 1 0 2Zm0-4H5a1 1 0 0 1 0-2h8a1 1 0 1 1 0 2Zm0-5H5a1 1 0 0 1 0-2h2V2h4v2h2a1 1 0 1 1 0 2Z")
+            span(data-markdown-copy-target="successIcon" class="hidden inline-flex items-center")
+              svg(class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12")
+                path(stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5.917 5.724 10.5 15 1.5")
+          div(id="tooltip-markdown" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-gray-50 transition-opacity duration-300 bg-blue-600 rounded-lg shadow-sm opacity-0 tooltip" data-popper-placement="top")
+            span(data-markdown-copy-target="defaultTooltipMessage")
+              | Copy link
+            span(data-markdown-copy-target="successTooltipMessage" class="hidden")
+              | Copied!
+            div(class="tooltip-arrow" data-popper-arrow)
 
-      div(id="contributions-table")
-        = render 'table', table_header: 'Pull Request', issues: @assigned_issues, user: current_user, table_id: 'assigned_issues'
-        = render 'table', table_header: 'Review',       issues: @reviewed_issues, user: current_user, table_id: 'reviewed_issues'
+    div(id="contributions-table")
+      = render 'table', table_header: 'Pull Request', issues: @assigned_issues, user: current_user, table_id: 'assigned_issues'
+      = render 'table', table_header: 'Review',       issues: @reviewed_issues, user: current_user, table_id: 'reviewed_issues'
 
-        - if @issues.any? || @wikis.any?
-          h2.text-2xl.text-slate-600.font-bold.border-b.border-gray-400.pb-2.mb-3
-            | その他
-          = render 'list', list_header: 'Issue', content: 'バグ発見の報告や改善提案を目的として作成したIssueです。', items: @issues, list_id: 'created_issues' if @issues.any?
-          = render 'list', list_header: 'Wiki', content: '議事録や作業効率化を目的として作成したWikiページです。', items: @wikis , list_id: 'created_wikis' if @wikis.any?
+      - if @issues.any? || @wikis.any?
+        h2.text-2xl.text-slate-600.font-bold.border-b.border-gray-400.pb-2.mb-3
+          | その他
+        = render 'list', list_header: 'Issue', content: 'バグ発見の報告や改善提案を目的として作成したIssueです。', items: @issues, list_id: 'created_issues' if @issues.any?
+        = render 'list', list_header: 'Wiki', content: '議事録や作業効率化を目的として作成したWikiページです。', items: @wikis , list_id: 'created_wikis' if @wikis.any?
