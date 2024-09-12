@@ -7,8 +7,11 @@ pin "@hotwired/stimulus-loading", to: "stimulus-loading.js"
 pin_all_from "app/javascript/controllers", under: "controllers"
 pin_all_from "app/javascript/helpers", under: "helpers"
 
+pin "swichting-show-hidden", to: "switching_show_hidden.js"
+
 # not default
 pin "flowbite", to: "https://cdn.jsdelivr.net/npm/flowbite@2.5.1/dist/flowbite.turbo.min.js"
+
 # node-html-markdown
 pin "node-html-markdown", to: "https://ga.jspm.io/npm:node-html-markdown@1.3.0/dist/index.js"
 pin "boolbase", to: "https://ga.jspm.io/npm:boolbase@1.0.0/index.js"
