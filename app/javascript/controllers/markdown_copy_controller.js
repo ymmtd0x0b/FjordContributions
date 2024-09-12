@@ -1,6 +1,6 @@
 import { Controller } from '@hotwired/stimulus'
 import { NodeHtmlMarkdown } from 'node-html-markdown'
-import switchingShowHidden from '../switching_show_hidden'
+import { switchingShowHidden } from 'helpers/switching_show_hidden'
 
 // Connects to data-controller="url-copy"
 export default class extends Controller {
