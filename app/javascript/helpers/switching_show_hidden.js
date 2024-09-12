@@ -1,4 +1,4 @@
-export default function(showEl, hideEl) {
+export const switchingShowHidden = (showEl, hideEl) => {
   showEl.classList.add('hidden')
   hideEl.classList.remove('hidden')
 
