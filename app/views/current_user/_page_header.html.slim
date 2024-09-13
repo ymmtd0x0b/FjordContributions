@@ -2,7 +2,7 @@
   .flex.items-center.space-x-3
     .flex.items-center
       .w-8.h-8.rounded.mr-1
-        = image_tag repository.avatar_url
+        = image_tag repository.avatar_url, alt: 'リポジトリのアイコン'
       .ml-1.py-1.text-ms.font-semibold.text-slate-700
         = repository.name
     .flex.text-ms.font-medium.text-slate-700

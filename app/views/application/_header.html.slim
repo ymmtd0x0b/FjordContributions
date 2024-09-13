@@ -4,14 +4,14 @@ header
       .flex.items-center.text-white
         = link_to root_path do
           .flex.items-center
-            = image_tag 'symbol.png', width: 37.5, height: 37.5
-            = image_tag 'logo_header.png', width: 250, height: 37.5, class: 'mb-1'
+            = image_tag 'symbol.png', width: 37.5, height: 37.5, alt: 'FjordContributionsのシンボル'
+            = image_tag 'logo_header.png', width: 250, height: 37.5, class: 'mb-1', alt: 'FjordContributionsのロゴ'
       .flex.items-center.lg:order-2
         - if logged_in?
           .text-sm.pe-1.font-medium.text-white.rounded-full.hover:text-blue-600.md:me-0.focus:ring-4.focus:ring-gray-100
             button#dropdownUserAvatarButton(data-dropdown-toggle='dropdownAvatarName' type='button')
               .flex.items-center
-                = image_tag current_user.avatar_url, class: 'rounded-full w-8 h-8 me-2'
+                = image_tag current_user.avatar_url, class: 'rounded-full w-8 h-8 me-2', alt: 'ログインユーザーのアイコン'
                 .px-1.font-medium
                   - if current_user.name?
                       = current_user.login

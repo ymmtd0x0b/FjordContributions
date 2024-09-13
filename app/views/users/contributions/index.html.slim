@@ -4,7 +4,7 @@
       span チーム開発プラクティスでの
       .mx-3
         .flex.justify-center.items-center
-          = image_tag @user.avatar_url, class: 'rounded-full w-10 h-10 me-2'
+          = image_tag @user.avatar_url, class: 'rounded-full w-10 h-10 me-2', alt: 'ユーザーのアイコン'
           .font-bold.text-blue-600
             - if @user.name?
                 .text-xl.border-b-2.border-blue-600
