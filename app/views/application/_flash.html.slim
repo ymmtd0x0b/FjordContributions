@@ -1,7 +1,7 @@
 - if flash[:notice]
   div(id="toast-notice" data-controller="toast")
-    .hidden.fixed.flex.items-center.w-fit.mix-w-xs.p-4.mb-4.top-5.right-5.rounded-lg.shadow.text-white.bg-green-500(data-toast-target="toast" role="alert")
-      .inline-flex.items-center.justify-center.flex-shrink-0.w-8.h-8.bg-white.rounded-lg.text-green-500
+    .hidden.fixed.flex.items-center.w-fit.mix-w-xs.p-4.mb-4.top-5.right-5.rounded-lg.shadow.text-white.bg-emerald-600(data-toast-target="toast" role="alert")
+      .inline-flex.items-center.justify-center.flex-shrink-0.w-8.h-8.bg-white.rounded-lg.text-emerald-600
         svg(class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20")
           path(d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z")
         span.sr-only
@@ -59,7 +59,7 @@
                   p により、いつでも情報を取得できます。
               .border.border-1.border-gray-500.my-4
               .flex.justify-center.mt-5
-                = button_to current_user_path, method: :patch, data: { turbo: false, action: 'click->accept-confirm#showLoading' }, class: "text-white bg-green-500 hover:bg-green-600 focus:ring-4 focus:outline-none focus:ring-green-300 font-semibold rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center" do
+                = button_to current_user_path, method: :patch, data: { turbo: false, action: 'click->accept-confirm#showLoading' }, class: "text-white bg-emerald-600 hover:bg-emerald-700 focus:ring-4 focus:outline-none focus:ring-emerald-400 font-semibold rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center" do
                   | 今すぐあなたの取り組みを取得する
                 button(data-modal-hide="account_registration" type="button" class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700")
                   | 後で
