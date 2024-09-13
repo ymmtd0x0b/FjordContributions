@@ -10,8 +10,12 @@ export default class extends Controller {
     'successTooltipMessage'
   ]
 
+  static values = {
+    publicUrl: String
+  }
+
   run() {
-    navigator.clipboard.writeText(document.location.href)
+    navigator.clipboard.writeText(this.publicUrlValue)
 
     switchingShowHidden(this.defaultIconTarget, this.successIconTarget)
     switchingShowHidden(
