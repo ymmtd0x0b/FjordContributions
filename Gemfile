@@ -42,6 +42,7 @@ group :development do
   gem 'web-console'
 
   # not default
+  gem 'bullet'
   gem 'rubocop-capybara', require: false
   gem 'rubocop-fjord', require: false
   gem 'rubocop-rails', require: false
