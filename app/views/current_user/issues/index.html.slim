@@ -1,3 +1,6 @@
+- title "#{current_user.login}さんの取り組み一覧"
+- description "#{current_user.login}さんの取り組みを表示するページ"
+
 = render 'current_user/page_header', repository: @repository, user: current_user
 = render 'current_user/page_tabs', user: current_user
 = render 'current_user/page_body', items: @issues
