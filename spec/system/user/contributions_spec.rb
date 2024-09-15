@@ -3,24 +3,24 @@
 require 'rails_helper'
 
 RSpec.describe 'User::Contributions', type: :system do
-  before do
-    create(:repository, id: 123, name: 'test/repository')
-    create(:issue, :with_author, repository_id: 123, title: 'キムラが担当した Issue') do |issue|
-      issue.assignees << kimura
-      issue.pull_requests << create(:pull_request, repository_id: 123, number: 111) { |pr| pr.assignees << kimura }
-    end
-    create(:issue, :with_author, repository_id: 123, title: 'キムラがレビューした Issue') do |issue|
-      issue.pull_requests << create(:pull_request, repository_id: 123, number: 222) { |pr| pr.reviewers << kimura }
-    end
-    create(:issue, repository_id: 123, title: 'キムラが作成した Issue', author: kimura)
-    create(:wiki, repository_id: 123, title: 'キムラが作成した Wiki', author: kimura)
-  end
-
+  let!(:repository) { create(:repository, id: 123, name: 'test/repository') }
   let!(:kimura) { create(:user, login: 'kimura', avatar_url: 'https://example.com/avatar_url.png') }
+
+  before do
+    create(:issue, :with_author, repository:, title: 'キムラが担当した Issue') do |issue|
+      issue.assignees << kimura
+      issue.pull_requests << create(:pull_request, repository:, number: 111) { |pr| pr.assignees << kimura }
+    end
+    create(:issue, :with_author, repository:, title: 'キムラがレビューした Issue') do |issue|
+      issue.pull_requests << create(:pull_request, repository:, number: 222) { |pr| pr.reviewers << kimura }
+    end
+    create(:issue, repository:, title: 'キムラが作成した Issue', author: kimura)
+    create(:wiki, repository:, title: 'キムラが作成した Wiki', author: kimura)
+  end
 
   context 'ゲストの場合' do
     scenario 'ユーザーの 作成/担当/レビューした Issue とそれと紐付いた PullRequest 、Wiki を一覧表示する' do
-      login_as kimura, to: users_contributions_path('kimura')
+      visit users_contributions_path('kimura')
 
       expect(page).to have_content('チーム開発プラクティスでの kimura さんの取り組み', normalize_ws: true)
 

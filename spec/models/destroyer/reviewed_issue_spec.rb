@@ -14,17 +14,15 @@ RSpec.describe Destroyer::ReviewedIssue, type: :model do
     let(:jiro_reviewed_pr) { create(:pull_request, repository:) { |pr| pr.reviewers << jiro } }
 
     it '他のユーザーから参照されていない「ユーザーがレビューしている Issue 」を削除すること' do
-      create(:issue, repository:, author_id: 0) { |issue| issue.pull_requests << taro_reviewed_pr }
-      create(:issue, repository:, author: jiro) { |issue| issue.pull_requests << taro_reviewed_pr }
-      create(:issue, repository:, author_id: 0) do |issue|
-        issue.pull_requests << taro_reviewed_pr
-        issue.assignees << jiro
-      end
-      create(:issue, repository:, author_id: 0) { |issue| issue.pull_requests << [taro_reviewed_pr, jiro_assigned_pr] }
-      create(:issue, repository:, author_id: 0) { |issue| issue.pull_requests << [taro_reviewed_pr, jiro_reviewed_pr] }
+      create(:issue, id: 1, repository:, author_id: 0) { |issue| issue.pull_requests << taro_reviewed_pr }
+      create(:issue, id: 2, repository:, author: jiro) { |issue| issue.pull_requests << taro_reviewed_pr }
+      jiro.assigned_issues << create(:issue, id: 3, repository:, author_id: 0) { |issue| issue.pull_requests << taro_reviewed_pr }
+      create(:issue, id: 4, repository:, author_id: 0) { |issue| issue.pull_requests << [taro_reviewed_pr, jiro_assigned_pr] }
+      create(:issue, id: 5, repository:, author_id: 0) { |issue| issue.pull_requests << [taro_reviewed_pr, jiro_reviewed_pr] }
 
       destroyer = Destroyer::ReviewedIssue.new
-      expect { destroyer.call(taro) }.to change { taro.reviewed_issues.count }.from(5).to(4)
+      expect { destroyer.call(taro) }.to change { taro.reviewed_issues.count }.by(-1)
+                                     .and change { Issue.exists?(id: 1) }.from(true).to(false)
     end
   end
 end

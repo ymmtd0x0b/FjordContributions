@@ -22,6 +22,7 @@ RSpec.describe 'Users', type: :system do
     expect(page).to have_content '更新に成功しました'
     expect(page).to have_button 'キムラ'
     expect(page).to have_selector 'img[src$="https://example.com/after_avatar.png"]'
+    expect(Newspaper).to have_received(:publish).with(:user_update, kind_of(Hash))
   end
 
   context '更新に失敗した場合' do

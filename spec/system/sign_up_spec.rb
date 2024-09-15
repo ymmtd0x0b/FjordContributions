@@ -54,9 +54,7 @@ RSpec.describe 'Sign up', type: :system do
         visit root_path
         click_button 'GitHubアカウントで登録'
 
-        within('form[action="/current_user"]') do
-          click_button '今すぐあなたの取り組みを取得する'
-        end
+        click_button '今すぐあなたの取り組みを取得する'
         expect(page).to have_content '更新に成功しました'
 
         visit current_user_contributions_path
