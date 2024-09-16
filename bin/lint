@@ -2,4 +2,5 @@
 
 set -e
 bin/rubocop -a
+slim-lint app/views
 yarn run lint
