@@ -5,7 +5,7 @@
 [![Postgres](https://img.shields.io/badge/Postgres-%23316192.svg?logo=postgresql&logoColor=white)](#)
 [![TailwindCSS](https://img.shields.io/badge/Tailwind%20CSS-%2338B2AC.svg?logo=tailwind-css&logoColor=white)](#)
 [![GitHub Actions](https://img.shields.io/badge/GitHub_Actions-2088FF?logo=github-actions&logoColor=white)](https://github.com/ymmtd0x0b/FjordContributions/actions)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/ymmtd0x0b/FjordContributions?tab=MIT-1-ov-file)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/ymmtd0x0b/FjordContributions/blob/main/LICENSE.md)
 
 プログラミングスクール・フィヨルドブートキャンプのチーム開発プラクティスにて、受講生が関わった Issue や PullRequest 、Wiki を個人に焦点を当てて可視化できるサービスです。
 
