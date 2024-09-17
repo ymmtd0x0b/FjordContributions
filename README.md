@@ -11,11 +11,20 @@
 
 GitHub の検索フォームに手入力して探しださずとも自動でデータを取得し、一覧表示できます。また、共有用 URL によって本サービスに登録していない人にも一覧表示を共有することも可能です。
 
+<br />
+
+<p align="center">
+  <kbd><img src="https://github.com/user-attachments/assets/fc27537d-8c3a-4c77-a22c-44673cc5b8aa" width="700" /></kbd>
+</p>
+
+<br />
+<br />
 
 ## URL
 
 https://fjordcontributions.onrender.com
 
+<br />
 
 ## インストールと起動
 
@@ -23,7 +32,6 @@ https://fjordcontributions.onrender.com
 $ git clone https://github.com/ymmtd0x0b/FjordContributions.git
 $ cd FjordContributions
 ```
-
 
 ### 起動準備
 
@@ -81,8 +89,9 @@ $ bin/setup
 $ bin/dev
 ```
 
-[http://localhost:3000/](http://localhost:3000/) にアクセスする
+起動後は [http://localhost:3000/](http://localhost:3000/) にアクセスしてください。
 
+<br />
 
 ## テスト
 
@@ -99,6 +108,7 @@ $ bin/rspec
 $ HEADFULL=1 bin/rspec
 ```
 
+<br />
 
 ## Lint
 
@@ -122,6 +132,7 @@ $ bin/lint
 $ npm run format
 ```
 
+<br />
 
 ## 使用技術
 
