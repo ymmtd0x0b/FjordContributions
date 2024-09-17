@@ -2,5 +2,6 @@
 - description "#{current_user.login}さんの取り組みを表示するページ"
 
 = render 'current_user/page_header', repository: @repository, user: current_user
-= render 'current_user/page_tabs', user: current_user
-= render 'current_user/page_body', items: @wikis
+= turbo_frame_tag 'contributions_list' do
+  = render 'current_user/page_tabs', user: current_user
+  = render 'current_user/page_body', items: @wikis

@@ -47,5 +47,7 @@ module FjordContributions
         # helper_specs: false,
         routing_specs: false
     end
+
+    config.action_view.preload_links_header = false
   end
 end

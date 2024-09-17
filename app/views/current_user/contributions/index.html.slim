@@ -2,47 +2,48 @@
 - description "#{current_user.login}さんの取り組みを表示するページ"
 
 = render 'current_user/page_header', repository: @repository, user: current_user
-= render 'current_user/page_tabs', user: current_user
-.px-10.pt-5.pb-10.flex-grow.max-w-screen-lg.mx-auto
-  .flex.justify-end
-    div(class="flex items-center gap-x-6 mr-10")
-      .flex.items-center(data-controller="url-copy" data-url-copy-public-url-value="#{request.url.gsub(/current_user/, current_user.login)}")
-        span(class="flex-shrink-0 inline-flex items-center py-2.5 px-4 text-sm font-medium text-center text-gray-900 bg-gray-100 border border-gray-300 rounded-s-lg")
-          | URL をコピー
-        button(data-action="click->url-copy#run" data-tooltip-target="tooltip-url" type="button"
-               class="flex-shrink-0 inline-flex items-center py-3 px-4 text-sm font-medium text-center text-white bg-gray-500 rounded-e-lg hover:bg-gray-600 focus:ring-2 focus:outline-none focus:ring-gray-600 border border-gray-500 hover:border-gray-600")
-          span(data-url-copy-target="defaultIcon" class="inline-flex items-center")
-            = inline_svg_tag 'clipboard_icon.svg', class: 'w-4 h-4'
-          span(data-url-copy-target="successIcon" class="hidden inline-flex items-center")
-            = inline_svg_tag 'check_icon.svg', class: 'w-4 h-4'
-        div(id="tooltip-url" role="tooltip" class="absolute invisible inline-block px-3 py-2 text-sm font-medium text-gray-50 transition-opacity duration-300 bg-gray-600 rounded-lg shadow-sm opacity-0 tooltip" data-popper-placement="top")
-          span(data-url-copy-target="defaultTooltipMessage")
-            | Copy link
-          span(data-url-copy-target="successTooltipMessage" class="hidden")
-            | Copied!
-          div(class="tooltip-arrow" data-popper-arrow="")
-      .flex.items-center(data-controller="markdown-copy")
-        span(class="flex-shrink-0 inline-flex items-center py-2.5 px-4 text-sm font-medium text-center text-gray-900 bg-gray-100 border border-gray-300 rounded-s-lg")
-          | Markdown をコピー
-        button(data-action="click->markdown-copy#run" data-tooltip-target="tooltip-markdown" type="button"
-               class="flex-shrink-0 inline-flex items-center py-3 px-4 text-sm font-medium text-center text-white bg-blue-500 rounded-e-lg hover:bg-blue-600 focus:ring-2 focus:outline-none focus:ring-blue-600 border border-blue-500 hover:border-blue-600")
-          span(data-markdown-copy-target="defaultIcon" class="inline-flex items-center")
-            = inline_svg_tag 'clipboard_icon.svg', class: 'w-4 h-4'
-          span(data-markdown-copy-target="successIcon" class="hidden inline-flex items-center")
-            = inline_svg_tag 'check_icon.svg', class: 'w-4 h-4'
-        div(id="tooltip-markdown" role="tooltip" class="absolute invisible inline-block px-3 py-2 text-sm font-medium text-gray-50 transition-opacity duration-300 bg-blue-600 rounded-lg shadow-sm opacity-0 tooltip" data-popper-placement="top")
-          span(data-markdown-copy-target="defaultTooltipMessage")
-            | Copy link
-          span(data-markdown-copy-target="successTooltipMessage" class="hidden")
-            | Copied!
-          div(class="tooltip-arrow" data-popper-arrow="")
+= turbo_frame_tag 'contributions_list' do
+  = render 'current_user/page_tabs', user: current_user
+  .px-10.pt-5.pb-10.flex-grow.max-w-screen-lg.mx-auto
+    .flex.justify-end
+      div(class="flex items-center gap-x-6 mr-10")
+        .flex.items-center(data-controller="url-copy" data-url-copy-public-url-value="#{request.url.gsub(/current_user/, current_user.login)}")
+          span(class="flex-shrink-0 inline-flex items-center py-2.5 px-4 text-sm font-medium text-center text-gray-900 bg-gray-100 border border-gray-300 rounded-s-lg")
+            | URL をコピー
+          button(data-action="click->url-copy#run" data-tooltip-target="tooltip-url" type="button"
+                class="flex-shrink-0 inline-flex items-center py-3 px-4 text-sm font-medium text-center text-white bg-gray-500 rounded-e-lg hover:bg-gray-600 focus:ring-2 focus:outline-none focus:ring-gray-600 border border-gray-500 hover:border-gray-600")
+            span(data-url-copy-target="defaultIcon" class="inline-flex items-center")
+              = inline_svg_tag 'clipboard_icon.svg', class: 'w-4 h-4'
+            span(data-url-copy-target="successIcon" class="hidden inline-flex items-center")
+              = inline_svg_tag 'check_icon.svg', class: 'w-4 h-4'
+          div(id="tooltip-url" role="tooltip" class="absolute invisible inline-block px-3 py-2 text-sm font-medium text-gray-50 transition-opacity duration-300 bg-gray-600 rounded-lg shadow-sm opacity-0 tooltip" data-popper-placement="top")
+            span(data-url-copy-target="defaultTooltipMessage")
+              | Copy link
+            span(data-url-copy-target="successTooltipMessage" class="hidden")
+              | Copied!
+            div(class="tooltip-arrow" data-popper-arrow="")
+        .flex.items-center(data-controller="markdown-copy")
+          span(class="flex-shrink-0 inline-flex items-center py-2.5 px-4 text-sm font-medium text-center text-gray-900 bg-gray-100 border border-gray-300 rounded-s-lg")
+            | Markdown をコピー
+          button(data-action="click->markdown-copy#run" data-tooltip-target="tooltip-markdown" type="button"
+                class="flex-shrink-0 inline-flex items-center py-3 px-4 text-sm font-medium text-center text-white bg-blue-500 rounded-e-lg hover:bg-blue-600 focus:ring-2 focus:outline-none focus:ring-blue-600 border border-blue-500 hover:border-blue-600")
+            span(data-markdown-copy-target="defaultIcon" class="inline-flex items-center")
+              = inline_svg_tag 'clipboard_icon.svg', class: 'w-4 h-4'
+            span(data-markdown-copy-target="successIcon" class="hidden inline-flex items-center")
+              = inline_svg_tag 'check_icon.svg', class: 'w-4 h-4'
+          div(id="tooltip-markdown" role="tooltip" class="absolute invisible inline-block px-3 py-2 text-sm font-medium text-gray-50 transition-opacity duration-300 bg-blue-600 rounded-lg shadow-sm opacity-0 tooltip" data-popper-placement="top")
+            span(data-markdown-copy-target="defaultTooltipMessage")
+              | Copy link
+            span(data-markdown-copy-target="successTooltipMessage" class="hidden")
+              | Copied!
+            div(class="tooltip-arrow" data-popper-arrow="")
 
-  div(id="contributions-table")
-    = render 'table', table_header: 'Pull Request', issues: @assigned_issues, user: current_user, table_id: 'assigned_issues'
-    = render 'table', table_header: 'Review',       issues: @reviewed_issues, user: current_user, table_id: 'reviewed_issues'
+    div(id="contributions-table")
+      = render 'table', table_header: 'Pull Request', issues: @assigned_issues, user: current_user, table_id: 'assigned_issues'
+      = render 'table', table_header: 'Review',       issues: @reviewed_issues, user: current_user, table_id: 'reviewed_issues'
 
-    - if @issues.any? || @wikis.any?
-      h2.text-2xl.text-slate-600.font-bold.border-b.border-gray-400.pb-2.mb-3
-        | その他
-      = render 'list', list_header: 'Issue', content: 'バグ発見の報告や改善提案を目的として作成したIssueです。', items: @issues, list_id: 'created_issues' if @issues.any?
-      = render 'list', list_header: 'Wiki', content: '議事録や作業効率化を目的として作成したWikiページです。', items: @wikis, list_id: 'created_wikis' if @wikis.any?
+      - if @issues.any? || @wikis.any?
+        h2.text-2xl.text-slate-600.font-bold.border-b.border-gray-400.pb-2.mb-3
+          | その他
+        = render 'list', list_header: 'Issue', content: 'バグ発見の報告や改善提案を目的として作成したIssueです。', items: @issues, list_id: 'created_issues' if @issues.any?
+        = render 'list', list_header: 'Wiki', content: '議事録や作業効率化を目的として作成したWikiページです。', items: @wikis, list_id: 'created_wikis' if @wikis.any?
