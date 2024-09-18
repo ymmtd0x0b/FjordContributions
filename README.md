@@ -44,7 +44,7 @@ $ cd FjordContributions
 
 OmniAuth、Octokit の双方は環境変数を通して取得した機密情報 (以降で設定します) を基に動作します。
 
-本プロジェクトでは [dotenv](https://github.com/bkeepers/dotenv) を導入しているため `.evnファイル` を作成することで、お使いのシステムに手を加えること無く環境変数を設定可能です。
+本プロジェクトでは [dotenv](https://github.com/bkeepers/dotenv) を導入しているため `.envファイル` を作成することで、お使いのシステムに手を加えること無く環境変数を設定可能です。
 
 - .envファイルの作成<div>
 
