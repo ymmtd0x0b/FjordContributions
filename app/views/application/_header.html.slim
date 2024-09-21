@@ -1,11 +1,10 @@
 header
   nav.py-2.bg-slate-600
-    .flex.flex-wrap.justify-between.items-center.px-4.py-1.mx-auto.max-w-screen-lg
+    .flex.flex-wrap.justify-between.items-center.px-4.mx-auto.max-w-screen-lg
       .flex.items-center.text-white
         = link_to root_path do
           .flex.items-center
-            = image_tag 'symbol.png', width: 37.5, height: 37.5, alt: 'FjordContributionsのシンボル'
-            = image_tag 'logo_header.png', width: 250, height: 37.5, class: 'mb-1', alt: 'FjordContributionsのロゴ'
+            = image_tag 'logo.png', width: '280', class: 'mb-1', alt: 'FjordContributionsのロゴ'
       .flex.items-center.lg:order-2
         - if logged_in?
           .text-sm.pe-1.font-medium.text-white.rounded-full.hover:text-blue-600.md:me-0.focus:ring-4.focus:ring-gray-100
