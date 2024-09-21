@@ -1,20 +1,20 @@
 - if items.presence
   .bg-gray-50
     .max-w-screen-lg.mx-auto.px-7
-      .relative.my-10.overflow-x-auto.shadow-md.sm:rounded-lg
+      .relative.my-10.overflow-x-auto.rounded-t-lg
         .w-full.text-sm.text-left.rtl:text-right.text-gray-500
-          .px-6.py-3.text-gray-50.font-semibold.bg-slate-700.border-b
+          .px-6.py-3.text-gray-50.font-semibold.bg-slate-700
             = "Total #{items.count}"
           - items.each do |item|
-            .bg-white.border-b.hover:bg-gray-100.px-6.py-2.font-bold.text-slate-700
+            .bg-white.border-x.border-b.border-gray-300.last:rounded-b-lg.hover:bg-gray-100.px-6.py-2.font-bold.text-slate-700
               .w-fit.text-base.hover:text-blue-600
                 = link_to item.title, item.url, { target: '_blank', rel: 'noopener noreferrer' }
               - if item.instance_of?(Issue)
-                .flex.items-center.pt-1.space-x-2
-                  .px-2.text-xs.font-medium.text-slate-500.
+                .flex.items-center.pt-1.gap-x-2
+                  .text-xs.font-medium.text-slate-500.
                     = "##{item.number}"
                   - item.labels.each do |label|
-                    .flex.px-2.text-xs.font-bold.rounded-full(class="py-0.5" style="background-color: #{label.color}; color: #{label.font_color}; border: 2px solid #{label.border_color}")
+                    .flex.px-2.text-xs.font-bold.rounded-full(class="py-0.5" style="background-color: #{label.color}; color: #{label.font_color}; border: 1px solid #{label.border_color}")
                       = label.name
 - else
   .max-w-screen-lg.mx-auto.w-full.text-center.mt-28.text-slate-700
