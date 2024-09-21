@@ -2,9 +2,9 @@
   h2.text-2xl.text-slate-600.font-bold.border-b.border-gray-400.pb-2.mb-3
     = table_header
 
-  .relative.mt-4.mx-3.overflow-x-auto.sm:rounded-lg
+  .relative.mt-4.mx-3.overflow-x-auto.rounded-lg
     table.table-fixed.w-full.text-sm.text-left.rtl:text-right.text-gray-500(id="#{table_id}")
-      thead.text-gray-50.bg-slate-600.border-b.border-gray-400
+      thead.text-gray-50.bg-slate-700.border-t.border-x.border-slate-600
         tr
           th.px-6.py-3(class="w-1/12")
             | Point
@@ -15,7 +15,7 @@
       tbody
         - if issues.any?
           - issues.each do |issue|
-            tr.font-semibold.odd:bg-gray-200.text-slate-800.even:bg-gray-100.border-b.border-gray-400
+            tr.font-semibold.odd:bg-white.text-slate-800.even:bg-gray-100.border-x.border-b.border-gray-300.last:border-b-0
               td.px-6.py-3.text-center
                 = issue.point || '-'
               td.px-6.py-3
@@ -37,7 +37,7 @@
               td.px-6.py-3
                 | -
       tfoot
-        tr.bg-slate-600.font-semibold.text-gray-50
+        tr.bg-slate-600.font-semibold.text-gray-50.border-b.border-x.border-slate-600
           th.px-6.py-3.text-center
             = issues.sum(&:point)
           td.px-6.py-3
