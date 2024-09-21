@@ -1,50 +1,52 @@
 - title 'トップページ'
 
 .w-full.mx-auto.max-w-screen-lg
-  h1.text-slate-700.text-center.text-3xl.font-semibold.pt-16
-    | 登録するだけであなたの取り組みを一覧表示
-  p.text-slate-700.text-center.text-2xl.pt-10
+  h1.text-slate-700.text-center.text-4xl.font-bold.pt-16.leading-normal
+    | bootcampリポジトリの
+    br
+    | 取り組みを一覧表示
+  p.text-slate-700.text-center.text-base.font-medium.leading-relaxed.pt-10
     | フィヨルドブートキャンプのチーム開発プラクティスで
     br
     | あなたが関わった Issue や PullRequest を自動で取得して一覧表示できるサービスです。
 
-  .flex.justify-around.py-14.text-slate-700.font-medium.text-center
-    .flex.flex-col.justify-center.w-52.items-center.p-4.bg-gray-50.border.border-slate-400.rounded-lg.shadow-md
+  .flex.justify-around.py-14.px-7.text-slate-700.font-medium.text-center.mb-10
+    .flex.flex-col.justify-center.h-48.w-48.items-center.bg-white.border.border-slate-300.rounded-lg
       .grid.grid-cols-1.content-center.pt-2
-        i.fa-solid.fa-code-merge.text-8xl
+        i.fa-solid.fa-code-merge.text-6xl
       .pt-4.pb-2
         = '担当した'
         br
         = 'Issue & PullRequest'
-    .flex.flex-col.justify-center.w-52.items-center.p-4.bg-gray-50.border.border-slate-400.rounded-lg.shadow-md
+    .flex.flex-col.justify-center.h-48.w-48.items-center.bg-white.border.border-slate-300.rounded-lg
       .grid.grid-cols-1.content-center.py-2
-        i.fa-solid.fa-comments.text-8xl
+        i.fa-solid.fa-comments.text-6xl
       .pt-4.pb-2
         = 'レビューした'
         br
         = 'Issue & PullRequest'
-    .flex.flex-col.justify-center.w-52.items-center.p-4.bg-gray-50.border.border-slate-400.rounded-lg.shadow-md
+    .flex.flex-col.justify-center.h-48.w-48.items-center.bg-white.border.border-slate-300.rounded-lg
       .grid.grid-cols-1.content-center.py-2
-        i.fa-solid.fa-file-signature.text-8xl
+        i.fa-solid.fa-file-signature.text-6xl
       .pt-4.pb-2
         = '作成した'
         br
         = 'Issue'
-    .flex.flex-col.justify-center.w-52.items-center.p-4.bg-gray-50.border.border-slate-400.rounded-lg.shadow-md
+    .flex.flex-col.justify-center.h-48.w-48.items-center.bg-white.border.border-slate-300.rounded-lg
       .grid.grid-cols-1.content-center.py-2
-        i.fa-solid.fa-book.text-8xl
+        i.fa-solid.fa-book.text-6xl
       .pt-4.pb-2
         = '作成した'
         br
         = 'Wikiページ'
 
-  .text-slate-700.text-center.pt-5.text-xl.mb-10
-    | 初めて利用する方はGitHubアカウントを連携してください。
-
-  .flex.justify-center.mb-10.h-12
+  .flex.justify-center.mb-2.h-12
     = button_to '/auth/github', method: :post, data: { turbo: false },
-                class: 'text-center py-2 px-5 font-semibold text-gray-200 focus:outline-none bg-slate-600 rounded-lg border border-gray-200 hover:bg-slate-500 hover:text-gray-200 focus:z-10 focus:ring-4 focus:ring-gray-100' do
+                class: 'text-center h-12 px-5 font-semibold text-white bg-blue-500 hover:bg-blue-600 focus:ring-4 focus:outline-none focus:ring-blue-300 border border-blue-500 rounded-lg focus:z-10' do
         .flex.items-center
           .mr-2.text-lg
             i.fa-brands.fa-github
           | GitHubアカウントで登録
+
+  .text-slate-700.font-medium.text-center.pt-5.text-lg
+    | 初めて利用する方はGitHubアカウントを連携してください。

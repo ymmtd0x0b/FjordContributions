@@ -86,6 +86,12 @@ module.exports = {
           }
         }
       },
+      colors: {
+        "blue": {
+          500: "#4f87e1",
+          600: "#2569d9"
+        }
+      }
     },
   },
   plugins: [

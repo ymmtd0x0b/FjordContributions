@@ -4,14 +4,14 @@
 = render 'current_user/page_header', repository: @repository, user: current_user
 = turbo_frame_tag 'contributions_list' do
   = render 'current_user/page_tabs', user: current_user
-  .px-10.pt-5.pb-10.flex-grow.max-w-screen-lg.mx-auto
+  .pl-10.pr-7.pt-5.pb-10.flex-grow.max-w-screen-lg.mx-auto
     .flex.justify-end
-      div(class="flex items-center gap-x-6 mr-10")
-        .flex.items-center(data-controller="url-copy" data-url-copy-public-url-value="#{request.url.gsub(/current_user/, current_user.login)}")
-          span(class="flex-shrink-0 inline-flex items-center py-2.5 px-4 text-sm font-medium text-center text-gray-900 bg-gray-100 border border-gray-300 rounded-s-lg")
+      div(class="flex items-center gap-x-6")
+        .flex.items-stretch(data-controller="url-copy" data-url-copy-public-url-value="#{request.url.gsub(/current_user/, current_user.login)}")
+          span(class="flex items-center justify-center w-44 text-base font-semibold text-gray-800 bg-zinc-300 rounded-s-md")
             | URL をコピー
           button(data-action="click->url-copy#run" data-tooltip-target="tooltip-url" type="button"
-                class="flex-shrink-0 inline-flex items-center py-3 px-4 text-sm font-medium text-center text-white bg-gray-500 rounded-e-lg hover:bg-gray-600 focus:ring-2 focus:outline-none focus:ring-gray-600 border border-gray-500 hover:border-gray-600")
+                class="flex-shrink-0 inline-flex items-center py-3 px-4 text-sm font-medium text-center text-white bg-gray-500 rounded-e-md hover:bg-gray-600 focus:ring-2 focus:outline-none focus:ring-gray-600 border-2 border-gray-600 hover:border-gray-600")
             span(data-url-copy-target="defaultIcon" class="inline-flex items-center")
               = inline_svg_tag 'clipboard_icon.svg', class: 'w-4 h-4'
             span(data-url-copy-target="successIcon" class="hidden inline-flex items-center")
@@ -22,11 +22,11 @@
             span(data-url-copy-target="successTooltipMessage" class="hidden")
               | Copied!
             div(class="tooltip-arrow" data-popper-arrow="")
-        .flex.items-center(data-controller="markdown-copy")
-          span(class="flex-shrink-0 inline-flex items-center py-2.5 px-4 text-sm font-medium text-center text-gray-900 bg-gray-100 border border-gray-300 rounded-s-lg")
+        .flex.items-stretch(data-controller="markdown-copy")
+          span(class="flex items-center justify-center w-48 text-base font-semibold text-gray-800 bg-zinc-300 rounded-s-md")
             | Markdown をコピー
           button(data-action="click->markdown-copy#run" data-tooltip-target="tooltip-markdown" type="button"
-                class="flex-shrink-0 inline-flex items-center py-3 px-4 text-sm font-medium text-center text-white bg-blue-500 rounded-e-lg hover:bg-blue-600 focus:ring-2 focus:outline-none focus:ring-blue-600 border border-blue-500 hover:border-blue-600")
+                class="flex-shrink-0 inline-flex items-center py-3 px-4 text-sm font-medium text-center text-white bg-blue-500 rounded-e-md hover:bg-blue-600 focus:ring-2 focus:outline-none focus:ring-blue-600 border-2 border-blue-600 hover:border-blue-600")
             span(data-markdown-copy-target="defaultIcon" class="inline-flex items-center")
               = inline_svg_tag 'clipboard_icon.svg', class: 'w-4 h-4'
             span(data-markdown-copy-target="successIcon" class="hidden inline-flex items-center")

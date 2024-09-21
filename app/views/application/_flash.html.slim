@@ -1,6 +1,6 @@
 - if flash[:notice]
   div(id="toast-notice" data-controller="toast")
-    .hidden.fixed.flex.items-center.w-fit.mix-w-xs.p-4.mb-4.top-5.right-5.rounded-lg.shadow.text-white.bg-emerald-600(data-toast-target="toast" role="alert")
+    .hidden.fixed.flex.items-center.w-fit.mix-w-xs.p-4.mb-4.top-5.right-5.rounded-lg.text-white.bg-emerald-600(data-toast-target="toast" role="alert")
       .inline-flex.items-center.justify-center.flex-shrink-0.w-8.h-8.bg-white.rounded-lg.text-emerald-600
         = inline_svg_tag 'toast/check_icon.svg', class: 'w-5 h-5'
         span.sr-only
@@ -15,7 +15,7 @@
 
 - if flash[:alert]
   div(id="toast-alert" data-controller="toast")
-    .hidden.fixed.flex.items-center.w-fit.mix-w-xs.p-4.mb-4.top-5.right-5.rounded-lg.shadow.text-white.bg-red-500(data-toast-target="toast" role="alert")
+    .hidden.fixed.flex.items-center.w-fit.mix-w-xs.p-4.mb-4.top-5.right-5.rounded-lg.text-white.bg-red-500(data-toast-target="toast" role="alert")
       .inline-flex.items-center.justify-center.flex-shrink-0.w-8.h-8.bg-white.rounded-lg.text-red-500
         = inline_svg_tag 'toast/error_icon.svg', class: 'w-5 h-5'
         span.sr-only
@@ -33,7 +33,7 @@
     div(id="account_registration" data-accept-confirm-target="modal" tabindex="-1" aria-modal="true"
         class="overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full max-h-full flex md:inset-0 h-[calc(100%-1rem)]")
       .animate-slide-in-top.relative.p-4.w-fit.max-w-3xl.max-h-full.min-h-64
-        .relative.flex.justify-center.items-center.min-w-96.min-h-64.p-4.bg-white.rounded-lg.shadow
+        .relative.flex.justify-center.items-center.min-w-96.min-h-64.p-4.bg-white.rounded-lg
           .px-10.py-4(data-accept-confirm-target="dialog")
             button(type="button" data-modal-hide="account_registration"
                    class="absolute top-3 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center end-2.5")
