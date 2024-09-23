@@ -14,7 +14,7 @@ GitHub の検索フォームに手入力して探しださずとも自動でデ�
 <br />
 
 <p align="center">
-  <kbd><img src="https://github.com/user-attachments/assets/fc27537d-8c3a-4c77-a22c-44673cc5b8aa" width="700" /></kbd>
+  <kbd><img src="https://github.com/user-attachments/assets/b59d98a8-fa43-4bd1-ad9d-b9984c0636c0" width="600" /></kbd>
 </p>
 
 <br />
