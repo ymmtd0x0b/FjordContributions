@@ -1,0 +1,22 @@
+inherit_gem:
+  rubocop-fjord:
+    - "config/rubocop.yml"
+    - "config/rails.yml"
+
+AllCops:
+  SuggestExtensions: false
+
+Rails/LexicallyScopedActionFilter:
+  Exclude:
+    - app/controllers/high_voltage/pages_controller.rb
+
+Rails/SkipsModelValidations:
+  Exclude:
+    - app/models/issue.rb
+    - app/models/labeling.rb
+    - app/models/assign.rb
+    - app/models/pull_request.rb
+    - app/models/resolution.rb
+    - app/models/review.rb
+    - app/models/wiki.rb
+    - app/models/label.rb

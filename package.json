@@ -1,0 +1,26 @@
+{
+  "scripts": {
+    "lint": "run-p lint:*",
+    "lint:eslint": "eslint 'app/javascript/**/*.js'",
+    "lint:prettier": "prettier app/javascript/**/*.js --check",
+    "format": "prettier app/javascript/**/*.js --write"
+  },
+  "devDependencies": {
+    "@eslint/eslintrc": "^3.1.0",
+    "@tailwindcss/typography": "^0.5.14",
+    "eslint": "^8.57.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-config-standard": "^17.1.0",
+    "eslint-plugin-import": "^2.29.1",
+    "eslint-plugin-n": "^16.6.2",
+    "eslint-plugin-promise": "^6.6.0",
+    "npm-run-all": "^4.1.5",
+    "prettier": "^3.3.3",
+    "prettier-config-standard": "^7.0.0"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "flowbite": "^2.5.1",
+    "node-html-markdown": "^1.3.0"
+  }
+}

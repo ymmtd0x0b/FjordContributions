@@ -1,0 +1,11 @@
+- content_for(:title, 'ページが見つかりませんでしたでした')
+
+.flex.flex-col.justify-center.items-center
+  .pt-14.pb-10
+    = image_tag 'symbol.png', width: 100, alt: 'FjordContributionsのロゴ'
+  .text-zinc-700.text-center
+    h1.pb-8.text-4xl.font-bold
+      | 404: Not Found
+    p.pb-10.text-xl.font-semibold
+      | お探しのページが見つかりませんでした。
+    = link_to 'トップページに戻る', root_path, class: 'font-medium text-blue-600 dark:text-blue-500 hover:underline'
