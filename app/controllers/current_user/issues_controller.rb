@@ -7,11 +7,11 @@ class CurrentUser::IssuesController < ApplicationController
     @issues =
       case params[:association]
       when 'assigned'
-        current_user.assigned_issues.includes(%i[repository labels]).order(:created_at)
+        current_user.assigned_issues.eager_load(:repository).preload(:labels).order(:created_at)
       when 'reviewed'
-        current_user.reviewed_issues.includes(%i[repository labels]).order(:created_at)
+        current_user.reviewed_issues.eager_load(:repository).preload(:labels).order(:created_at)
       else
-        current_user.issues.includes(%i[repository labels]).order(:created_at)
+        current_user.issues.eager_load(:repository).preload(:labels).order(:created_at)
       end
   end
 end
