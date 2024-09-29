@@ -19,9 +19,8 @@ RSpec.describe GitHub::User, type: :model do
     end
 
     context 'ユーザーが見つからない場合' do
-      it 'nil を返すこと', vcr: { cassette_name: 'github/user/find_by_with_not_found' } do
-        user = GitHub::User.find_by(login: 'not_found_user')
-        expect(user).to eq nil
+      it 'エラーを返すこと', vcr: { cassette_name: 'github/user/find_by_with_not_found' } do
+        expect { GitHub::User.find_by(login: 'not_found_user') }.to raise_error(Octokit::Error)
       end
     end
   end
