@@ -465,7 +465,6 @@ DEPENDENCIES
   rubocop-rails
   selenium-webdriver
   simplecov
-  slim
   slim-rails
   slim_lint
   sprockets-rails

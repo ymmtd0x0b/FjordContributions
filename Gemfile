@@ -26,7 +26,6 @@ gem 'newspaper'
 gem 'octokit'
 gem 'omniauth-github'
 gem 'omniauth-rails_csrf_protection'
-gem 'slim'
 gem 'slim-rails'
 gem 'tailwindcss-rails'
 
