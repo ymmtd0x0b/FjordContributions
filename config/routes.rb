@@ -8,7 +8,10 @@ Rails.application.routes.draw do
     resources :wikis, only: %i[index]
     resources :contributions, only: %i[index]
   end
-  namespace :users, path: '/:user_login' do
+  # namespace :users, path: '/:user_login' do
+  #   resources :contributions, only: %i[index]
+  # end
+  resources :users, param: :login, only: [] do
     resources :contributions, only: %i[index]
   end
 end
