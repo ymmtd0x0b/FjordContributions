@@ -1,7 +1,9 @@
 # frozen_string_literal: true
 
 class Issue < ApplicationRecord
-  belongs_to :author, class_name: 'User', optional: true
+  belongs_to :author, class_name: 'User', optional: true # 親データの有無はチェックしたくないが、 null を許容したくないので以下にバリデーションを設定
+  validates :author_id, presence: true
+
   belongs_to :repository
 
   has_many :labelings, dependent: :destroy
