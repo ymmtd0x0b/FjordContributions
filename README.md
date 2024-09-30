@@ -138,43 +138,43 @@ $ npm run format
 
 - Ruby 3.3.4
 - Ruby and Rails 7.2.1
-- PostgreSQL
-- Hotwire
-  - turbo-rails 2.0.7
-  - stimulus-rails 1.3.4
-- Slim 5.2.1
-- TailwindCSS
-  - tailwindcss-rails 2.7.4
+- PostgreSQL 16.4
 - Node.js 20.12.2
-- Octokit 9.1.0
-- Git 2.3.0
+- Hotwire
+  - turbo-rails
+  - stimulus-rails
+- Slim
+- TailwindCSS
+  - tailwindcss-rails
+- Octokit
+- Git
 
 
 #### ログイン機能
 
 - OmniAuth
-  - omniauth-github 2.0.1
-  - omniauth-rails_csrf_protection 1.0.2
+  - omniauth-github
+  - omniauth-rails_csrf_protection
 
 
 #### テスティングフレームワーク
 
 - RSpec
-  - rspec-rails 7.0.1
-  - factory_bot 6.4.6
+  - rspec-rails
+  - factory_bot
 
 
 #### 計測ツール
 
-- SimpleCov 0.22.0
+- SimpleCov
 
 
 #### Linter/Formatter
 
-- RuboCop 1.66.1
-- Slim-Lint 0.29.0
-- ESLint 3.1.0
-- Prettier 3.3.3
+- RuboCop
+- Slim-Lint
+- ESLint
+- Prettier
 
 
 #### CI/CD
