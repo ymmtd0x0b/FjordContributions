@@ -58,4 +58,25 @@ RSpec.describe 'Users', type: :system do
 
     expect(Newspaper).to have_received(:publish).with(:user_destroy, kind_of(User))
   end
+
+  context '削除に失敗した場合' do
+    scenario '失敗したことを Flash メッセージ で通知する' do
+      allow(Newspaper).to receive(:publish).and_raise(ActiveRecord::RecordNotDestroyed)
+
+      create(:repository, id: 123, name: 'test/repository')
+      kimura = create(:user, id: 456, login: 'kimura')
+
+      login_as kimura, to: current_user_wikis_path
+      expect(page).to have_current_path current_user_wikis_path
+
+      expect do
+        click_button 'kimura'
+        click_button 'アカウント削除'
+        click_button 'はい'
+
+        expect(page).to have_content '削除に失敗しました'
+        expect(page).to have_current_path current_user_wikis_path
+      end.not_to change(User, :count)
+    end
+  end
 end

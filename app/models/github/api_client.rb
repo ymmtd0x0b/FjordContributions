@@ -13,7 +13,7 @@ module GitHub
       id ? @client.repo(id.to_i) : @client.repo(name)
     rescue Octokit::Error => e
       log_error(e)
-      nil
+      raise
     end
 
     def labels(repository_name, option = { page: 1, per_page: 100 })
@@ -28,14 +28,14 @@ module GitHub
       labels
     rescue Octokit::Error => e
       log_error(e)
-      []
+      raise
     end
 
     def user(id_or_login)
       @client.user id_or_login
     rescue Octokit::Error => e
       log_error(e)
-      nil
+      raise
     end
 
     def search_issues(query, option = { page: 1, per_page: 100 })
@@ -50,7 +50,7 @@ module GitHub
       issues
     rescue Octokit::Error => e
       log_error(e)
-      []
+      raise
     end
 
     private
