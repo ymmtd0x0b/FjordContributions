@@ -8,7 +8,7 @@ class Labeling < ApplicationRecord
     def synchronize(issues_by_github_api)
       issues_id = issues_by_github_api.map(&:id)
       labels_id = issues_by_github_api.flat_map(&:labels_id)
-      where(issue_id: issues_id).where.not(label_id: labels_id).delete_all
+      where(issue_id: issues_id).where.not(label_id: labels_id).destroy_all
 
       hash_list = issues_by_github_api.flat_map(&:create_labelings)
       upsert_all(hash_list, unique_by: %i[issue_id label_id]) if hash_list.any?
