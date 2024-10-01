@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class CurrentUserController < ApplicationController
+class CurrentUsersController < ApplicationController
   before_action :set_repository, only: %i[update]
 
   def update
