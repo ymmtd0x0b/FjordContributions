@@ -30,12 +30,10 @@ module MetaTagsHelper
   private
 
   def url
-    params = { host: HOST_NAME }
-    URI::HTTPS.build(params).to_s
+    @url ||= URI::HTTPS.build({ host: HOST_NAME }).to_s
   end
 
   def image
-    params = { host: HOST_NAME, path: '/ogp.png' }
-    URI::HTTPS.build(params).to_s
+    @image ||= URI::HTTPS.build({ host: HOST_NAME, path: '/ogp.png' }).to_s
   end
 end
