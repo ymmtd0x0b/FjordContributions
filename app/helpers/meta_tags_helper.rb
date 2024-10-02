@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module MetaTagsHelper
-  HOST_NAME = ENV['HOST_NAME']
+  HOST_NAME = ENV.fetch('HOST_NAME')
 
   def default_meta_tags # rubocop:disable Metrics/MethodLength
     {
