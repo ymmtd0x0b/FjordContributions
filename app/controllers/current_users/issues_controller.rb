@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class CurrentUser::IssuesController < ApplicationController
+class CurrentUsers::IssuesController < ApplicationController
   before_action :set_repository, only: %i[index]
 
   def index

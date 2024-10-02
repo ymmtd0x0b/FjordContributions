@@ -1,0 +1,7 @@
+- title "#{current_user.login}さんの取り組み一覧"
+- description "#{current_user.login}さんの取り組みを表示するページ"
+
+= render 'current_users/page_header', repository: @repository, user: current_user
+= turbo_frame_tag 'contributions_list' do
+  = render 'current_users/page_tabs', user: current_user
+  = render 'current_users/page_body', items: @issues

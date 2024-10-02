@@ -1,13 +1,13 @@
 - title "#{current_user.login}さんの取り組み一覧"
 - description "#{current_user.login}さんの取り組みを表示するページ"
 
-= render 'current_user/page_header', repository: @repository, user: current_user
+= render 'current_users/page_header', repository: @repository, user: current_user
 = turbo_frame_tag 'contributions_list' do
-  = render 'current_user/page_tabs', user: current_user
+  = render 'current_users/page_tabs', user: current_user
   .pl-10.pr-7.pt-5.pb-10.flex-grow.max-w-screen-lg.mx-auto
     .flex.justify-end
       div(class="flex items-center gap-x-6")
-        .flex.items-stretch(data-controller="url-copy" data-url-copy-public-url-value="#{request.url.gsub(/current_user/, current_user.login)}")
+        .flex.items-stretch(data-controller="url-copy" data-url-copy-public-url-value="#{user_contributions_url(user_login: current_user.login)}")
           span(class="flex items-center justify-center w-44 text-base font-semibold text-gray-800 bg-zinc-300 rounded-s-md")
             | URL をコピー
           button(data-action="click->url-copy#run" data-tooltip-target="tooltip-url" type="button"
