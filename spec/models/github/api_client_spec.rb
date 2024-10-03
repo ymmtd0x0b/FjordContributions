@@ -18,13 +18,8 @@ RSpec.describe GitHub::APIClient, type: :model do
     end
 
     context 'エラーが発生した場合(リポジトリが見つからない場合もエラーに含む)' do
-      it 'nilを返すこと', vcr: { cassette_name: 'github/api_client/repository_with_not_found' } do
-        actual = client.repository(name: 'test/non_exist_repository')
-        expect(actual).to eq nil
-      end
-
-      it 'ログへ出力すること', vcr: { cassette_name: 'github/api_client/repository_with_not_found' } do
-        client.repository(name: 'test/non_exist_repository')
+      it 'ログへ出力させつつ、エラーを返すこと', vcr: { cassette_name: 'github/api_client/repository_with_not_found' } do
+        expect { client.repository(name: 'test/non_exist_repository') }.to raise_error(Octokit::Error)
         expect(Rails.logger).to have_received(:error).with(<<~LOG.chomp)
           [GitHub API] GET https://api.github.com/repos/test/non_exist_repository: 404 - Not Found // See: https://docs.github.com/rest/repos/repos#get-a-repository
         LOG
@@ -49,13 +44,8 @@ RSpec.describe GitHub::APIClient, type: :model do
     end
 
     context 'エラーが発生した場合' do
-      it '空の Array を返すこと', vcr: { cassette_name: 'github/api_client/labels_error' } do
-        actual = client.labels('test/non_exist_repository')
-        expect(actual).to be_empty
-      end
-
-      it 'ログへ出力すること', vcr: { cassette_name: 'github/api_client/labels_error' } do
-        client.labels('test/non_exist_repository')
+      it 'ログへ出力させつつ、エラーを返すこと', vcr: { cassette_name: 'github/api_client/labels_error' } do
+        expect { client.labels('test/non_exist_repository') }.to raise_error(Octokit::Error)
         expect(Rails.logger).to have_received(:error).with(<<~LOG.chomp)
           [GitHub API] GET https://api.github.com/repos/test/non_exist_repository/labels?page=1&per_page=100: 404 - Not Found // See: https://docs.github.com/rest/issues/labels#list-labels-for-a-repository
         LOG
@@ -72,13 +62,8 @@ RSpec.describe GitHub::APIClient, type: :model do
     end
 
     context 'エラーが発生した場合(ユーザーが見つからない場合もエラーに含む)' do
-      it 'nilを返すこと', vcr: { cassette_name: 'github/api_client/user_with_not_found' } do
-        actual = client.user('not_found_user')
-        expect(actual).to eq nil
-      end
-
-      it 'ログへ出力すること', vcr: { cassette_name: 'github/api_client/user_with_not_found' } do
-        client.user('not_found_user')
+      it 'ログへ出力させつつ、エラーを返すこと', vcr: { cassette_name: 'github/api_client/user_with_not_found' } do
+        expect { client.user('not_found_user') }.to raise_error(Octokit::Error)
         expect(Rails.logger).to have_received(:error).with(<<~LOG.chomp)
           [GitHub API] GET https://api.github.com/users/not_found_user: 404 - Not Found // See: https://docs.github.com/rest
         LOG
@@ -102,13 +87,8 @@ RSpec.describe GitHub::APIClient, type: :model do
     end
 
     context 'エラーが発生した場合' do
-      it '空の Array を返すこと', vcr: { cassette_name: 'github/api_client/search_issues_with_error' } do
-        actual = client.search_issues('repo:test/repository is:issue author:error')
-        expect(actual).to be_empty
-      end
-
-      it 'ログへ出力すること', vcr: { cassette_name: 'github/api_client/search_issues_with_error' } do
-        client.search_issues('repo:test/repository is:issue author:error')
+      it 'ログへ出力させつつ、エラーを返すこと', vcr: { cassette_name: 'github/api_client/search_issues_with_error' } do
+        expect { client.search_issues('repo:test/repository is:issue author:error') }.to raise_error(Octokit::Error)
         expect(Rails.logger).to have_received(:error).with(<<~LOG.chomp)
           [GitHub API] GET https://api.github.com/search/issues?page=1&per_page=100&q=repo%3Atest%2Frepository+is%3Aissue+author%3Aerror: 422 - Validation Failed
           Error summary:

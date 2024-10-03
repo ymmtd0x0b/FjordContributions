@@ -28,9 +28,8 @@ RSpec.describe GitHub::Repository, type: :model do
     end
 
     context 'リポジトリが見つからない場合' do
-      it 'nilを返すこと', vcr: { cassette_name: 'github/api_client/repository_with_not_found' } do
-        actual = GitHub::Repository.find_by(name: 'test/non_exist_repository')
-        expect(actual).to eq nil
+      it 'エラーを返すこと', vcr: { cassette_name: 'github/api_client/repository_with_not_found' } do
+        expect { GitHub::Repository.find_by(name: 'test/non_exist_repository') }.to raise_error(Octokit::Error)
       end
     end
   end

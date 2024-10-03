@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe LabelDecorator, type: :model do
+RSpec.describe LabelDecorator do
   describe '#border_color' do
     context 'ラベルの色が明るい場合' do
       it 'より暗く変換して返すこと' do

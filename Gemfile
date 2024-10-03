@@ -4,8 +4,8 @@ source 'https://rubygems.org'
 
 gem 'bootsnap', require: false
 gem 'importmap-rails'
-gem 'pg', '~> 1.5'
-gem 'puma', '>= 5.0'
+gem 'pg'
+gem 'puma'
 gem 'rails', '~> 7.2.1'
 gem 'sprockets-rails'
 gem 'stimulus-rails'
@@ -26,7 +26,6 @@ gem 'newspaper'
 gem 'octokit'
 gem 'omniauth-github'
 gem 'omniauth-rails_csrf_protection'
-gem 'slim'
 gem 'slim-rails'
 gem 'tailwindcss-rails'
 

@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 module MetaTagsHelper
+  HOST_NAME = ENV.fetch('HOST_NAME')
+
   def default_meta_tags # rubocop:disable Metrics/MethodLength
     {
       site: 'FjordContributions',
@@ -13,15 +15,25 @@ module MetaTagsHelper
         title: :title,
         description: :description,
         type: 'website',
-        url: 'https://fjordcontributions.onrender.com',
-        image: 'https://fjordcontributions.onrender.com/ogp.png'
+        url:,
+        image:
       },
       twitter: {
         card: 'summary',
         description: :description,
-        image: 'https://fjordcontributions.onrender.com/ogp.png',
-        domain: 'https://fjordcontributions.onrender.com'
+        image:,
+        domain: url
       }
     }
+  end
+
+  private
+
+  def url
+    @url ||= URI::HTTPS.build({ host: HOST_NAME }).to_s
+  end
+
+  def image
+    @image ||= URI::HTTPS.build({ host: HOST_NAME, path: '/ogp.png' }).to_s
   end
 end

@@ -20,7 +20,7 @@ RSpec.describe 'User::Contributions', type: :system do
 
   context 'ゲストの場合' do
     scenario 'ユーザーの 作成/担当/レビューした Issue とそれと紐付いた PullRequest 、Wiki を一覧表示する' do
-      visit users_contributions_path('kimura')
+      visit user_contributions_path(user_login: 'kimura')
 
       expect(page).to have_content('チーム開発プラクティスでの kimura さんの取り組み', normalize_ws: true)
 
@@ -49,7 +49,7 @@ RSpec.describe 'User::Contributions', type: :system do
 
   context 'ユーザーの場合' do
     scenario 'ユーザーの 作成/担当/レビューした Issue とそれと紐付いた PullRequest 、Wiki を一覧表示する' do
-      login_as kimura, to: users_contributions_path('kimura')
+      login_as kimura, to: user_contributions_path(user_login: 'kimura')
 
       expect(page).to have_content('チーム開発プラクティスでの kimura さんの取り組み', normalize_ws: true)
 
