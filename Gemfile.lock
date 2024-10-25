@@ -136,7 +136,7 @@ GEM
     ffi (1.17.0-x86_64-linux-gnu)
     font-awesome-sass (6.5.2)
       sassc (~> 2.0)
-    git (2.3.0)
+    git (2.3.1)
       activesupport (>= 5.0)
       addressable (~> 2.8)
       process_executer (~> 1.1)
@@ -237,7 +237,7 @@ GEM
       ast (~> 2.4.1)
       racc
     pg (1.5.8)
-    process_executer (1.1.2)
+    process_executer (1.2.0)
     psych (5.1.2)
       stringio
     public_suffix (6.0.1)
